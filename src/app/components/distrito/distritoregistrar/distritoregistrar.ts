@@ -56,6 +56,7 @@ form: FormGroup = new FormGroup({});
       nombre: ['', Validators.required],
     });
   }
+  //aceptar
   aceptar(): void {
     if (this.form.valid) {
       this.di.ID_Distrito=this.form.value.codigo
