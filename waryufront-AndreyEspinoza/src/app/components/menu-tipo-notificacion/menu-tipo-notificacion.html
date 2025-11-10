@@ -1,0 +1,16 @@
+<div class="container">
+  <mat-toolbar class="custom-toolbar">
+    <button 
+    matButton 
+    class="btn-rojo" 
+    aria-label="Example icon-button with menu icon"
+    [matMenuTriggerFor]="menuTipoNotificacion">
+      <mat-icon>menu</mat-icon>Tipo de notificacion
+    </button>
+  </mat-toolbar>
+
+  <mat-menu #menuTipoNotificacion="matMenu">
+    <button mat-menu-item routerLink="/tiponotificacion">Listar</button>
+    <button mat-menu-item routerLink="/tiponotificacion/news">Registrar</button>
+  </mat-menu>
+</div>
