@@ -1,0 +1,34 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%"><h2>BotonPanico</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <br />
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre"/>
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) { Ingrese nombre del usuario!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+        <mat-form-field>
+        <mat-label>Latitud</mat-label>
+        <input matInput formControlName="latitud"/>
+        <mat-error>
+          @if (form.get('latitud')?.hasError('required')) { Ingrese latitud del usuario!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+        <mat-form-field>
+        <mat-label>Longitud</mat-label>
+        <input matInput formControlName="longitud"/>
+        <mat-error>
+          @if (form.get('longitud')?.hasError('required')) { Ingrese longitud del usuario!! }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button matButton="elevated">Interactuar</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -7,10 +7,20 @@
     [matMenuTriggerFor]="menuDistrito">
       <mat-icon>menu</mat-icon>Distrito
     </button>
+    <button 
+    matButton 
+    class="btn-rojo" 
+    aria-label="Example icon-button with menu icon"
+    [matMenuTriggerFor]="menuBotonPanico">
+      <mat-icon>menu</mat-icon>BotonPanico
+    </button>
   </mat-toolbar>
 
   <mat-menu #menuDistrito="matMenu">
     <button mat-menu-item routerLink="/distritos">Listar</button>
     <button mat-menu-item routerLink="/distritos/news">Registrar</button>
+  </mat-menu>
+  <mat-menu #menuBotonPanico="matMenu">
+    <button mat-menu-item routerLink="/BotonPanico/interactuar">Interactuar</button>
   </mat-menu>
 </div>
