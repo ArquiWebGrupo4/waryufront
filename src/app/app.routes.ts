@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Distrito } from './components/distrito/distrito';
+import { Interactuar } from './components/botonpanico/interactuar/interactuar';
 import { Distritoregistrar } from './components/distrito/distritoregistrar/distritoregistrar';
 import { Rol } from './components/rol/rol';
 import { Rolregistrar } from './components/rol/rolregistrar/rolregistrar';
@@ -16,4 +17,5 @@ export const routes: Routes = [
             {path:'edits/:id',component:Rolregistrar}
         ]
     }
+    {path:'BotonPanico/interactuar',component:Interactuar}
 ];

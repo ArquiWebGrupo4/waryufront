@@ -50,4 +50,6 @@ export class DistritoService implements OnInit {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' })
   }
+
+  //prueba
 }

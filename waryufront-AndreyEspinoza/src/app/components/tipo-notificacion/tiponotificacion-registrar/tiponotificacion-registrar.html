@@ -1,0 +1,39 @@
+<div class="container">
+    @if (edicion) {
+        <div style="text-align: center; margin: 5%;"><h2>Actualización de tipo de notificacion</h2></div>
+    }
+    @else {
+        <div style="text-align: center; margin: 5%;"><h2>Registro de tipos de notificacion</h2></div>
+    }
+
+    <div style="text-align: center; margin: 5%;">
+        <form [formGroup]="form" (submit)="aceptar()">
+            @if (edicion) {
+                <mat-form-field>
+                    <mat-label>ID</mat-label>
+                    <input matInput formControlName="codigo" />
+                    <mat-error>
+                        @if (form.get('codigo')?.hasError('required')) {Ingrese id del tipo de notificacion!!}
+                    </mat-error>
+                </mat-form-field>
+            }
+
+            <br />
+            <mat-form-field>
+                <mat-label>Tipo de notificacion</mat-label>
+                <input matInput formControlName="nombre" />
+                <mat-error>
+                    @if (form.get('nombre')?.hasError('required')) {Ingrese el nombre del tipo de notificacion!!}
+                </mat-error>
+            </mat-form-field>
+            <div>
+                @if (edicion) {
+                    <button matButton="elevated">Actualizar</button>
+                }
+                @else {
+                    <button matButton="elevated">Registrar</button>
+                }
+            </div>
+        </form>
+    </div>
+</div>
