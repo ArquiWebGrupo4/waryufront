@@ -12,6 +12,8 @@ import { TipoIncidente } from './components/tipo-incidente/tipo-incidente';
 import { Tipoincidenteregistrar} from './components/tipo-incidente/tipoincidenteregistrar/tipoincidenteregistrar';
 import { LandingPage } from './components/landing-page/landing-page';
 import {Menu} from './components/menu/menu';
+import { Usuarios } from './components/usuarios/usuarios';
+import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuariosregistrar';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -43,6 +45,12 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Tipoincidenteregistrar},
             {path:'edits/:id',component:Tipoincidenteregistrar}
+        ]
+    },
+    {path:'usuarios', component:Usuarios,
+        children: [
+            {path:'news', component:Usuariosregistrar},
+            {path:'edits/:id',component:Usuariosregistrar}
         ]
     },
     {path:'', component:LandingPage
