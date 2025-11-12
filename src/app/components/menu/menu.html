@@ -19,6 +19,14 @@
     [matMenuTriggerFor]="menuBotonPanico">
       <mat-icon>menu</mat-icon>BotonPanico
     </button>
+    <button 
+      matButton 
+      class="btn-verde" 
+      aria-label="Botón menú nivel"
+      [matMenuTriggerFor]="menuNivel">
+      <mat-icon>menu</mat-icon>Nivel
+    </button>
+    
   </mat-toolbar>
   <!-- Menú Distrito -->
   <mat-menu #menuDistrito="matMenu">
@@ -31,5 +39,10 @@
     <button mat-menu-item routerLink="/roles/news">Registrar</button>
   <mat-menu #menuBotonPanico="matMenu">
     <button mat-menu-item routerLink="/BotonPanico/interactuar">Interactuar</button>
+  </mat-menu>
+  <!-- Menú Nivel -->
+  <mat-menu #menuNivel="matMenu">
+    <button mat-menu-item routerLink="/niveles">Listar</button>
+    <button mat-menu-item routerLink="/niveles/news">Registrar</button>
   </mat-menu>
 </div>
