@@ -8,6 +8,11 @@
       <mat-icon>menu</mat-icon>Distrito
     </button>
     <button 
+      matButton 
+      class="btn-azul" 
+      aria-label="Botón menú rol"
+      [matMenuTriggerFor]="menuRol">
+      <mat-icon>menu</mat-icon>Rol
     matButton 
     class="btn-rojo" 
     aria-label="Example icon-button with menu icon"
@@ -15,11 +20,15 @@
       <mat-icon>menu</mat-icon>BotonPanico
     </button>
   </mat-toolbar>
-
+  <!-- Menú Distrito -->
   <mat-menu #menuDistrito="matMenu">
     <button mat-menu-item routerLink="/distritos">Listar</button>
     <button mat-menu-item routerLink="/distritos/news">Registrar</button>
   </mat-menu>
+  <!-- Menú Rol -->
+  <mat-menu #menuRol="matMenu">
+    <button mat-menu-item routerLink="/roles">Listar</button>
+    <button mat-menu-item routerLink="/roles/news">Registrar</button>
   <mat-menu #menuBotonPanico="matMenu">
     <button mat-menu-item routerLink="/BotonPanico/interactuar">Interactuar</button>
   </mat-menu>
