@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { Interactuar } from './interactuar/interactuar';
+import { Botonpanicolistar } from './botonpanicolistar/botonpanicolistar';
 @Component({
   selector: 'app-botonpanico',
-  imports: [RouterOutlet, Interactuar],
+  imports: [RouterOutlet, Botonpanicolistar],
   templateUrl: './botonpanico.html',
   styleUrl: './botonpanico.css',
 })
