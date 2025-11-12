@@ -38,7 +38,11 @@ export class NivelxpeligroService implements OnInit {
   }
 
   update(n: Nivelxpeligro) {
-    return this.http.put(`${this.url}`, n, { responseType: 'text' });
+      const payload = {
+      id_nivel: n.ID_nivel,
+      nivel: n.nivel
+    };
+    return this.http.put(`${this.url}`, payload, { responseType: 'text' });
   }
 
   delete(id: number) {

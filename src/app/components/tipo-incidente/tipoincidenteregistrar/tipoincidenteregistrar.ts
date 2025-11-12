@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Distrito } from '../../../models/Distrito';
-import { DistritoService } from '../../../services/distrito-service';
+import { Tipo_Incidente } from '../../../models/Tipo_Incidente';
+import { TipoIncidenteService } from '../../../services/Tipo_Incidente_Service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,30 +15,27 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-
 @Component({
-  selector: 'app-distritoregistrar',
-  imports: [
-    ReactiveFormsModule,
+  selector: 'app-tipoincidenteregistrar',
+  imports: [ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule,
-  ],
-  templateUrl: './distritoregistrar.html',
+    MatButtonModule,],
+  templateUrl: './tipoincidenteregistrar.html',
   providers: [provideNativeDateAdapter()],
-  styleUrl: './distritoregistrar.css',
+  styleUrl: './tipoincidenteregistrar.css',
 })
-export class Distritoregistrar implements OnInit {
+export class Tipoincidenteregistrar implements OnInit {
 form: FormGroup = new FormGroup({});
-  di: Distrito = new Distrito();
+  di: Tipo_Incidente = new Tipo_Incidente();
 
   edicion: boolean = false;
   id: number = 0;
 
   constructor(
-    private dS: DistritoService,
+    private dS: TipoIncidenteService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
@@ -58,31 +55,36 @@ form: FormGroup = new FormGroup({});
   }
   //aceptar
   aceptar(): void {
+    console.log("llegue hasta aqui")
     if (this.form.valid) {
-      this.di.ID_Distrito=this.form.value.codigo
-      this.di.Nombre = this.form.value.nombre;
+      this.di.id_tipo_incidente=this.form.value.codigo
+      this.di.tipo = this.form.value.nombre;
+      console.log("1er paso")
       if(this.edicion){
+        console.log("edicion")
         this.dS.update(this.di).subscribe((data) => {
           this.dS.list().subscribe((data) => {
             this.dS.setList(data);
           });
         });
-      }else{
+      }
+      else{
+        console.log("comenzando")
         this.dS.insert(this.di).subscribe((data) => {
           this.dS.list().subscribe((data) => {
             this.dS.setList(data);
           });
         });
       }
-      this.router.navigate(['distritos']);
+      this.router.navigate(['tipoincidente']);
     }
   }
 
   init() {
     if (this.edicion) {
       this.dS.listId(this.id).subscribe((data: any) => {
-        const codigo = data.id_Distrito;
-        const nombre = data.nombre;
+        const codigo = this.id;
+        const nombre = data.tipo_Tipo_Incidente;
         this.form = new FormGroup({
           codigo: new FormControl(codigo),
           nombre: new FormControl(nombre),
@@ -90,5 +92,6 @@ form: FormGroup = new FormGroup({});
         
       });
     }
-  }
+  }  
+
 }

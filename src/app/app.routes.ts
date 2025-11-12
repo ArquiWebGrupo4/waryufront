@@ -6,7 +6,12 @@ import { Rol } from './components/rol/rol';
 import { Rolregistrar } from './components/rol/rolregistrar/rolregistrar';
 import {Nivelxpeligro} from './components/nivelxpeligro/nivelxpeligro';
 import {nivelxpeligroregistrar} from './components/nivelxpeligro/nivelxpeligroregistrar/nivelxpeligroregistrar';
-
+import { TipoNotificacion } from './components/tipo-notificacion/tipo-notificacion';
+import { TiponotificacionRegistrar } from './components/tipo-notificacion/tiponotificacion-registrar/tiponotificacion-registrar';
+import { TipoIncidente } from './components/tipo-incidente/tipo-incidente';
+import { Tipoincidenteregistrar} from './components/tipo-incidente/tipoincidenteregistrar/tipoincidenteregistrar';
+import { LandingPage } from './components/landing-page/landing-page';
+import {Menu} from './components/menu/menu';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -25,6 +30,23 @@ export const routes: Routes = [
             {path:'news',component:nivelxpeligroregistrar},
             {path:'edits/:id',component:nivelxpeligroregistrar}
         ]
+    },
+    {path:'BotonPanico/interactuar',component:Interactuar},
+    
+    {path:'tiponotificacion', component:TipoNotificacion,
+        children: [
+            {path:'news', component:TiponotificacionRegistrar},
+            {path:'edits/:id',component:TiponotificacionRegistrar}
+        ]
+    },
+    {path:'tipoincidente', component:TipoIncidente,
+        children: [
+            {path:'news', component:Tipoincidenteregistrar},
+            {path:'edits/:id',component:Tipoincidenteregistrar}
+        ]
+    },
+    {path:'', component:LandingPage
+    },
+    {path:'menu', component:Menu
     }
-    {path:'BotonPanico/interactuar',component:Interactuar}
 ];

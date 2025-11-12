@@ -73,12 +73,14 @@ export class nivelxpeligroregistrar implements OnInit {
   
     init() {
       if (this.edicion) {
-        this.nS.listId(this.id).subscribe((data) => {
+      this.nS.listId(this.id).subscribe((data) => {
+        const codigo = this.id;
+        console.log(codigo);
+        const nombre = data.nivel;
           this.form = new FormGroup({
-            codigo: new FormControl(data.ID_nivel),
-            nivel: new FormControl(data.nivel),
+            codigo: new FormControl(codigo),
+            nivel: new FormControl(nombre),
           });
-          
         });
       }
     }
