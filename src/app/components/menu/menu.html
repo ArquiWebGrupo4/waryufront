@@ -62,7 +62,17 @@
       [matMenuTriggerFor]="menuUsuario">
       <mat-icon>menu</mat-icon>Usuario
       </button>
+
+      <button 
+      mat-button 
+      class="btn-naranja" 
+      aria-label="Botón Reporte Incidente"
+      [matMenuTriggerFor]="menuReporteIncidente">
+      <mat-icon>menu</mat-icon>Reporte Incidente
+      </button>
     </mat-toolbar>
+
+    
 
   <!-- Menú Distrito -->
   <mat-menu #menuDistrito="matMenu">
@@ -103,5 +113,13 @@
   <mat-menu #menuUsuario="matMenu">
     <button mat-menu-item routerLink="/usuarios">Listar</button>
     <button mat-menu-item routerLink="/usuarios/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú de Reporte de incidentes -->
+
+  <mat-menu #menuReporteIncidente="matMenu">
+
+    <button mat-menu-item routerLink="/reporteincidente">Listar</button>
+    <button mat-menu-item routerLink="/reporteincidente/news">Registrar</button>
   </mat-menu>
 </div>

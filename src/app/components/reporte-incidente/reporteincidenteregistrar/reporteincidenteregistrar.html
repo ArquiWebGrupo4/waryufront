@@ -1,0 +1,60 @@
+<div class="container">
+    <div style="text-align: center; margin: 5%"><h2>Registrar Reporte de Incidente</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+       <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" type="number" />
+        <mat-error>
+          @if (form.get('codigo')?.hasError('required')) { Ingrese ID de reporte!! }
+        </mat-error>
+      </mat-form-field> 
+      }
+      <br />
+      <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <input matInput formControlName="descripcion" />
+        <mat-error>
+          @if (form.get('descripcion')?.hasError('required')) { Ingrese descripcion del Reporte!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) { Ingrese fecha de reporte!! }
+        </mat-error>
+      </mat-form-field>
+        <br />
+        <mat-form-field>
+        <mat-label>Incidente</mat-label>
+        <input matInput formControlName="id_incidente" />
+        <mat-error>
+          @if (form.get('id_incidente')?.hasError('required')) { Ingrese ID de incidente valido!! }
+        </mat-error>
+      </mat-form-field>
+
+
+        <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="id_usuario">
+          @for (a of listaUsuarios; track a) {
+          <mat-option [value]="a.ID_Usuario">{{ a.ID_Usuario }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button matButton="elevated">{{ edicion ? 'Actualizar' : 'Registrar' }}</button>
+      </div>
+
+
+
+    </form>
+</div>
+</div>

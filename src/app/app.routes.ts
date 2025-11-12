@@ -14,6 +14,9 @@ import { LandingPage } from './components/landing-page/landing-page';
 import {Menu} from './components/menu/menu';
 import { Usuarios } from './components/usuarios/usuarios';
 import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuariosregistrar';
+import { ReporteIncidente } from './components/reporte-incidente/reporte-incidente';
+import { Reporteincidenteregistrar } from './components/reporte-incidente/reporteincidenteregistrar/reporteincidenteregistrar';
+
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -51,6 +54,12 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Usuariosregistrar},
             {path:'edits/:id',component:Usuariosregistrar}
+        ]
+    },
+    {path:'reporteincidente', component:ReporteIncidente,
+        children: [
+            {path:'news', component:Reporteincidenteregistrar},
+            {path:'edits/:id',component:Reporteincidenteregistrar}
         ]
     },
     {path:'', component:LandingPage
