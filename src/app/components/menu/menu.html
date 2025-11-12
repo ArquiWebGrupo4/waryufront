@@ -62,7 +62,17 @@
       [matMenuTriggerFor]="menuUsuario">
       <mat-icon>menu</mat-icon>Usuario
       </button>
-    </mat-toolbar>
+
+         <!-- Botón Tipo de Usuario -->
+    <button 
+      mat-button 
+      class="btn-naranja" 
+      aria-label="Botón menú Incidente"
+      [matMenuTriggerFor]="menuIncidente">
+      <mat-icon>menu</mat-icon>Incidente
+      </button>
+  </mat-toolbar>
+
 
   <!-- Menú Distrito -->
   <mat-menu #menuDistrito="matMenu">
@@ -103,5 +113,11 @@
   <mat-menu #menuUsuario="matMenu">
     <button mat-menu-item routerLink="/usuarios">Listar</button>
     <button mat-menu-item routerLink="/usuarios/news">Registrar</button>
+  </mat-menu>
+
+     <!-- Menú de Incidente -->
+  <mat-menu #menuIncidente="matMenu">
+    <button mat-menu-item routerLink="/Incidente">Listar</button>
+    <button mat-menu-item routerLink="/Incidente/news">Registrar</button>
   </mat-menu>
 </div>

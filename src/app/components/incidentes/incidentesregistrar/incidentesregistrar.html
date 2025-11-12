@@ -1,0 +1,107 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%">
+      <h2>Actualización de Incidente</h2>
+    </div>
+  } @else {
+    <div style="text-align: center; margin: 5%">
+      <h2>Registro de Incidente</h2>
+    </div>
+  }
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      @if (edicion) {
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" />
+        </mat-form-field>
+      }
+
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="fk1">
+          @for (u of listausuarios; track u) {
+            <mat-option [value]="u.ID_Usuario">{{ u.NombreCompleto }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Nivel de Peligro</mat-label>
+        <mat-select formControlName="fk2">
+          @for (n of listaNivelPeligro; track n) {
+            <mat-option [value]="n.ID_nivel">{{ n.nivel }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Tipo de Incidente</mat-label>
+        <mat-select formControlName="fk3">
+          @for (t of listaTipoIncidente; track t) {
+            <mat-option [value]="t.id_tipo_incidente">{{ t.tipo }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Distrito</mat-label>
+        <mat-select formControlName="fk4">
+          @for (d of listadistrito; track d) {
+            <mat-option [value]="d.ID_Distrito">{{ d.Nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Imagen URL</mat-label>
+        <input matInput formControlName="imagen" />
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha de Creación</mat-label>
+        <input matInput formControlName="fechacreacion" />
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha de Modificacion</mat-label>
+        <input matInput formControlName="fechamodificacion" />
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Latitud</mat-label>
+        <input matInput formControlName="latitud" type="number" />
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Longitud</mat-label>
+        <input matInput formControlName="longitud" type="number" />
+      </mat-form-field>
+
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button matButton="elevated">Registrar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>
