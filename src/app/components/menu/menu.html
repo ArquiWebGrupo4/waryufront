@@ -71,6 +71,15 @@
       [matMenuTriggerFor]="menuIncidente">
       <mat-icon>menu</mat-icon>Incidente
       </button>
+
+      <!-- Botón Busqueda -->
+    <button 
+      mat-button 
+      class="btn-rojo" 
+      aria-label="Botón menú Busqueda"
+      [matMenuTriggerFor]="menuBusqueda">
+      <mat-icon>menu</mat-icon>Busqueda
+    </button>
       
   </mat-toolbar>
 
@@ -122,5 +131,11 @@
   <mat-menu #menuIncidente="matMenu">
     <button mat-menu-item routerLink="/Incidente">Listar</button>
     <button mat-menu-item routerLink="/Incidente/news">Registrar</button>
+  </mat-menu>
+
+    <!-- Menú Busqueda -->
+  <mat-menu #menuBusqueda="matMenu">
+    <button mat-menu-item routerLink="/Busqueda">Listar</button>
+    <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>
   </mat-menu>
 </div>

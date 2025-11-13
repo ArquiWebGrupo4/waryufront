@@ -16,6 +16,9 @@ import { Usuarios } from './components/usuarios/usuarios';
 import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuariosregistrar';
 import { Incidentes } from './components/incidentes/incidentes';
 import { Incidentesregistrar } from './components/incidentes/incidentesregistrar/incidentesregistrar';
+import { Busqueda } from './components/busqueda/busqueda';
+import { Busquedaregistrar } from './components/busqueda/busquedaregistrar/busquedaregistrar';
+import { Busquedalistar } from './components/busqueda/busquedalistar/busquedalistar';
 import { Botonpanico } from './components/botonpanico/botonpanico';
 import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
 export const routes: Routes = [
@@ -66,6 +69,12 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Incidentesregistrar},
             {path:'edits/:id',component:Incidentesregistrar}
+        ]
+    },
+     {path:'Busqueda', component:Busqueda,
+        children: [
+            {path:'news', component:Busquedaregistrar},
+            {path:'edits/:id',component:Busquedalistar}
         ]
     },
     {path:'', component:LandingPage
