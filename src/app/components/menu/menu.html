@@ -80,6 +80,7 @@
       [matMenuTriggerFor]="menuBusqueda">
       <mat-icon>menu</mat-icon>Busqueda
     </button>
+      
   </mat-toolbar>
 
 
@@ -97,6 +98,8 @@
 
   <!-- Menú Botón Pánico -->
   <mat-menu #menuBotonPanico="matMenu">
+    <button mat-menu-item routerLink="/BotonPanico">Listar</button>
+    <button mat-menu-item routerLink="/BotonPanico/news">Registrar</button>
     <button mat-menu-item routerLink="/BotonPanico/interactuar">Interactuar</button>
   </mat-menu>
 

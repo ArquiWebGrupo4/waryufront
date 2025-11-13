@@ -19,6 +19,8 @@ import { Incidentesregistrar } from './components/incidentes/incidentesregistrar
 import { Busqueda } from './components/busqueda/busqueda';
 import { Busquedaregistrar } from './components/busqueda/busquedaregistrar/busquedaregistrar';
 import { Busquedalistar } from './components/busqueda/busquedalistar/busquedalistar';
+import { Botonpanico } from './components/botonpanico/botonpanico';
+import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -38,7 +40,12 @@ export const routes: Routes = [
             {path:'edits/:id',component:nivelxpeligroregistrar}
         ]
     },
-    {path:'BotonPanico/interactuar',component:Interactuar},
+    {path:'BotonPanico',component:Botonpanico,
+        children:[
+            {path:'news',component:Botonpanicoregistrar},
+            {path:'edits/:id',component:Botonpanicoregistrar},
+            {path:'interactuar',component:Interactuar}
+        ]},
     
     {path:'tiponotificacion', component:TipoNotificacion,
         children: [
