@@ -12,6 +12,12 @@ import { TipoIncidente } from './components/tipo-incidente/tipo-incidente';
 import { Tipoincidenteregistrar} from './components/tipo-incidente/tipoincidenteregistrar/tipoincidenteregistrar';
 import { LandingPage } from './components/landing-page/landing-page';
 import {Menu} from './components/menu/menu';
+import { Usuarios } from './components/usuarios/usuarios';
+import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuariosregistrar';
+import { Incidentes } from './components/incidentes/incidentes';
+import { Incidentesregistrar } from './components/incidentes/incidentesregistrar/incidentesregistrar';
+import { Botonpanico } from './components/botonpanico/botonpanico';
+import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -31,7 +37,12 @@ export const routes: Routes = [
             {path:'edits/:id',component:nivelxpeligroregistrar}
         ]
     },
-    {path:'BotonPanico/interactuar',component:Interactuar},
+    {path:'BotonPanico',component:Botonpanico,
+        children:[
+            {path:'news',component:Botonpanicoregistrar},
+            {path:'edits/:id',component:Botonpanicoregistrar},
+            {path:'interactuar',component:Interactuar}
+        ]},
     
     {path:'tiponotificacion', component:TipoNotificacion,
         children: [
@@ -43,6 +54,18 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Tipoincidenteregistrar},
             {path:'edits/:id',component:Tipoincidenteregistrar}
+        ]
+    },
+    {path:'usuarios', component:Usuarios,
+        children: [
+            {path:'news', component:Usuariosregistrar},
+            {path:'edits/:id',component:Usuariosregistrar}
+        ]
+    },
+    {path:'Incidente', component:Incidentes,
+        children: [
+            {path:'news', component:Incidentesregistrar},
+            {path:'edits/:id',component:Incidentesregistrar}
         ]
     },
     {path:'', component:LandingPage

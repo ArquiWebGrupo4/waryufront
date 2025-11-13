@@ -44,17 +44,14 @@ form: FormGroup = new FormGroup({});
     });
 
     this.form = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      latitud: ['', Validators.required],
-      longitud: ['', Validators.required],
+      nombre: ['', Validators.required]
     });
 
   }
   aceptar(): void {
-    if (this.form.valid) {
-      this.bS.test().subscribe({});
+    this.bS.interactuar().subscribe({});
+      console.log ("Se acaba de interactuar")
       this.router.navigate(['BotonPanico/interactuar']);
-    }
   }
 
   init() {
