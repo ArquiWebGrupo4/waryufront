@@ -71,6 +71,26 @@
       <mat-icon>menu</mat-icon>Reporte Incidente
       </button>
     </mat-toolbar>
+         <!-- Botón Tipo de Usuario -->
+    <button 
+      mat-button 
+      class="btn-naranja" 
+      aria-label="Botón menú Incidente"
+      [matMenuTriggerFor]="menuIncidente">
+      <mat-icon>menu</mat-icon>Incidente
+      </button>
+
+      <!-- Botón Busqueda -->
+    <button 
+      mat-button 
+      class="btn-rojo" 
+      aria-label="Botón menú Busqueda"
+      [matMenuTriggerFor]="menuBusqueda">
+      <mat-icon>menu</mat-icon>Busqueda
+    </button>
+      
+  </mat-toolbar>
+
 
     
 
@@ -88,6 +108,8 @@
 
   <!-- Menú Botón Pánico -->
   <mat-menu #menuBotonPanico="matMenu">
+    <button mat-menu-item routerLink="/BotonPanico">Listar</button>
+    <button mat-menu-item routerLink="/BotonPanico/news">Registrar</button>
     <button mat-menu-item routerLink="/BotonPanico/interactuar">Interactuar</button>
   </mat-menu>
 
@@ -121,5 +143,15 @@
 
     <button mat-menu-item routerLink="/reporteincidente">Listar</button>
     <button mat-menu-item routerLink="/reporteincidente/news">Registrar</button>
+     <!-- Menú de Incidente -->
+  <mat-menu #menuIncidente="matMenu">
+    <button mat-menu-item routerLink="/Incidente">Listar</button>
+    <button mat-menu-item routerLink="/Incidente/news">Registrar</button>
+  </mat-menu>
+
+    <!-- Menú Busqueda -->
+  <mat-menu #menuBusqueda="matMenu">
+    <button mat-menu-item routerLink="/Busqueda">Listar</button>
+    <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>
   </mat-menu>
 </div>

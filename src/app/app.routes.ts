@@ -17,6 +17,13 @@ import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuar
 import { ReporteIncidente } from './components/reporte-incidente/reporte-incidente';
 import { Reporteincidenteregistrar } from './components/reporte-incidente/reporteincidenteregistrar/reporteincidenteregistrar';
 
+import { Incidentes } from './components/incidentes/incidentes';
+import { Incidentesregistrar } from './components/incidentes/incidentesregistrar/incidentesregistrar';
+import { Busqueda } from './components/busqueda/busqueda';
+import { Busquedaregistrar } from './components/busqueda/busquedaregistrar/busquedaregistrar';
+import { Busquedalistar } from './components/busqueda/busquedalistar/busquedalistar';
+import { Botonpanico } from './components/botonpanico/botonpanico';
+import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -36,7 +43,12 @@ export const routes: Routes = [
             {path:'edits/:id',component:nivelxpeligroregistrar}
         ]
     },
-    {path:'BotonPanico/interactuar',component:Interactuar},
+    {path:'BotonPanico',component:Botonpanico,
+        children:[
+            {path:'news',component:Botonpanicoregistrar},
+            {path:'edits/:id',component:Botonpanicoregistrar},
+            {path:'interactuar',component:Interactuar}
+        ]},
     
     {path:'tiponotificacion', component:TipoNotificacion,
         children: [
@@ -60,6 +72,16 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Reporteincidenteregistrar},
             {path:'edits/:id',component:Reporteincidenteregistrar}
+    {path:'Incidente', component:Incidentes,
+        children: [
+            {path:'news', component:Incidentesregistrar},
+            {path:'edits/:id',component:Incidentesregistrar}
+        ]
+    },
+     {path:'Busqueda', component:Busqueda,
+        children: [
+            {path:'news', component:Busquedaregistrar},
+            {path:'edits/:id',component:Busquedalistar}
         ]
     },
     {path:'', component:LandingPage
