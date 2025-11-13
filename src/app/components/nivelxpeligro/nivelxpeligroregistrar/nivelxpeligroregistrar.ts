@@ -52,7 +52,7 @@ export class nivelxpeligroregistrar implements OnInit {
     }
     aceptar(): void {
       if (this.form.valid) {
-        this.ni.ID_nivel = this.form.value.codigo;
+        this.ni.id_nivel = this.form.value.codigo;
         this.ni.nivel = this.form.value.nivel;      
         if(this.edicion){
           this.nS.update(this.ni).subscribe((data) => {

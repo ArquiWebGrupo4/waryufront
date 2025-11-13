@@ -62,7 +62,7 @@ form: FormGroup = new FormGroup({});
     this.form = this.formBuilder.group({
       codigo:[''],
       direccion: ['', Validators.required],
-      palabra_clave: ['', Validators.required],
+      palabra_Clave: ['', Validators.required],
       fecha: ['', Validators.required],
       fk:['',Validators.required]
     });
@@ -70,11 +70,11 @@ form: FormGroup = new FormGroup({});
   //aceptar
   aceptar(): void {
     if (this.form.valid) {
-      this.bu.ID_Busqueda=this.form.value.codigo
-      this.bu.Direccion = this.form.value.direccion;
-      this.bu.Palabra_Clave = this.form.value.palabra_clave;
-      this.bu.Fecha = this.form.value.fecha;
-      this.bu.usuario.ID_Usuario = this.form.value.fk;
+      this.bu.id_Busqueda=this.form.value.codigo
+      this.bu.direccion = this.form.value.direccion;
+      this.bu.palabra_Clave = this.form.value.palabra_Clave;
+      this.bu.fecha = this.form.value.fecha;
+      this.bu.usuario.id_Usuario = this.form.value.fk;
       if(this.edicion){
         this.bS.update(this.bu).subscribe((data) => {
           this.bS.list().subscribe((data) => {
@@ -88,24 +88,19 @@ form: FormGroup = new FormGroup({});
           });
         });
       }
-      this.router.navigate(['busqueda']);
+      this.router.navigate(['Busqueda']);
     }
   }
 
   init() {
     if (this.edicion) {
       this.bS.listId(this.id).subscribe((data: any) => {
-        const codigo = data.ID_Busqueda;
-        const direccion = data.Direccion;
-        const palabra_clave = data.Palabra_Clave;
-        const fecha = data.Fecha;
-        const fk = data.usuario.ID_Usuario;
         this.form = new FormGroup({
-          codigo: new FormControl(codigo),
-          nombre: new FormControl(direccion),
-          palabra_clave: new FormControl(palabra_clave),
-          fecha: new FormControl(fecha),
-          fk: new FormControl(fk),
+          codigo: new FormControl(data.id_Busqueda),
+          direccion: new FormControl(data.direccion),
+          palabra_Clave: new FormControl(data.palabra_Clave),
+          fecha: new FormControl(data.fecha),
+          fk: new FormControl(data.usuario.id_Usuario),
         });
         
       });

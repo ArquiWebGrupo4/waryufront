@@ -24,7 +24,7 @@
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="fk1">
           @for (u of listausuarios; track u) {
-            <mat-option [value]="u.ID_Usuario">{{ u.NombreCompleto }}</mat-option>
+            <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -32,19 +32,19 @@
       <br />
       <mat-form-field>
         <mat-label>fecha</mat-label>
-        <input matInput formControlName="fecha" />
+        <input type="datetime-local" matInput formControlName="fecha" />
       </mat-form-field>
 
       <br />
       <mat-form-field>
         <mat-label>latitud</mat-label>
-        <textarea matInput formControlName="latitud"></textarea>
+        <input type="number" matInput formControlName="latitud" />
       </mat-form-field>
 
       <br />
       <mat-form-field>
         <mat-label>longitud</mat-label>
-        <input matInput formControlName="longitud" />
+        <input type="number" matInput formControlName="longitud" />
       </mat-form-field>
 
       <div>

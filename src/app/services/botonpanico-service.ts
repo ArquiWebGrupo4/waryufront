@@ -24,8 +24,8 @@ export class BotonpanicoService implements OnInit {
       return this.http.get<Botonpanico[]>(this.url);
     }
   
-    insert(d: Botonpanico): Observable<string> {
-      return this.http.post(this.url, d, { responseType: 'text' });
+    insert(d: Botonpanico) : Observable<string> {
+      return this.http.post(`${this.url}`, d, { responseType: 'text' });
     }
   
     setList(listaNueva: Botonpanico[]) {

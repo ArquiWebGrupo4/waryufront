@@ -84,17 +84,17 @@ export class Incidentesregistrar {
 
   aceptar(): void {
     if(this.form.valid){
-      this.inc.ID_Incidente = this.form.value['codigo'];
-      this.inc.Usuario.ID_Usuario = this.form.value['fk1'];
-      this.inc.nivelPeligro.ID_nivel = this.form.value['fk2'];
-      this.inc.tipoIncidente.id_tipo_incidente = this.form.value['fk3'];
-      this.inc.Distrito.ID_Distrito = this.form.value['fk4'];
-      this.inc.Imagen_URL = this.form.value['imagen'];
-      this.inc.Descripcion = this.form.value['descripcion'];
-      this.inc.Fecha_Creacion = this.form.value['fechacreacion'];
-      this.inc.Fecha_Modificacion = this.form.value['fechamodificacion'];
-      this.inc.Lat = this.form.value['latitud'];
-      this.inc.Lon = this.form.value['longitud'];
+      this.inc.id_Incidente = this.form.value['codigo'];
+      this.inc.usuario.id_Usuario = this.form.value['fk1'];
+      this.inc.nivelPeligro.id_nivel = this.form.value['fk2'];
+      this.inc.tipoIncidente.id_Tipo_Incidente = this.form.value['fk3'];
+      this.inc.distrito.id_Distrito = this.form.value['fk4'];
+      this.inc.imagen_URL = this.form.value['imagen'];
+      this.inc.descripcion = this.form.value['descripcion'];
+      this.inc.fecha_Creacion = this.form.value['fechacreacion'];
+      this.inc.fecha_Modificacion = this.form.value['fechamodificacion'];
+      this.inc.lat = this.form.value['latitud'];
+      this.inc.lon = this.form.value['longitud'];
       if (this.edicion) {
         this.iS.update(this.inc).subscribe(() => {
           this.iS.list().subscribe((data) => {
@@ -116,17 +116,17 @@ export class Incidentesregistrar {
       if (this.edicion) {
         this.iS.listId(this.id).subscribe((data) => {
           this.form = new FormGroup({
-            codigo: new FormControl(data.ID_Incidente),
-            fk1: new FormControl(data.Usuario.ID_Usuario),
-            fk2: new FormControl(data.nivelPeligro.ID_nivel),
-            fk3: new FormControl(data.tipoIncidente.id_tipo_incidente),
-            fk4: new FormControl(data.Distrito.ID_Distrito),
-            imagen: new FormControl(data.Imagen_URL),
-            descripcion: new FormControl(data.Descripcion),
-            fechacreacion: new FormControl(data.Fecha_Creacion),
-            fechamodificacion: new FormControl(data.Fecha_Modificacion),
-            latitud: new FormControl(data.Lat),
-            longitud: new FormControl(data.Lon),
+            codigo: new FormControl(data.id_Incidente),
+            fk1: new FormControl(data.usuario.id_Usuario),
+            fk2: new FormControl(data.nivelPeligro.id_nivel),
+            fk3: new FormControl(data.tipoIncidente.id_Tipo_Incidente),
+            fk4: new FormControl(data.distrito.id_Distrito),
+            imagen: new FormControl(data.imagen_URL),
+            descripcion: new FormControl(data.descripcion),
+            fechacreacion: new FormControl(data.fecha_Creacion),
+            fechamodificacion: new FormControl(data.fecha_Modificacion),
+            latitud: new FormControl(data.lat),
+            longitud: new FormControl(data.lon),
           });
         });
       }

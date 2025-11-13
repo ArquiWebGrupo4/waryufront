@@ -21,8 +21,8 @@ export class DistritoService implements OnInit {
 
   insert(a: Distrito): Observable<string> {
     const payload = {
-      id_Distrito: a.ID_Distrito,
-      nombre: a.Nombre
+      id_Distrito: a.id_Distrito,
+      nombre: a.nombre
     };
     return this.http.post(this.url, payload, { responseType: 'text' });
   }
@@ -41,8 +41,8 @@ export class DistritoService implements OnInit {
 
   update(a: Distrito) {
       const payload = {
-      id_Distrito: a.ID_Distrito,
-      nombre: a.Nombre
+      id_Distrito: a.id_Distrito,
+      nombre: a.nombre
     };
     return this.http.put(`${this.url}`, payload, { responseType: 'text' });
   }

@@ -23,10 +23,10 @@ export class TipoIncidenteService implements OnInit {
   }
 
   insert(a:Tipo_Incidente): Observable<string>{
-    console.log(a.id_tipo_incidente);
+    console.log(a.id_Tipo_Incidente);
     console.log(a.tipo);
     const payload = {
-      id_Tipo_Incidente: a.id_tipo_incidente,
+      id_Tipo_Incidente: a.id_Tipo_Incidente,
       tipo_Tipo_Incidente: a.tipo,
       
     };
@@ -45,7 +45,7 @@ export class TipoIncidenteService implements OnInit {
   
     update(a: Tipo_Incidente) {
         const payload = {
-        id_Tipo_Incidente: a.id_tipo_incidente,
+        id_Tipo_Incidente: a.id_Tipo_Incidente,
         tipo_Tipo_Incidente: a.tipo
       };
       return this.http.put(`${this.url}`, payload, { responseType: 'text' });

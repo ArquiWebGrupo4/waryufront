@@ -1,98 +1,55 @@
 <div class="container">
   <mat-toolbar class="custom-toolbar">
     <!-- Botón Distrito -->
-    <button 
-      mat-button 
-      class="btn-rojo" 
-      aria-label="Botón menú distrito"
-      [matMenuTriggerFor]="menuDistrito">
-      <mat-icon>menu</mat-icon>Distrito
+    <button mat-button class="btn-rojo" aria-label="Botón menú distrito" [matMenuTriggerFor]="menuDistrito">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> Distrito
     </button>
 
     <!-- Botón Rol -->
-    <button 
-      mat-button 
-      class="btn-azul" 
-      aria-label="Botón menú rol"
-      [matMenuTriggerFor]="menuRol">
-      <mat-icon>menu</mat-icon>Rol
+    <button mat-button class="btn-azul" aria-label="Botón menú rol" [matMenuTriggerFor]="menuRol">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="security"></mat-icon> Rol
     </button>
 
     <!-- Botón Pánico -->
-    <button 
-      mat-button 
-      class="btn-rojo" 
-      aria-label="Botón menú pánico"
-      [matMenuTriggerFor]="menuBotonPanico">
-      <mat-icon>menu</mat-icon>Botón Pánico
+    <button mat-button class="btn-rojo" aria-label="Botón menú pánico" [matMenuTriggerFor]="menuBotonPanico">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="warning"></mat-icon> Botón Pánico
     </button>
 
     <!-- Botón Nivel -->
-    <button 
-      mat-button 
-      class="btn-verde" 
-      aria-label="Botón menú nivel"
-      [matMenuTriggerFor]="menuNivel">
-      <mat-icon>menu</mat-icon>Nivel
+    <button mat-button class="btn-verde" aria-label="Botón menú nivel" [matMenuTriggerFor]="menuNivel">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="priority_high"></mat-icon> Nivel
     </button>
 
     <!-- Botón Tipo de Notificación -->
-    <button 
-      mat-button 
-      class="btn-naranja" 
-      aria-label="Botón menú tipo de notificación"
-      [matMenuTriggerFor]="menuTipoNotificacion">
-      <mat-icon>menu</mat-icon>Tipo de Notificación
+    <button mat-button class="btn-naranja" aria-label="Botón menú tipo de notificación" [matMenuTriggerFor]="menuTipoNotificacion">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="notifications"></mat-icon> Tipo de Notificación
     </button>
 
     <!-- Botón Tipo de Incidente -->
-    <button 
-      mat-button 
-      class="btn-naranja" 
-      aria-label="Botón menú tipo de incidente"
-      [matMenuTriggerFor]="menuTipoIncidente">
-      <mat-icon>menu</mat-icon>Tipo de Incidente
+    <button mat-button class="btn-naranja" aria-label="Botón menú tipo de incidente" [matMenuTriggerFor]="menuTipoIncidente">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="report"></mat-icon> Tipo de Incidente
     </button>
 
-     <!-- Botón Tipo de Usuario -->
-    <button 
-      mat-button 
-      class="btn-naranja" 
-      aria-label="Botón menú Usuario"
-      [matMenuTriggerFor]="menuUsuario">
-      <mat-icon>menu</mat-icon>Usuario
-      </button>
-
-      <button 
-      mat-button 
-      class="btn-naranja" 
-      aria-label="Botón Reporte Incidente"
-      [matMenuTriggerFor]="menuReporteIncidente">
-      <mat-icon>menu</mat-icon>Reporte Incidente
-      </button>
-    </mat-toolbar>
-         <!-- Botón Tipo de Usuario -->
-    <button 
-      mat-button 
-      class="btn-naranja" 
-      aria-label="Botón menú Incidente"
-      [matMenuTriggerFor]="menuIncidente">
-      <mat-icon>menu</mat-icon>Incidente
-      </button>
-
-      <!-- Botón Busqueda -->
-    <button 
-      mat-button 
-      class="btn-rojo" 
-      aria-label="Botón menú Busqueda"
-      [matMenuTriggerFor]="menuBusqueda">
-      <mat-icon>menu</mat-icon>Busqueda
+    <!-- Botón Usuario -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú usuario" [matMenuTriggerFor]="menuUsuario">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="people"></mat-icon> Usuario
     </button>
-      
+
+    <!-- Botón Reporte Incidente -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú reporte incidente" [matMenuTriggerFor]="menuReporteIncidente">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="assignment	"></mat-icon> Reporte Incidente
+    </button>
+
+    <!-- Botón Incidente -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú incidente" [matMenuTriggerFor]="menuIncidente">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dangerous"></mat-icon> Incidente
+    </button>
+
+    <!-- Botón Busqueda -->
+    <button mat-button class="btn-rojo" aria-label="Botón menú busqueda" [matMenuTriggerFor]="menuBusqueda">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Busqueda
+    </button>
   </mat-toolbar>
-
-
-    
 
   <!-- Menú Distrito -->
   <mat-menu #menuDistrito="matMenu">
@@ -131,25 +88,25 @@
     <button mat-menu-item routerLink="/tipoincidente/news">Registrar</button>
   </mat-menu>
 
-   <!-- Menú de Usuario -->
+  <!-- Menú Usuario -->
   <mat-menu #menuUsuario="matMenu">
     <button mat-menu-item routerLink="/usuarios">Listar</button>
     <button mat-menu-item routerLink="/usuarios/news">Registrar</button>
   </mat-menu>
 
-  <!-- Menú de Reporte de incidentes -->
-
+  <!-- Menú Reporte Incidente -->
   <mat-menu #menuReporteIncidente="matMenu">
-
     <button mat-menu-item routerLink="/reporteincidente">Listar</button>
     <button mat-menu-item routerLink="/reporteincidente/news">Registrar</button>
-     <!-- Menú de Incidente -->
+  </mat-menu>
+
+  <!-- Menú Incidente -->
   <mat-menu #menuIncidente="matMenu">
     <button mat-menu-item routerLink="/Incidente">Listar</button>
     <button mat-menu-item routerLink="/Incidente/news">Registrar</button>
   </mat-menu>
 
-    <!-- Menú Busqueda -->
+  <!-- Menú Busqueda -->
   <mat-menu #menuBusqueda="matMenu">
     <button mat-menu-item routerLink="/Busqueda">Listar</button>
     <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>

@@ -55,13 +55,10 @@ form: FormGroup = new FormGroup({});
   }
   //aceptar
   aceptar(): void {
-    console.log("llegue hasta aqui")
     if (this.form.valid) {
-      this.di.id_tipo_incidente=this.form.value.codigo
+      this.di.id_Tipo_Incidente=this.form.value.codigo
       this.di.tipo = this.form.value.nombre;
-      console.log("1er paso")
       if(this.edicion){
-        console.log("edicion")
         this.dS.update(this.di).subscribe((data) => {
           this.dS.list().subscribe((data) => {
             this.dS.setList(data);

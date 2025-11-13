@@ -72,6 +72,8 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Reporteincidenteregistrar},
             {path:'edits/:id',component:Reporteincidenteregistrar}
+        ]
+    },
     {path:'Incidente', component:Incidentes,
         children: [
             {path:'news', component:Incidentesregistrar},
@@ -81,7 +83,7 @@ export const routes: Routes = [
      {path:'Busqueda', component:Busqueda,
         children: [
             {path:'news', component:Busquedaregistrar},
-            {path:'edits/:id',component:Busquedalistar}
+            {path:'edits/:id',component:Busquedaregistrar}
         ]
     },
     {path:'', component:LandingPage

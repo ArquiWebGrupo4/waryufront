@@ -1,4 +1,4 @@
 export class Rol {
-    ID_Rol:number=0
-    Nombre:string=""
+    id_Rol:number=0
+    nombre:string=""
 }

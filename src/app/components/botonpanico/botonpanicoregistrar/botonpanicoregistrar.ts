@@ -58,9 +58,7 @@ form: FormGroup = new FormGroup({});
     this.form = this.formBuilder.group({
       codigo: [''],
       fk1: ['', Validators.required],
-      imagen: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      fechacreacion: ['', Validators.required],
+      fecha: ['', Validators.required],
       latitud: ['', Validators.required],
       longitud: ['', Validators.required],
     });
@@ -69,7 +67,7 @@ form: FormGroup = new FormGroup({});
   aceptar(): void {
     if(this.form.valid){
       this.btns.id_Boton_Panico = this.form.value['codigo'];
-      this.btns.Usuario.ID_Usuario = this.form.value['fk1'];
+      this.btns.usuario.id_Usuario = this.form.value['fk1'];
       this.btns.fecha_Activacion = this.form.value['fecha'];
       this.btns.lat = this.form.value['latitud'];
       this.btns.lon = this.form.value['longitud'];
@@ -79,9 +77,12 @@ form: FormGroup = new FormGroup({});
             this.iS.setList(data);
           });
         });
-      } else {
+      } 
+      else {
+        console.log(this.btns);
         this.iS.insert(this.btns).subscribe(() => {
           this.iS.list().subscribe((data) => {
+            console.log(data);
             this.iS.setList(data);
           });
         });
@@ -93,9 +94,10 @@ form: FormGroup = new FormGroup({});
     init() {
       if (this.edicion) {
         this.iS.listId(this.id).subscribe((data) => {
+          console.log(data);
           this.form = new FormGroup({
             codigo: new FormControl(data.id_Boton_Panico),
-            fk1: new FormControl(data.Usuario.ID_Usuario),
+            fk1: new FormControl(data.usuario.id_Usuario),
             fecha: new FormControl(data.fecha_Activacion),
             latitud: new FormControl(data.lat),
             longitud: new FormControl(data.lon)

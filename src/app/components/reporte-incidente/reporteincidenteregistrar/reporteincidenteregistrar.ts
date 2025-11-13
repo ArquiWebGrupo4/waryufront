@@ -12,7 +12,8 @@ import { Reporte_Incidente } from '../../../models/Reporte_Incidente';
 import { Usuarios } from '../../../models/Usuarios';
 import { MatSelectModule } from '@angular/material/select';
 import { UsuarioService } from '../../../services/usuario-service';
-
+import { IncidentesService } from '../../../services/incidentes-service';
+import { Incidentes } from '../../../models/Incidentes';
 @Component({
   selector: 'app-reporteincidenteregistrar',
   imports: [ReactiveFormsModule,
@@ -33,13 +34,14 @@ export class Reporteincidenteregistrar implements OnInit {
   edicion: boolean = false
   id: number = 0;
   listaUsuarios: Usuarios[] = [];
-
+  listaIncidentes: Incidentes[] = [];
   constructor(
     private riS: ReporteIncidenteService,
     private router: Router,
     private formBuilder: FormBuilder,
      private route: ActivatedRoute,
-     private uS: UsuarioService
+     private uS: UsuarioService,
+     private iS : IncidentesService
     ) {}
 
     ngOnInit(): void {
@@ -49,22 +51,22 @@ export class Reporteincidenteregistrar implements OnInit {
         this.init();
       });
       this.uS.list().subscribe(data => {this.listaUsuarios = data});
-
+      this.iS.list().subscribe(data => {this.listaIncidentes = data});
       this.form = this.formBuilder.group({
-        codigo:['', Validators.required],
+        codigo:[''],
         descripcion: ['', Validators.required],
         fecha: ['', Validators.required],
-        id_incidente: ['', Validators.required],
-        id_usuario: ['', Validators.required],
+        id_Incidente: ['', Validators.required],
+        id_Usuario: ['', Validators.required],
       });
     }
     aceptar(): void {
       if (this.form.valid) {
-        this.ri.ID_Reporte = this.form.value.codigo;
-        this.ri.Descripcion = this.form.value.descripcion;
-        this.ri.Fecha = this.form.value.fecha;
-        this.ri.ID_Incidente = this.form.value.id_incidente;
-        this.ri.usuario.ID_Usuario = this.form.value.id_usuario;
+        this.ri.id_Reporte = this.form.value.codigo;
+        this.ri.descripcion = this.form.value.descripcion;
+        this.ri.fecha = this.form.value.fecha;
+        this.ri.incidente.id_Incidente = this.form.value.id_Incidente;
+        this.ri.usuario.id_Usuario = this.form.value.id_Usuario;
         if(this.edicion){
           this.riS.update(this.ri).subscribe((data) => {
             this.riS.list().subscribe((data) => {
@@ -79,19 +81,19 @@ export class Reporteincidenteregistrar implements OnInit {
         });
 
       }
-      this.router.navigate(['reportes']);
+      this.router.navigate(['reporteincidente']);
     }
 }
     init() {
       if (this.edicion) {
       this.riS.listId(this.id).subscribe((data) => {
-        
+          console.log(data);
           this.form = new FormGroup({
-            codigo: new FormControl(data.ID_Reporte),
-            descripcion: new FormControl(data.Descripcion),
-            fecha: new FormControl(data.Fecha),
-            id_incidente: new FormControl(data.ID_Incidente),
-            id_usuario: new FormControl(data.usuario.ID_Usuario),
+            codigo: new FormControl(data.id_Reporte),
+            descripcion: new FormControl(data.descripcion),
+            fecha: new FormControl(data.fecha),
+            id_Incidente: new FormControl(data.incidente.id_Incidente),
+            id_Usuario: new FormControl(data.usuario.id_Usuario),
           });
         });
       }

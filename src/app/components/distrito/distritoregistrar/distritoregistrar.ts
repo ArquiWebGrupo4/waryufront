@@ -59,8 +59,8 @@ form: FormGroup = new FormGroup({});
   //aceptar
   aceptar(): void {
     if (this.form.valid) {
-      this.di.ID_Distrito=this.form.value.codigo
-      this.di.Nombre = this.form.value.nombre;
+      this.di.id_Distrito=this.form.value.codigo
+      this.di.nombre = this.form.value.nombre;
       if(this.edicion){
         this.dS.update(this.di).subscribe((data) => {
           this.dS.list().subscribe((data) => {

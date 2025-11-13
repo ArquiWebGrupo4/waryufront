@@ -11,6 +11,23 @@
         </mat-error>
       </mat-form-field> 
       }
+      <mat-form-field>
+        <mat-label>Incidente</mat-label>
+        <mat-select formControlName="id_Incidente">
+          @for (i of listaIncidentes; track i) {
+            <mat-option [value]="i.id_Incidente">{{ i.descripcion }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="id_Usuario">
+          @for (u of listaUsuarios; track u) {
+            <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Descripcion</mat-label>
@@ -29,25 +46,6 @@
         <mat-error>
           @if (form.get('fecha')?.hasError('required')) { Ingrese fecha de reporte!! }
         </mat-error>
-      </mat-form-field>
-        <br />
-        <mat-form-field>
-        <mat-label>Incidente</mat-label>
-        <input matInput formControlName="id_incidente" />
-        <mat-error>
-          @if (form.get('id_incidente')?.hasError('required')) { Ingrese ID de incidente valido!! }
-        </mat-error>
-      </mat-form-field>
-
-
-        <br />
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="id_usuario">
-          @for (a of listaUsuarios; track a) {
-          <mat-option [value]="a.ID_Usuario">{{ a.ID_Usuario }}</mat-option>
-          }
-        </mat-select>
       </mat-form-field>
       <div>
         <button matButton="elevated">{{ edicion ? 'Actualizar' : 'Registrar' }}</button>

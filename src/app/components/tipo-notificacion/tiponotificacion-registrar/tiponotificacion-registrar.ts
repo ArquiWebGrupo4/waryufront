@@ -41,8 +41,8 @@ export class TiponotificacionRegistrar implements OnInit {
 
     aceptar(): void {
       if (this.form.valid) {
-        this.ti.ID_TipoNotificacion = this.form.value.codigo
-        this.ti.Nombre = this.form.value.nombre;
+        this.ti.id_TipoNotificacion = this.form.value.codigo
+        this.ti.nombre = this.form.value.nombre;
         if(this.edicion){
           this.tS.update(this.ti).subscribe((data) => {
             this.tS.list().subscribe((data) => {

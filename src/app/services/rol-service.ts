@@ -21,8 +21,8 @@ export class RolService implements OnInit {
 
   insert(a: Rol): Observable<string> {
     const payload = {
-      id_Distrito: a.ID_Rol,
-      nombre: a.Nombre
+      id_Rol: a.id_Rol,
+      nombre: a.nombre
     };
     return this.http.post(this.url, payload, { responseType: 'text' });
   }
@@ -41,8 +41,8 @@ export class RolService implements OnInit {
 
   update(a: Rol) {
       const payload = {
-      id_Rol: a.ID_Rol,
-      nombre: a.Nombre
+      id_Rol: a.id_Rol,
+      nombre: a.nombre
     };
     return this.http.put(`${this.url}`, payload, { responseType: 'text' });
   }

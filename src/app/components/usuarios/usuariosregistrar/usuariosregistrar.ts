@@ -65,16 +65,16 @@ export class Usuariosregistrar implements OnInit {
 
   aceptar(): void {
     if (this.form.valid) {
-      this.user.ID_Usuario = this.form.value.codigo;
-      this.user.Nombreusuario = this.form.value.nombre;
-      this.user.NombreCompleto = this.form.value.nombrecompleto;
-      this.user.Email = this.form.value.email;
-      this.user.Contrasenahash = this.form.value.contrasenahash;
-      this.user.Fecha_Registro = this.form.value.fecharegistro;
-      this.user.Telefono = this.form.value.telefono;
-      this.user.Telefono_panico = this.form.value.telefonopanico;
-      this.user.Mensaje = this.form.value.mensaje;
-      this.user.rol.ID_Rol = this.form.value.fk
+      this.user.id_Usuario = this.form.value.codigo;
+      this.user.nombreUsuario = this.form.value.nombre;
+      this.user.nombreCompleto = this.form.value.nombrecompleto;
+      this.user.email = this.form.value.email;
+      this.user.contrasenahash = this.form.value.contrasenahash;
+      this.user.fecha_Registro = this.form.value.fecharegistro;
+      this.user.telefono = this.form.value.telefono;
+      this.user.telefono_Panico = this.form.value.telefonopanico;
+      this.user.mensaje = this.form.value.mensaje;
+      this.user.rol.id_Rol = this.form.value.fk
       if (this.edicion) {
         this.uS.update(this.user).subscribe((data) => {
           this.uS.list().subscribe((data) => {
@@ -94,17 +94,18 @@ export class Usuariosregistrar implements OnInit {
   init() {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
+        console.log(data);
         this.form = new FormGroup({
-          codigo: new FormControl(data.ID_Usuario),
-          nombre: new FormControl(data.Nombreusuario),
-          nombrecompleto: new FormControl(data.NombreCompleto), 
-          email: new FormControl(data.Email),
-          contrasenahash: new FormControl(data.Contrasenahash),
-          fecharegistro: new FormControl(data.Fecha_Registro),  
-          telefono: new FormControl(data.Telefono),
-          telefonopanico: new FormControl(data.Telefono_panico),
-          mensaje: new FormControl(data.Mensaje),
-          fk:new FormControl(data.rol.ID_Rol)
+          codigo: new FormControl(data.id_Usuario),
+          nombre: new FormControl(data.nombreUsuario),
+          nombrecompleto: new FormControl(data.nombreCompleto), 
+          email: new FormControl(data.email),
+          contrasenahash: new FormControl(data.contrasenahash),
+          fecharegistro: new FormControl(data.fecha_Registro),  
+          telefono: new FormControl(data.telefono),
+          telefonopanico: new FormControl(data.telefono_Panico),
+          mensaje: new FormControl(data.mensaje),
+          fk:new FormControl(data.rol.id_Rol)
         });
       });
     }

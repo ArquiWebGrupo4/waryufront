@@ -1,4 +1,4 @@
 export class Distrito{
-  ID_Distrito:number=0
-  Nombre:string=""
+  id_Distrito:number=0
+  nombre:string=""
 }

@@ -57,8 +57,8 @@ form: FormGroup = new FormGroup({});
     }
     aceptar(): void {
       if (this.form.valid) {
-        this.di.ID_Rol=this.form.value.codigo
-        this.di.Nombre = this.form.value.nombre;
+        this.di.id_Rol=this.form.value.codigo
+        this.di.nombre = this.form.value.nombre;
         if(this.edicion){
           this.rS.update(this.di).subscribe((data) => {
             this.rS.list().subscribe((data) => {
