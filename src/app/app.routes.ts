@@ -21,9 +21,10 @@ import { Incidentes } from './components/incidentes/incidentes';
 import { Incidentesregistrar } from './components/incidentes/incidentesregistrar/incidentesregistrar';
 import { Busqueda } from './components/busqueda/busqueda';
 import { Busquedaregistrar } from './components/busqueda/busquedaregistrar/busquedaregistrar';
-import { Busquedalistar } from './components/busqueda/busquedalistar/busquedalistar';
 import { Botonpanico } from './components/botonpanico/botonpanico';
 import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
+import { Notificacionregistrar } from './components/notificacion/notificacionregistrar/notificacionregistrar';
+import { Notificacion } from './components/notificacion/notificacion';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -84,6 +85,12 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Busquedaregistrar},
             {path:'edits/:id',component:Busquedaregistrar}
+        ]
+    },
+    {path:'Notificacion', component:Notificacion,
+        children: [
+            {path:'news', component:Notificacionregistrar},
+            {path:'edits/:id',component:Notificacionregistrar}
         ]
     },
     {path:'', component:LandingPage

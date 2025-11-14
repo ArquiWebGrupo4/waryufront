@@ -1,0 +1,53 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%">
+      <h2>Actualización de Notificacion</h2>
+    </div>
+  } @else {
+    <div style="text-align: center; margin: 5%">
+      <h2>Registro de Notificacion</h2>
+    </div>
+  }
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      @if (edicion) {
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" />
+        </mat-form-field>
+      }
+
+      <br />
+      <mat-form-field>
+        <mat-label>Tipo de Notificacion</mat-label>
+        <mat-select formControlName="fk">
+          @for (t of listatipoNotificacion; track t) {
+            <mat-option [value]="t.id_Tipo_Notificacion">{{ t.tipo_Tipo_Notificacion}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>mensaje</mat-label>
+        <input matInput formControlName="mensaje" />
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>fecha</mat-label>
+        <input matInput type="date-local" formControlName="fecha" />
+      </mat-form-field>
+
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button matButton="elevated">Registrar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

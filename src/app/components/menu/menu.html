@@ -49,6 +49,11 @@
     <button mat-button class="btn-rojo" aria-label="Botón menú busqueda" [matMenuTriggerFor]="menuBusqueda">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Busqueda
     </button>
+
+    <!-- Botón Notificacion -->
+    <button mat-button class="btn-morado" aria-label="Botón menú notificacion" [matMenuTriggerFor]="menuNotificacion">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Notificacion
+    </button>
   </mat-toolbar>
 
   <!-- Menú Distrito -->
@@ -111,4 +116,12 @@
     <button mat-menu-item routerLink="/Busqueda">Listar</button>
     <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>
   </mat-menu>
+
+  <!-- Menú Notificación -->
+  <mat-menu #menuNotificacion="matMenu">
+    <button mat-menu-item routerLink="/Notificacion">Listar</button>
+    <button mat-menu-item routerLink="/Notificacion/news">Registrar</button>
+  </mat-menu>
 </div>
+
+

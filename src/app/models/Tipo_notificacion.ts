@@ -1,4 +1,4 @@
 export class Tipo_Notificacion {
-    id_TipoNotificacion:number = 0
-    nombre:string = ""
+    id_Tipo_Notificacion:number = 0
+    tipo_Tipo_Notificacion:string = ""
 }
