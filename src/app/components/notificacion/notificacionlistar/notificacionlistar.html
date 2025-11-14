@@ -1,0 +1,53 @@
+<div class="container">
+    <div style="text-align: center;margin:5%"><h2>Lista de Notificaciones</h2></div>
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+       
+        <ng-container matColumnDef="c1">
+          <th mat-header-cell *matHeaderCellDef>ID_Notificacion</th>
+          <td mat-cell *matCellDef="let element"> {{element.id_Notificacion}} </td>
+        </ng-container>
+        
+
+        <ng-container matColumnDef="c2">
+          <th mat-header-cell *matHeaderCellDef>Mensaje</th>
+          <td mat-cell *matCellDef="let element"> {{element.mensaje}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="c3">
+          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="c4">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let element"> {{element.tipo_Notificacion.tipo_Tipo_Notificacion}} </td>
+        </ng-container>
+  
+        <!-- Columna Actualizar -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['edits', element.id_Notificacion]">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Columna Eliminar -->
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="eliminar(element.id_Notificacion)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+                  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  

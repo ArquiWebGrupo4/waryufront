@@ -21,9 +21,9 @@ export class TipoNotificacionService implements OnInit{
   
   insert(a:Tipo_Notificacion): Observable<string> {
     const payload = {
-      id_Tipo_Notificacion: a.id_TipoNotificacion,
-      tipo_Tipo_Notificacion: a.nombre
-    }
+      id_Tipo_Notificacion: a.id_Tipo_Notificacion,
+      tipo_Tipo_Notificacion: a.tipo_Tipo_Notificacion
+    };
     return this.http.post(this.url, payload, {responseType:'text'});
   }
 
@@ -42,8 +42,8 @@ export class TipoNotificacionService implements OnInit{
 
   update(a:Tipo_Notificacion) {
     const payload = {
-      id_Tipo_Notificacion: a.id_TipoNotificacion,
-      tipo_Tipo_Notificacion: a.nombre
+      id_Tipo_Notificacion: a.id_Tipo_Notificacion,
+      tipo_Tipo_Notificacion: a.tipo_Tipo_Notificacion
     };
     return this.http.put(`${this.url}`, payload, {responseType: 'text'});
   }

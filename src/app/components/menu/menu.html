@@ -50,9 +50,14 @@
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Busqueda
     </button>
 
-        <!-- Botón Distrito Favorito -->
+    <!-- Botón Distrito Favorito -->
     <button mat-button class="btn-rojo" aria-label="Botón menú distrito Favorito" [matMenuTriggerFor]="menuDistritoFavorito">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Distrito Favorito
+    </button>
+
+    <!-- Botón Notificacion -->
+    <button mat-button class="btn-morado" aria-label="Botón menú notificacion" [matMenuTriggerFor]="menuNotificacion">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="notifications"></mat-icon> Notificacion
     </button>
   </mat-toolbar>
 
@@ -117,9 +122,17 @@
     <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>
   </mat-menu>
 
-    <!-- Menú Distrito Favorito -->
+  <!-- Menú Distrito Favorito -->
   <mat-menu #menuDistritoFavorito="matMenu">
     <button mat-menu-item routerLink="/distritofavorito">Listar</button>
     <button mat-menu-item routerLink="/distritofavorito/news">Registrar</button>
   </mat-menu>
+  
+  <!-- Menú Notificación -->
+  <mat-menu #menuNotificacion="matMenu">
+    <button mat-menu-item routerLink="/Notificacion">Listar</button>
+    <button mat-menu-item routerLink="/Notificacion/news">Registrar</button>
+  </mat-menu>
 </div>
+
+

@@ -21,11 +21,12 @@ import { Incidentes } from './components/incidentes/incidentes';
 import { Incidentesregistrar } from './components/incidentes/incidentesregistrar/incidentesregistrar';
 import { Busqueda } from './components/busqueda/busqueda';
 import { Busquedaregistrar } from './components/busqueda/busquedaregistrar/busquedaregistrar';
-import { Busquedalistar } from './components/busqueda/busquedalistar/busquedalistar';
 import { Botonpanico } from './components/botonpanico/botonpanico';
 import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
 import { Distritofavorito } from './components/distritofavorito/distritofavorito';
 import { Distritofavoritoregistrar } from './components/distritofavorito/distritofavoritoregistrar/distritofavoritoregistrar';
+import { Notificacionregistrar } from './components/notificacion/notificacionregistrar/notificacionregistrar';
+import { Notificacion } from './components/notificacion/notificacion';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -82,16 +83,22 @@ export const routes: Routes = [
             {path:'edits/:id',component:Incidentesregistrar}
         ]
     },
-     {path:'Busqueda', component:Busqueda,
+    {path:'Busqueda', component:Busqueda,
         children: [
             {path:'news', component:Busquedaregistrar},
             {path:'edits/:id',component:Busquedaregistrar}
         ]
     },
-       {path:'distritofavorito', component:Distritofavorito,
+    {path:'distritofavorito', component:Distritofavorito,
         children: [
             {path:'news', component:Distritofavoritoregistrar},
             {path:'edits/:id',component:Distritofavoritoregistrar}
+        ]
+    },
+    {path:'Notificacion', component:Notificacion,
+        children: [
+            {path:'news', component:Notificacionregistrar},
+            {path:'edits/:id',component:Notificacionregistrar}
         ]
     },
     {path:'', component:LandingPage
