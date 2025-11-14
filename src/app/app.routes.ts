@@ -24,6 +24,8 @@ import { Busquedaregistrar } from './components/busqueda/busquedaregistrar/busqu
 import { Busquedalistar } from './components/busqueda/busquedalistar/busquedalistar';
 import { Botonpanico } from './components/botonpanico/botonpanico';
 import { Botonpanicoregistrar } from './components/botonpanico/botonpanicoregistrar/botonpanicoregistrar';
+import { Distritofavorito } from './components/distritofavorito/distritofavorito';
+import { Distritofavoritoregistrar } from './components/distritofavorito/distritofavoritoregistrar/distritofavoritoregistrar';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -84,6 +86,12 @@ export const routes: Routes = [
         children: [
             {path:'news', component:Busquedaregistrar},
             {path:'edits/:id',component:Busquedaregistrar}
+        ]
+    },
+       {path:'distritofavorito', component:Distritofavorito,
+        children: [
+            {path:'news', component:Distritofavoritoregistrar},
+            {path:'edits/:id',component:Distritofavoritoregistrar}
         ]
     },
     {path:'', component:LandingPage

@@ -49,6 +49,11 @@
     <button mat-button class="btn-rojo" aria-label="Botón menú busqueda" [matMenuTriggerFor]="menuBusqueda">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Busqueda
     </button>
+
+        <!-- Botón Distrito Favorito -->
+    <button mat-button class="btn-rojo" aria-label="Botón menú distrito Favorito" [matMenuTriggerFor]="menuDistritoFavorito">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Distrito Favorito
+    </button>
   </mat-toolbar>
 
   <!-- Menú Distrito -->
@@ -110,5 +115,11 @@
   <mat-menu #menuBusqueda="matMenu">
     <button mat-menu-item routerLink="/Busqueda">Listar</button>
     <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>
+  </mat-menu>
+
+    <!-- Menú Distrito Favorito -->
+  <mat-menu #menuDistritoFavorito="matMenu">
+    <button mat-menu-item routerLink="/distritofavorito">Listar</button>
+    <button mat-menu-item routerLink="/distritofavorito/news">Registrar</button>
   </mat-menu>
 </div>
