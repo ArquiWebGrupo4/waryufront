@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="text-align: center;margin:5%"><h2>Lista de Busquedas</h2></div>
+  <div style="text-align: center;margin:5%"><h2>Lista de Distritos Favoritos de Usuarios</h2></div>
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -18,12 +18,12 @@
       
       <ng-container matColumnDef="cf">
         <th mat-header-cell *matHeaderCellDef>Usuario</th>
-        <td mat-cell *matCellDef="let element"> {{element.usuario.id_Usuario}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.usuario.nombreUsuario}} </td>
       </ng-container>
 
          <ng-container matColumnDef="cfk">
         <th mat-header-cell *matHeaderCellDef>Distrito</th>
-        <td mat-cell *matCellDef="let element"> {{element.distrito.id_Distrito}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.distrito.nombre}} </td>
       </ng-container>
                  <!-- Symbol Column -->
                  <ng-container matColumnDef="c3">
