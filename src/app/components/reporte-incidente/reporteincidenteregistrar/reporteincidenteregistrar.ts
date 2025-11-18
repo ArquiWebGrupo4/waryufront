@@ -54,7 +54,7 @@ export class Reporteincidenteregistrar implements OnInit {
       this.iS.list().subscribe(data => {this.listaIncidentes = data});
       this.form = this.formBuilder.group({
         codigo:[''],
-        descripcion: ['', Validators.required],
+        descripcion: ['', [Validators.required, Validators.maxLength(1000)]],
         fecha: ['', Validators.required],
         id_Incidente: ['', Validators.required],
         id_Usuario: ['', Validators.required],

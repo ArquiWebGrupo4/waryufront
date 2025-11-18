@@ -35,7 +35,7 @@ export class TiponotificacionRegistrar implements OnInit {
 
       this.form = this.formbuilder.group({
         codigo:[''],
-        nombre:['',Validators.required],
+        nombre:['',[Validators.required, Validators.maxLength(50)]],
       });
     }
 

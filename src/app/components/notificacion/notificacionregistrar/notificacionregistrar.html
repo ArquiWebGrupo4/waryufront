@@ -15,7 +15,7 @@
       @if (edicion) {
         <mat-form-field>
           <mat-label>ID</mat-label>
-          <input matInput formControlName="codigo" />
+          <input matInput formControlName="codigo" [readonly]="edicion" />
         </mat-form-field>
       }
 
@@ -33,12 +33,23 @@
       <mat-form-field>
         <mat-label>mensaje</mat-label>
         <input matInput formControlName="mensaje" />
+        <mat-error>
+          @if (form.get('mensaje')?.hasError('required')) { Ingrese mensaje!! }
+          @if (form.get('mensaje')?.hasError('maxlength')) { Máximo 100 caracteres permitidos!! }
+        </mat-error>
       </mat-form-field>
 
       <br />
+      
       <mat-form-field>
-        <mat-label>fecha</mat-label>
-        <input matInput type="date-local" formControlName="fecha" />
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) { Ingrese fecha!! }
+        </mat-error>
       </mat-form-field>
 
       <div>

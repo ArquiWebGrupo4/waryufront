@@ -50,7 +50,7 @@ form: FormGroup = new FormGroup({});
 
     this.form = this.formBuilder.group({
       codigo:[''],
-      nombre: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.maxLength(50)]],
     });
   }
   //aceptar

@@ -11,7 +11,7 @@
             @if (edicion) {
                 <mat-form-field>
                     <mat-label>ID</mat-label>
-                    <input matInput formControlName="codigo" />
+                    <input matInput formControlName="codigo" [readonly]="edicion" />
                     <mat-error>
                         @if (form.get('codigo')?.hasError('required')) {Ingrese id del tipo de notificacion!!}
                     </mat-error>
@@ -24,6 +24,7 @@
                 <input matInput formControlName="nombre" />
                 <mat-error>
                     @if (form.get('nombre')?.hasError('required')) {Ingrese el nombre del tipo de notificacion!!}
+                    @if (form.get('nombre')?.hasError('maxlength')) {Máximo 50 caracteres permitidos!!}
                 </mat-error>
             </mat-form-field>
             <div>

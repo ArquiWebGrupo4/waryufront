@@ -46,7 +46,7 @@ export class Notificacionregistrar {
     });
     this.form = this.formBuilder.group({
       codigo: [''],
-      mensaje: ['', Validators.required],
+      mensaje: ['', [Validators.required, Validators.maxLength(100)]],
       fecha: ['', Validators.required],
       fk:['',Validators.required]
     });

@@ -15,7 +15,7 @@
       @if (edicion) {
         <mat-form-field>
           <mat-label>ID</mat-label>
-          <input matInput formControlName="codigo" />
+          <input matInput formControlName="codigo" [readonly]="edicion" />
         </mat-form-field>
       }
 

@@ -11,7 +11,7 @@
       @if(edicion){
       <mat-form-field>
         <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
+        <input matInput formControlName="codigo" [readonly]="edicion" />
         <mat-error>
           @if (form.get('codigo')?.hasError('required')) { Ingrese id del rol!! }
         </mat-error>
@@ -24,6 +24,7 @@
         <input matInput formControlName="nombre" />
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) { Ingrese nombre del Rol!! }
+          @if (form.get('nombre')?.hasError('maxlength')) { Máximo 20 caracteres permitidos!! }
         </mat-error>
       </mat-form-field>
       <div>

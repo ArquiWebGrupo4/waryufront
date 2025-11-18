@@ -5,7 +5,7 @@
       @if(edicion){
        <mat-form-field>
         <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" type="number" />
+        <input matInput formControlName="codigo" type="number" [readonly]="edicion" />
         <mat-error>
           @if (form.get('codigo')?.hasError('required')) { Ingrese ID de reporte!! }
         </mat-error>
@@ -34,6 +34,7 @@
         <input matInput formControlName="descripcion" />
         <mat-error>
           @if (form.get('descripcion')?.hasError('required')) { Ingrese descripcion del Reporte!! }
+          @if (form.get('descripcion')?.hasError('maxlength')) { Máximo 1000 caracteres permitidos!! }
         </mat-error>
       </mat-form-field>
       <br />

@@ -52,7 +52,7 @@ form: FormGroup = new FormGroup({});
   
       this.form = this.formBuilder.group({
         codigo:[''],
-        nombre: ['', Validators.required],
+        nombre: ['', [Validators.required, Validators.maxLength(20)]],
       });
     }
     aceptar(): void {

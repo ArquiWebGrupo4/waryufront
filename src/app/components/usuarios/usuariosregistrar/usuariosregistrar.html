@@ -15,7 +15,7 @@
       @if (edicion) {
         <mat-form-field>
           <mat-label>ID</mat-label>
-          <input matInput formControlName="codigo" />
+          <input matInput formControlName="codigo" [readonly]="edicion" />
         </mat-form-field>
       }
       <br />
@@ -25,6 +25,9 @@
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) {
             Ingrese nombre de usuario!!
+          }
+          @if (form.get('nombre')?.hasError('maxlength')) {
+            Máximo 20 caracteres permitidos!!
           }
         </mat-error>
       </mat-form-field>
@@ -38,6 +41,9 @@
           @if (form.get('nombrecompleto')?.hasError('required')) {
             Ingrese nombre completo!!
           }
+          @if (form.get('nombrecompleto')?.hasError('maxlength')) {
+            Máximo 150 caracteres permitidos!!
+          }
         </mat-error>
       </mat-form-field>
       </div>
@@ -49,6 +55,9 @@
         <mat-error>
           @if (form.get('email')?.hasError('required')) {
             Ingrese email!!
+          }
+          @if (form.get('email')?.hasError('email')) {
+            Formato de email inválido!!
           }
         </mat-error>
       </mat-form-field>
@@ -104,6 +113,9 @@
         <mat-error>
           @if (form.get('mensaje')?.hasError('required')) {
             Ingrese mensaje!!
+          }
+          @if (form.get('mensaje')?.hasError('maxlength')) {
+            Máximo 200 caracteres permitidos!!
           }
         </mat-error>
       </mat-form-field>

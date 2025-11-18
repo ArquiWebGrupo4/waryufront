@@ -61,8 +61,8 @@ form: FormGroup = new FormGroup({});
 
     this.form = this.formBuilder.group({
       codigo:[''],
-      direccion: ['', Validators.required],
-      palabra_Clave: ['', Validators.required],
+      direccion: ['', [Validators.required, Validators.maxLength(100)]],
+      palabra_Clave: ['', [Validators.required, Validators.maxLength(30)]],
       fecha: ['', Validators.required],
       fk:['',Validators.required]
     });

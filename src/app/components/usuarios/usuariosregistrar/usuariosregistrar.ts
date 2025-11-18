@@ -51,14 +51,14 @@ export class Usuariosregistrar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      nombrecompleto: ['', Validators.required],
-      email: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.maxLength(20)]],
+      nombrecompleto: ['', [Validators.required, Validators.maxLength(150)]],
+      email: ['', [Validators.required, Validators.email]],
       contrasenahash: ['', Validators.required],
       fecharegistro: ['', Validators.required],
       telefono: ['', Validators.required],
       telefonopanico: ['', Validators.required],
-      mensaje: ['', Validators.required],
+      mensaje: ['', [Validators.required, Validators.maxLength(200)]],
       fk:['',Validators.required]
     });
   }

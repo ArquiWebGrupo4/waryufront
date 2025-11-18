@@ -14,6 +14,7 @@
         <input matInput formControlName="codigo" />
         <mat-error>
           @if (form.get('codigo')?.hasError('required')) { Ingrese id del tipo de incidente!! }
+          @if (form.get('codigo')?.hasError('maxlength')) { Máximo 50 caracteres permitidos!! }
         </mat-error>
       </mat-form-field>
       }
@@ -21,9 +22,10 @@
       <br />
       <mat-form-field>
         <mat-label>Tipo de Incidente</mat-label>
-        <input matInput formControlName="nombre" />
+        <input matInput formControlName="nombre" [readonly]="edicion"/>
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) { Ingrese nombre del tipo de incidente!! }
+          @if (form.get('nombre')?.hasError('maxlength')) { Máximo 50 caracteres permitidos!! }
         </mat-error>
       </mat-form-field>
       <div>

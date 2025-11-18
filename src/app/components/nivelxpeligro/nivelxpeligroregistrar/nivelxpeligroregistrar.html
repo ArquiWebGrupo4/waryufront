@@ -5,7 +5,7 @@
       @if(edicion){
       <mat-form-field>
         <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
+        <input matInput formControlName="codigo" [readonly]="edicion" />
         <mat-error>
           @if (form.get('codigo')?.hasError('required')) { Ingrese codigo del Nivel!! }
         </mat-error>
