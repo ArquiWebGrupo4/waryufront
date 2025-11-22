@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -14,7 +14,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
   templateUrl: './distritofavoritolistar.html',
   styleUrl: './distritofavoritolistar.css',
 })
-export class Distritofavoritolistar implements OnInit{
+export class Distritofavoritolistar implements OnInit, AfterViewInit {
  dataSource: MatTableDataSource<DistritoFavorito> = new MatTableDataSource();
 
   displayedColumns: string[] = ['c1','c2','cf','cfk','c3','c4'];
@@ -25,10 +25,10 @@ export class Distritofavoritolistar implements OnInit{
 
   ngOnInit(): void {
     this.dfS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.data = data;
     });
     this.dfS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.data = data;
     });
   }
   ngAfterViewInit(): void {

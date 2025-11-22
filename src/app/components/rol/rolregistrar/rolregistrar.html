@@ -25,6 +25,7 @@
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) { Ingrese nombre del Rol!! }
           @if (form.get('nombre')?.hasError('maxlength')) { Máximo 20 caracteres permitidos!! }
+          @if (form.get('nombre')?.hasError('minlength')) { Mínimo 4 caracteres requeridos!! }
         </mat-error>
       </mat-form-field>
       <div>

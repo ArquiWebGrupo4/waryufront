@@ -12,22 +12,10 @@
         <td mat-cell *matCellDef="let element">{{ element.id_Incidente }}</td>
       </ng-container>
 
-      <!-- Usuario -->
-      <ng-container matColumnDef="fk1">
-        <th mat-header-cell *matHeaderCellDef> Usuario </th>
-        <td mat-cell *matCellDef="let element">{{ element.usuario.nombreUsuario }}</td>
-      </ng-container>
-
       <!-- Nivel de Peligro -->
       <ng-container matColumnDef="fk2">
         <th mat-header-cell *matHeaderCellDef> Nivel de Peligro </th>
         <td mat-cell *matCellDef="let element">{{ element.nivelPeligro.nivel }}</td>
-      </ng-container>
-
-      <!-- Tipo de Incidente -->
-      <ng-container matColumnDef="fk3">
-        <th mat-header-cell *matHeaderCellDef> Tipo </th>
-        <td mat-cell *matCellDef="let element">{{ element.tipoIncidente.tipo_Tipo_Incidente }}</td>
       </ng-container>
 
       <!-- Distrito -->
@@ -42,16 +30,12 @@
         <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
       </ng-container>
 
-      <!-- Fecha de Creación -->
+      <!-- Columna Fecha -->
       <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td mat-cell *matCellDef="let element">{{ element.fecha_Creacion }}</td>
-      </ng-container>
-
-      <!-- Fecha de Modificación -->
-      <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef> Fecha Modificación </th>
-        <td mat-cell *matCellDef="let element">{{ element.fecha_Modificacion }}</td>
+        <th mat-header-cell *matHeaderCellDef> Fecha de Registro </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha_Creacion | date:'dd/MM/yyyy HH:mm:ss' }}
+        </td> 
       </ng-container>
 
       <!-- Actualizar -->
@@ -74,6 +58,14 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef> Ver Mas </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['ver', element.id_Incidente]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
       <!-- Filas -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -16,7 +16,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 })
 export class Incidenteslistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Incidentes> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1','fk1','fk2','fk3','fk4','c2','c3','c4','c5','c6'];
+  displayedColumns: string[] = ['c1','fk2','fk4','c2','c3','c5','c6', 'c7'];
 
   constructor(private iS: IncidentesService) {}
 

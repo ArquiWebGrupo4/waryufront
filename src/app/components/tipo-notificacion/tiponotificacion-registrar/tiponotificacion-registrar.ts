@@ -35,7 +35,7 @@ export class TiponotificacionRegistrar implements OnInit {
 
       this.form = this.formbuilder.group({
         codigo:[''],
-        nombre:['',[Validators.required, Validators.maxLength(50)]],
+        nombre:['',[Validators.required,Validators.minLength(6) ,Validators.maxLength(50)]],
       });
     }
 
@@ -67,7 +67,7 @@ export class TiponotificacionRegistrar implements OnInit {
           const nombre = data.tipo_Tipo_Notificacion;
           this.form = new FormGroup({
             codigo: new FormControl(codigo),
-            nombre: new FormControl(nombre),
+            nombre: new FormControl(nombre, [Validators.required, Validators.minLength(6), Validators.maxLength(50)]),
           });
         });
       }

@@ -17,10 +17,12 @@
         <td mat-cell *matCellDef="let element">{{ element.usuario.nombreUsuario }}</td>
       </ng-container>
 
-      <!-- Fecha -->
+      <!-- Columna Fecha -->
       <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td mat-cell *matCellDef="let element">{{ element.fecha_Activacion }}</td>
+        <th mat-header-cell *matHeaderCellDef> Fecha de Registro </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha_Activacion | date:'dd/MM/yyyy HH:mm:ss' }}
+        </td> 
       </ng-container>
 
       <!-- Actualizar -->

@@ -27,6 +27,9 @@
             <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('fk1')?.hasError('required')) { Seleccione un usuario!! }
+        </mat-error>
       </mat-form-field>
 
       <br />
@@ -37,6 +40,9 @@
             <mat-option [value]="n.id_nivel">{{ n.nivel }}</mat-option>
           }
         </mat-select>
+      <mat-error>
+        @if (form.get('fk2')?.hasError('required')) { Seleccione un nivel de peligro!! }
+      </mat-error>
       </mat-form-field>
 
       <br />
@@ -47,6 +53,9 @@
             <mat-option [value]="t.id_Tipo_Incidente">{{ t.tipo_Tipo_Incidente }}</mat-option>
           }
         </mat-select>
+      <mat-error>
+        @if (form.get('fk3')?.hasError('required')) { Seleccione un tipo de incidente!! }
+      </mat-error>
       </mat-form-field>
 
       <br />
@@ -57,17 +66,21 @@
             <mat-option [value]="d.id_Distrito">{{ d.nombre }}</mat-option>
           }
         </mat-select>
+      <mat-error>
+        @if (form.get('fk4')?.hasError('required')) { Seleccione un distrito!! }
+      </mat-error>
       </mat-form-field>
 
       <br />
-      <mat-form-field>
-        <mat-label>Imagen URL</mat-label>
-        <input matInput formControlName="imagen" />
+      
+      <div>
+        <label for="imagen">Imagen</label>
+        <br>
+        <input type="file" id="imagen" (change)="onFileSelected($event)" />
         <mat-error>
           @if (form.get('imagen')?.hasError('required')) { Ingrese URL de la imagen!! }
-          @if (form.get('imagen')?.hasError('maxlength')) { Máximo 250 caracteres permitidos!! }
         </mat-error>
-      </mat-form-field>
+      </div>
 
       <br />
       <mat-form-field>
@@ -75,32 +88,47 @@
         <textarea matInput formControlName="descripcion"></textarea>
         <mat-error>
           @if (form.get('descripcion')?.hasError('required')) { Ingrese descripción del incidente!! }
+          @if (form.get('descripcion')?.hasError('minlength')) { Mínimo 20 caracteres requeridos!! }
           @if (form.get('descripcion')?.hasError('maxlength')) { Máximo 500 caracteres permitidos!! }
         </mat-error>
       </mat-form-field>
 
       <br />
       <mat-form-field>
-        <mat-label>Fecha de Creación</mat-label>
-        <input matInput type="datetime-local" formControlName="fechacreacion" />
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [value]="form.get('fechacreacion')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
+        <mat-error>
+          @if (form.get('fechacreacion')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
+        </mat-error>
       </mat-form-field>
 
       <br />
       <mat-form-field>
         <mat-label>Fecha de Modificacion</mat-label>
-        <input matInput type="datetime-local" formControlName="fechamodificacion" />
+        <input matInput [value]="form.get('fechamodificacion')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
+        <mat-error>
+          @if (form.get('fechamodificacion')?.hasError('required')) {
+            Ingrese fecha de modificacion!!
+          }
+        </mat-error>
       </mat-form-field>
 
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
       <br />
+
       <mat-form-field>
         <mat-label>Latitud</mat-label>
-        <input matInput formControlName="latitud" type="number" />
+        <input matInput formControlName="latitud" type="number" readonly/>
       </mat-form-field>
 
       <br />
       <mat-form-field>
         <mat-label>Longitud</mat-label>
-        <input matInput formControlName="longitud" type="number" />
+        <input matInput formControlName="longitud" type="number" readonly/>
       </mat-form-field>
 
       <div>

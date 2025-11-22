@@ -18,6 +18,9 @@
             <mat-option [value]="i.id_Incidente">{{ i.descripcion }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('id_Incidente')?.hasError('required')) { Ingrese incidente!! }
+        </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
@@ -27,25 +30,30 @@
             <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
           }
         </mat-select>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Descripcion</mat-label>
-        <input matInput formControlName="descripcion" />
         <mat-error>
-          @if (form.get('descripcion')?.hasError('required')) { Ingrese descripcion del Reporte!! }
-          @if (form.get('descripcion')?.hasError('maxlength')) { Máximo 1000 caracteres permitidos!! }
+          @if (form.get('id_Usuario')?.hasError('required')) { Ingrese usuario!! }
         </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
-        <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fecha" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
         <mat-error>
-          @if (form.get('fecha')?.hasError('required')) { Ingrese fecha de reporte!! }
+          @if (form.get('descripcion')?.hasError('required')) { Ingrese descripcion del Reporte!! }
+          @if (form.get('descripcion')?.hasError('maxlength')) { Máximo 1000 caracteres permitidos!! }
+          @if (form.get('descripcion')?.hasError('minlength')) { Mínimo 20 caracteres requeridos!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+            <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput 
+               [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" 
+               readonly/>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
         </mat-error>
       </mat-form-field>
       <div>

@@ -35,6 +35,10 @@ export class IncidentesService implements OnInit{
     return this.http.get<Incidentes>(`${this.url}/${id}`);
   }
 
+  listIdTodo(id: number) {
+    return this.http.get<Incidentes>(`${this.url}/${id}/todo`);
+  }
+
   update(d: Incidentes) {
     return this.http.put(`${this.url}`, d, { responseType: 'text' });
   }

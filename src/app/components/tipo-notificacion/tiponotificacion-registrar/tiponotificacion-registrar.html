@@ -25,6 +25,7 @@
                 <mat-error>
                     @if (form.get('nombre')?.hasError('required')) {Ingrese el nombre del tipo de notificacion!!}
                     @if (form.get('nombre')?.hasError('maxlength')) {Máximo 50 caracteres permitidos!!}
+                    @if (form.get('nombre')?.hasError('minlength')) {Mínimo 6 caracteres requeridos!!}
                 </mat-error>
             </mat-form-field>
             <div>

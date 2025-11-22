@@ -12,17 +12,26 @@ import { Tipo_Notificacion } from '../../../models/Tipo_notificacion';
 import { NotificacionService } from '../../../services/notificacion-service';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import { TipoNotificacionService } from '../../../services/tipo-notificacion-service';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-notificacionregistrar',
   imports: [ReactiveFormsModule, MatInputModule, MatFormFieldModule,
-    MatRadioModule, MatDatepickerModule, MatButtonModule, MatSelectModule],
+    MatRadioModule, MatDatepickerModule, MatButtonModule, MatSelectModule, DatePipe],
   templateUrl: './notificacionregistrar.html',
   providers:[provideNativeDateAdapter()],
   styleUrl: './notificacionregistrar.css',
 })
 export class Notificacionregistrar {
+  getLocalDateTime(): string {
+    const hoy = new Date();
+    const year = hoy.getFullYear();
+    const month = String(hoy.getMonth() + 1).padStart(2, '0');
+    const day = String(hoy.getDate()).padStart(2, '0');
+    const hours = String(hoy.getHours()).padStart(2, '0');
+    const minutes = String(hoy.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
   form: FormGroup = new FormGroup({});
   noti: Notificacion = new Notificacion();
   edicion: boolean = false;
@@ -46,8 +55,8 @@ export class Notificacionregistrar {
     });
     this.form = this.formBuilder.group({
       codigo: [''],
-      mensaje: ['', [Validators.required, Validators.maxLength(100)]],
-      fecha: ['', Validators.required],
+      mensaje: ['', [Validators.required ,Validators.minLength(10) , Validators.maxLength(100)]],
+      fecha: [this.getLocalDateTime(), Validators.required],
       fk:['',Validators.required]
     });
   }

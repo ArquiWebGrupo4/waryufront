@@ -52,7 +52,7 @@ form: FormGroup = new FormGroup({});
   
       this.form = this.formBuilder.group({
         codigo:[''],
-        nombre: ['', [Validators.required, Validators.maxLength(20)]],
+        nombre: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(4)]],
       });
     }
     aceptar(): void {
@@ -84,7 +84,7 @@ form: FormGroup = new FormGroup({});
           const nombre = data.nombre;
           this.form = new FormGroup({
             codigo: new FormControl(codigo),
-            nombre: new FormControl(nombre),
+            nombre: new FormControl(nombre, [Validators.required, Validators.maxLength(20), Validators.minLength(4)]),
           });
           
         });

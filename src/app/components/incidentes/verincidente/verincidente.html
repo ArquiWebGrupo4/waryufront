@@ -1,0 +1,39 @@
+<div class="container">
+  <h2 style="text-align:center; margin:20px">Detalles del Incidente</h2>
+
+  <mat-card *ngIf="incidente" class="incidente-card">
+    <mat-card-header>
+      <mat-card-title> Incidente con ID: {{ incidente.id_Incidente }}</mat-card-title>
+      <mat-card-subtitle>Tipo de Incidente: {{ incidente.tipoIncidente.tipo_Tipo_Incidente }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <br>
+      <p><strong>ID:</strong> {{ incidente.id_Incidente }}</p>
+      <p><strong>Nombre de usuario que notifico:</strong> {{ incidente.usuario.nombreUsuario }}</p>
+      <p><strong>Nivel de peligro:</strong> {{ incidente.nivelPeligro.nivel }}</p>
+      <p><strong>Tipo de Incidente:</strong> {{ incidente.tipoIncidente.tipo_Tipo_Incidente }}</p>
+      <p><strong>Nombre de distrito:</strong> {{ incidente.distrito.nombre }}</p>
+      <div class="imagen-container" *ngIf="incidente.imagen_URL">
+        <p><strong>Imagen:</strong></p>
+        <img [src]="incidente.imagen_URL" alt="Imagen del incidente" class="imagen-incidente"/>
+      </div>
+      <br>
+      <p><strong>Descripcion:</strong> {{ incidente.descripcion }}</p>
+      <p><strong>Latitud:</strong> {{ incidente.lat }}</p>
+      <p><strong>Longitud:</strong> {{ incidente.lon }}</p>
+      <p><strong>Fecha de Registro:</strong> {{ incidente.fecha_Creacion | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+      <p><strong>Fecha de Modificacion:</strong> {{ incidente.fecha_Modificacion | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [routerLink]="['/Incidente']">
+        Volver a la Lista
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="!incidente">
+    <p>Cargando datos...</p>
+  </div>
+</div>

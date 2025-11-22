@@ -25,7 +25,10 @@
         <input matInput formControlName="direccion" />
         <mat-error>
           @if (form.get('direccion')?.hasError('required')) {
-            Ingrese nombre completo!!
+            Ingrese direccion completa!!
+          }
+          @if (form.get('direccion')?.hasError('minlength')) {
+            Mínimo 15 caracteres requeridos!!
           }
           @if (form.get('direccion')?.hasError('maxlength')) {
             Máximo 100 caracteres permitidos!!
@@ -39,7 +42,10 @@
         <input matInput formControlName="palabra_Clave" />
         <mat-error>
           @if (form.get('palabra_Clave')?.hasError('required')) {
-            Ingrese fecha de registro!!
+            Ingrese palabra clave!!
+          }
+          @if (form.get('palabra_Clave')?.hasError('minlength')) {
+            Mínimo 4 caracteres requeridos!!
           }
           @if (form.get('palabra_Clave')?.hasError('maxlength')) {
             Máximo 30 caracteres permitidos!!
@@ -49,13 +55,12 @@
 
       <br />
       <mat-form-field>
-        <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fecha" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
         <mat-error>
-          @if (form.get('fecha')?.hasError('required')) { Ingrese fecha!! }
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
         </mat-error>
       </mat-form-field>
     
@@ -67,6 +72,11 @@
             <mat-option [value]="a.id_Usuario">{{ a.nombreUsuario }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('fk')?.hasError('required')) {
+            Seleccione un usuario!!
+          }
+        </mat-error>
       </mat-form-field>
       <div>
         @if (edicion) {

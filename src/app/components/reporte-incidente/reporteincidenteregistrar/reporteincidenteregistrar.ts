@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { UsuarioService } from '../../../services/usuario-service';
 import { IncidentesService } from '../../../services/incidentes-service';
 import { Incidentes } from '../../../models/Incidentes';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-reporteincidenteregistrar',
   imports: [ReactiveFormsModule,
@@ -22,12 +23,22 @@ import { Incidentes } from '../../../models/Incidentes';
     MatRadioModule,
     MatDatepickerModule,
     MatButtonModule,
-    MatSelectModule],
+    MatSelectModule,
+    DatePipe],
   templateUrl: './reporteincidenteregistrar.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './reporteincidenteregistrar.css',
 })
 export class Reporteincidenteregistrar implements OnInit {
+    getLocalDateTime(): string {
+    const hoy = new Date();
+    const year = hoy.getFullYear();
+    const month = String(hoy.getMonth() + 1).padStart(2, '0');
+    const day = String(hoy.getDate()).padStart(2, '0');
+    const hours = String(hoy.getHours()).padStart(2, '0');
+    const minutes = String(hoy.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
   form: FormGroup = new FormGroup({});
   ri: Reporte_Incidente = new Reporte_Incidente();
 
@@ -54,8 +65,8 @@ export class Reporteincidenteregistrar implements OnInit {
       this.iS.list().subscribe(data => {this.listaIncidentes = data});
       this.form = this.formBuilder.group({
         codigo:[''],
-        descripcion: ['', [Validators.required, Validators.maxLength(1000)]],
-        fecha: ['', Validators.required],
+        descripcion: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1000)]],
+        fecha: [this.getLocalDateTime(), Validators.required],
         id_Incidente: ['', Validators.required],
         id_Usuario: ['', Validators.required],
       });
@@ -90,10 +101,10 @@ export class Reporteincidenteregistrar implements OnInit {
           console.log(data);
           this.form = new FormGroup({
             codigo: new FormControl(data.id_Reporte),
-            descripcion: new FormControl(data.descripcion),
-            fecha: new FormControl(data.fecha),
-            id_Incidente: new FormControl(data.incidente.id_Incidente),
-            id_Usuario: new FormControl(data.usuario.id_Usuario),
+            descripcion: new FormControl(data.descripcion, [Validators.required, Validators.minLength(20), Validators.maxLength(1000)]),
+            fecha: new FormControl(data.fecha, Validators.required),
+            id_Incidente: new FormControl(data.incidente.id_Incidente, Validators.required),
+            id_Usuario: new FormControl(data.usuario.id_Usuario, Validators.required),
           });
         });
       }

@@ -27,6 +27,9 @@
             <mat-option [value]="t.id_Tipo_Notificacion">{{ t.tipo_Tipo_Notificacion}}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('fk')?.hasError('required')) { Seleccione un tipo de notificacion!! }
+        </mat-error>
       </mat-form-field>
 
       <br />
@@ -35,6 +38,7 @@
         <input matInput formControlName="mensaje" />
         <mat-error>
           @if (form.get('mensaje')?.hasError('required')) { Ingrese mensaje!! }
+          @if (form.get('mensaje')?.hasError('minlength')) { Mínimo 10 caracteres requeridos!! }
           @if (form.get('mensaje')?.hasError('maxlength')) { Máximo 100 caracteres permitidos!! }
         </mat-error>
       </mat-form-field>
@@ -42,13 +46,12 @@
       <br />
       
       <mat-form-field>
-        <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fecha" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
         <mat-error>
-          @if (form.get('fecha')?.hasError('required')) { Ingrese fecha!! }
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
         </mat-error>
       </mat-form-field>
 

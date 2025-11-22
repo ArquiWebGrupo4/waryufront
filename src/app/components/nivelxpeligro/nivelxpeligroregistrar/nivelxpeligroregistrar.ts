@@ -47,7 +47,7 @@ export class nivelxpeligroregistrar implements OnInit {
   
       this.form = this.formBuilder.group({
         codigo:[''],
-        nivel: ['', Validators.required],
+        nivel: ['', [Validators.required]],
       });
     }
     aceptar(): void {
@@ -79,10 +79,9 @@ export class nivelxpeligroregistrar implements OnInit {
         const nombre = data.nivel;
           this.form = new FormGroup({
             codigo: new FormControl(codigo),
-            nivel: new FormControl(nombre),
+            nivel: new FormControl(nombre, [Validators.required]),
           });
         });
       }
     }
-
 }

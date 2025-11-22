@@ -53,7 +53,7 @@ form: FormGroup = new FormGroup({});
 
     this.form = this.formBuilder.group({
       codigo:[''],
-      nombre: ['', [Validators.required, Validators.maxLength(30)]],
+      nombre: ['', [Validators.required, Validators.maxLength(30) ,Validators.minLength(5)]],
     });
   }
   //aceptar
@@ -85,7 +85,7 @@ form: FormGroup = new FormGroup({});
         const nombre = data.nombre;
         this.form = new FormGroup({
           codigo: new FormControl(codigo),
-          nombre: new FormControl(nombre),
+          nombre: new FormControl(nombre, [Validators.required, Validators.maxLength(30), Validators.minLength(5)]),
         });
         
       });

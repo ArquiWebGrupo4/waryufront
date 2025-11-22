@@ -14,6 +14,7 @@ import { LandingPage } from './components/landing-page/landing-page';
 import {Menu} from './components/menu/menu';
 import { Usuarios } from './components/usuarios/usuarios';
 import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuariosregistrar';
+import { Verusuario } from './components/usuarios/verusuario/verusuario';
 import { ReporteIncidente } from './components/reporte-incidente/reporte-incidente';
 import { Reporteincidenteregistrar } from './components/reporte-incidente/reporteincidenteregistrar/reporteincidenteregistrar';
 
@@ -27,6 +28,7 @@ import { Distritofavorito } from './components/distritofavorito/distritofavorito
 import { Distritofavoritoregistrar } from './components/distritofavorito/distritofavoritoregistrar/distritofavoritoregistrar';
 import { Notificacionregistrar } from './components/notificacion/notificacionregistrar/notificacionregistrar';
 import { Notificacion } from './components/notificacion/notificacion';
+import { Verincidente } from './components/incidentes/verincidente/verincidente';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -68,7 +70,8 @@ export const routes: Routes = [
     {path:'usuarios', component:Usuarios,
         children: [
             {path:'news', component:Usuariosregistrar},
-            {path:'edits/:id',component:Usuariosregistrar}
+            {path:'edits/:id',component:Usuariosregistrar},
+            {path:'ver/:id',component: Verusuario}
         ]
     },
     {path:'reporteincidente', component:ReporteIncidente,
@@ -80,7 +83,8 @@ export const routes: Routes = [
     {path:'Incidente', component:Incidentes,
         children: [
             {path:'news', component:Incidentesregistrar},
-            {path:'edits/:id',component:Incidentesregistrar}
+            {path:'edits/:id',component:Incidentesregistrar},
+            {path:'ver/:id',component: Verincidente}
         ]
     },
     {path:'Busqueda', component:Busqueda,

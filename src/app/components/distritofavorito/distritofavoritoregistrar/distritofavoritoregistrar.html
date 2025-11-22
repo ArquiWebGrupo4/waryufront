@@ -43,6 +43,11 @@
             <mat-option [value]="a.id_Usuario">{{ a.nombreUsuario}}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('fk')?.hasError('required')) {
+            Seleccione un usuario!!
+          }
+        </mat-error>
       </mat-form-field>
 
           <br />
@@ -53,6 +58,11 @@
             <mat-option [value]="a.id_Distrito">{{ a.nombre}}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('fkd')?.hasError('required')) {
+            Seleccione un distrito!!
+          }
+        </mat-error>
       </mat-form-field>
       <div>
         @if (edicion) {

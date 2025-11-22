@@ -16,6 +16,9 @@
         <mat-form-field>
           <mat-label>ID</mat-label>
           <input matInput formControlName="codigo" [readonly]="edicion" />
+          <mat-error>
+            @if (form.get('codigo')?.hasError('required')) { Ingrese id del distrito!! }
+          </mat-error>
         </mat-form-field>
       }
 
@@ -27,24 +30,42 @@
             <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('fk1')?.hasError('required')) { Seleccione un usuario!! }
+        </mat-error>
       </mat-form-field>
 
       <br />
       <mat-form-field>
-        <mat-label>fecha</mat-label>
-        <input type="datetime-local" matInput formControlName="fecha" />
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
+        </mat-error>
       </mat-form-field>
+
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
 
       <br />
       <mat-form-field>
         <mat-label>latitud</mat-label>
-        <input type="number" matInput formControlName="latitud" />
+        <input type="number" matInput formControlName="latitud" readonly/>
+        <mat-error>
+          @if (form.get('latitud')?.hasError('required')) { Ingrese la latitud!! }
+        </mat-error>
       </mat-form-field>
 
       <br />
       <mat-form-field>
         <mat-label>longitud</mat-label>
-        <input type="number" matInput formControlName="longitud" />
+        <input type="number" matInput formControlName="longitud" readonly/>
+        <mat-error>
+          @if (form.get('longitud')?.hasError('required')) { Ingrese la longitud!! }
+        </mat-error>
       </mat-form-field>
 
       <div>

@@ -106,10 +106,10 @@ form: FormGroup = new FormGroup({});
     if (this.edicion) {
       this.dfS.listId(this.id).subscribe((data: any) => {
         this.form = new FormGroup({
-          codigo: new FormControl(data.id_DistritoFavorito),
-          estado: new FormControl(data.estado),
-          fk: new FormControl(data.usuario.id_Usuario),
-          fkd: new FormControl(data.distrito.id_Distrito)
+          codigo: new FormControl(data.id_DistritoFavorito, Validators.required),
+          estado: new FormControl(data.estado, Validators.required),
+          fk: new FormControl(data.usuario.id_Usuario, Validators.required),
+          fkd: new FormControl(data.distrito.id_Distrito, Validators.required)
         });
         
       });
