@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Reporte_Incidente } from '../models/Reporte_Incidente';
 import { Observable, Subject } from 'rxjs';
+import { Reporte_ReportesxIncidenteDTO } from '../models/Reporte_ReportesxIncidenteDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -42,6 +43,7 @@ export class ReporteIncidenteService implements OnInit {
         return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
     }
 
-
-
+    getContarTipoIncidente(): Observable<[Reporte_ReportesxIncidenteDTO]> {
+        return this.http.get<[Reporte_ReportesxIncidenteDTO]>(`${this.url}/ContarPorTipoIncidente`)
+    }
 }
