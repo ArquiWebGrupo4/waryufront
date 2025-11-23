@@ -2,7 +2,18 @@
   <div style="text-align: center; margin:5%">
     <h2>Lista de Reportes de Incidentes</h2>
   </div>
-
+  <!-- filtro por incidente -->
+  <div [formGroup]="form">
+    <mat-form-field appearance="outline" style="width: 250px; margin-bottom: 20px;">
+      <mat-label>Filtrar por Incidente</mat-label>
+        <mat-select formControlName="fk">
+          <mat-option value=''>Todos</mat-option>
+          @for (t of listaincidentes; track t) {
+            <mat-option [value]="t.id_Incidente">{{ t.descripcion}}</mat-option>
+          }
+        </mat-select>
+    </mat-form-field>
+  </div>
   <div>
     <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
 
