@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Incidentes } from '../models/Incidentes';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { Conteo_IncidenteXTipoDTO } from '../models/Conteo_IncidenteXTipoDTO';
 const base_url = environment.base
 
 @Injectable({
@@ -45,6 +46,9 @@ export class IncidentesService implements OnInit{
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' })
+  }
+  getcontar(): Observable<[Conteo_IncidenteXTipoDTO]> {
+    return this.http.get<[Conteo_IncidenteXTipoDTO]>(`${this.url}/contador_IncidentesXTipo`);
   }
 
 }

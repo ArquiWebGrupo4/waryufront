@@ -24,7 +24,6 @@
     <button mat-button class="btn-naranja" aria-label="Botón menú tipo de notificación" [matMenuTriggerFor]="menuTipoNotificacion">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="notifications"></mat-icon> Tipo de Notificación
     </button>
-
     <!-- Botón Tipo de Incidente -->
     <button mat-button class="btn-naranja" aria-label="Botón menú tipo de incidente" [matMenuTriggerFor]="menuTipoIncidente">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="report"></mat-icon> Tipo de Incidente
@@ -58,6 +57,12 @@
     <!-- Botón Notificacion -->
     <button mat-button class="btn-morado" aria-label="Botón menú notificacion" [matMenuTriggerFor]="menuNotificacion">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="notifications"></mat-icon> Notificacion
+    </button>
+
+
+       <!-- Botón Query -->
+    <button mat-button class="btn-morado" aria-label="Botón menú notificacion" [matMenuTriggerFor]="menuQuery">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="analytics"></mat-icon> Querys
     </button>
   </mat-toolbar>
 
@@ -133,6 +138,12 @@
     <button mat-menu-item routerLink="/Notificacion">Listar</button>
     <button mat-menu-item routerLink="/Notificacion/news">Registrar</button>
   </mat-menu>
+
+   <!-- Menú q -->
+  <mat-menu #menuQuery="matMenu">
+    <button mat-menu-item routerLink="/cantidadincidentextipo">Rep.Cantidad</button>
+  </mat-menu>
+
 </div>
 
 
