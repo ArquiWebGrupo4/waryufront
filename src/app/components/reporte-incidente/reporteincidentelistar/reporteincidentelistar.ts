@@ -8,6 +8,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 
 import { Reporte_Incidente } from '../../../models/Reporte_Incidente';
 import { ReporteIncidenteService } from '../../../services/reporte-incidente-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reporteincidentelistar',
@@ -19,7 +20,7 @@ export class Reporteincidentelistar implements OnInit, AfterViewInit {
   datasource: MatTableDataSource<Reporte_Incidente> = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'id_Usuario', 'id_Incidente', 'descripcion', 'fecha', 'ce', 'cd'];
 
-  constructor(private riS: ReporteIncidenteService) {}
+  constructor(private riS: ReporteIncidenteService,private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -40,6 +41,7 @@ export class Reporteincidentelistar implements OnInit, AfterViewInit {
     this.riS.delete(id).subscribe(() => {
       this.riS.list().subscribe((data) => {
         this.riS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

@@ -19,6 +19,7 @@ import { Botonpanico } from '../../../models/Botonpanico';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-botonpanicoregistrar',
   imports: [    ReactiveFormsModule,
@@ -65,6 +66,7 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS:UsuarioService,
+    private snackBar: MatSnackBar,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { } 
 
@@ -128,6 +130,7 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
         this.iS.update(this.btns).subscribe(() => {
           this.iS.list().subscribe((data) => {
             this.iS.setList(data);
+            this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
       } 
@@ -137,11 +140,16 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
           this.iS.list().subscribe((data) => {
             console.log(data);
             this.iS.setList(data);
+            this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
         });
       }
       this.router.navigate(['/BotonPanico']);
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/BotonPanico']);
   }
 
     init() {

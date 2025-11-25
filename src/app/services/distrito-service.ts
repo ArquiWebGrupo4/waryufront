@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Distrito } from '../models/Distrito';
 import { Observable, Subject } from 'rxjs';
+import { DistritoPeligrosoDTO } from '../models/DistritoPeligrosoDTO';
 
 const base_url = environment.base;
 
@@ -50,6 +51,12 @@ export class DistritoService implements OnInit {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' })
   }
+
+  getDistritosPeligrosos(): Observable<[DistritoPeligrosoDTO]> {
+      return this.http.get<[DistritoPeligrosoDTO]>(`${this.url}/Distritos-con-incidentes-peligrosos`);
+    }
+
+
 
   //prueba
 }

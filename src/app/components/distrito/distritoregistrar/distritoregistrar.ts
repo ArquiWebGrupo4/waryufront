@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-distritoregistrar',
@@ -41,7 +42,8 @@ form: FormGroup = new FormGroup({});
     private dS: DistritoService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -65,17 +67,23 @@ form: FormGroup = new FormGroup({});
         this.dS.update(this.di).subscribe((data) => {
           this.dS.list().subscribe((data) => {
             this.dS.setList(data);
+            this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
       }else{
         this.dS.insert(this.di).subscribe((data) => {
           this.dS.list().subscribe((data) => {
             this.dS.setList(data);
+            this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
         });
       }
       this.router.navigate(['distritos']);
     }
+  }
+
+  cancelar(): void { 
+    this.router.navigate(['distritos']);
   }
 
   init() {

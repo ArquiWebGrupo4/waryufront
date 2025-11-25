@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { Tipo_Notificacion } from '../../../models/Tipo_notificacion';
 import { TipoNotificacionService } from '../../../services/tipo-notificacion-service';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tiponotificacion-listar',
@@ -17,7 +18,7 @@ export class TiponotificacionListar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Tipo_Notificacion> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
 
-  constructor(private tS: TipoNotificacionService) {}
+  constructor(private tS: TipoNotificacionService, private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -38,6 +39,7 @@ export class TiponotificacionListar implements OnInit, AfterViewInit {
     this.tS.delete(id).subscribe(() => {
       this.tS.list().subscribe((data) => {
         this.tS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { DistritoFavoritoService } from '../../../services/distritofavorito-service';
 import { DistritoFavorito } from '../../../models/DistritoFavorito';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-distritofavoritolistar',
@@ -19,7 +20,7 @@ export class Distritofavoritolistar implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['c1','c2','cf','cfk','c3','c4'];
   
-  constructor(private dfS:DistritoFavoritoService) {}
+  constructor(private dfS:DistritoFavoritoService,private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -38,6 +39,7 @@ export class Distritofavoritolistar implements OnInit, AfterViewInit {
     this.dfS.delete(id).subscribe((data) => {
       this.dfS.list().subscribe(data => {
         this.dfS.setList(data)
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

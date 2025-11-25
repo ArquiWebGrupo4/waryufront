@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-rollistar',
@@ -17,7 +18,7 @@ export class Rollistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
 
-  constructor(private rS: RolService) {}
+  constructor(private rS: RolService,private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,6 +40,7 @@ export class Rollistar implements OnInit, AfterViewInit {
     this.rS.delete(id).subscribe(() => {
       this.rS.list().subscribe((data) => {
         this.rS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

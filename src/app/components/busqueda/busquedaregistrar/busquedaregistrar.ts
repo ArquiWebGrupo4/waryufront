@@ -19,6 +19,7 @@ import { Usuarios } from '../../../models/Usuarios';
 import { UsuarioService } from '../../../services/usuario-service';
 import { MatSelectModule } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-busquedaregistrar',
   imports: [
@@ -58,7 +59,8 @@ export class Busquedaregistrar implements OnInit {
       private router: Router,
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
-      private uS: UsuarioService
+      private uS: UsuarioService,
+      private snackBar: MatSnackBar
     ) {}
 
     ngOnInit(): void {
@@ -91,17 +93,23 @@ export class Busquedaregistrar implements OnInit {
           this.bS.update(this.bu).subscribe((data) => {
             this.bS.list().subscribe((data) => {
               this.bS.setList(data);
+              this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
             });
           });
         }else{
           this.bS.insert(this.bu).subscribe((data) => {
             this.bS.list().subscribe((data) => {
               this.bS.setList(data);
+              this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
             });
           });
         }
         this.router.navigate(['Busqueda']);
       }
+    }
+
+    cancelar(): void { 
+      this.router.navigate(['Busqueda']);
     }
 
     init() {

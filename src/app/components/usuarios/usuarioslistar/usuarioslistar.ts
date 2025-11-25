@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Usuarios } from '../../../models/Usuarios';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuarioslistar',
@@ -18,7 +19,7 @@ export class Usuarioslistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Usuarios> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'cf', 'c5', 'c6', 'c7'];
 
-  constructor(private uS: UsuarioService) {}
+  constructor(private uS: UsuarioService, private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,6 +40,8 @@ export class Usuarioslistar implements OnInit, AfterViewInit {
     this.uS.delete(id).subscribe(() => {
       this.uS.list().subscribe((data) => {
         this.uS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
+
       });
     });
   }

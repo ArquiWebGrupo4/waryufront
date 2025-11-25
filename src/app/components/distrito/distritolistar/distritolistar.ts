@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
 import { ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-distritolistar',
   imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, MatPaginatorModule],
@@ -17,7 +18,7 @@ import { ViewChild } from '@angular/core';
 export class Distritolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Distrito> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
-  constructor(private dS: DistritoService) {}
+  constructor(private dS: DistritoService,private snackBar: MatSnackBar) {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngOnInit(): void {
     this.dS.list().subscribe((data) => {
@@ -35,6 +36,7 @@ export class Distritolistar implements OnInit, AfterViewInit {
     this.dS.delete(id).subscribe((data) => {
       this.dS.list().subscribe(data=>{
         this.dS.setList(data)
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       })
     });
   }

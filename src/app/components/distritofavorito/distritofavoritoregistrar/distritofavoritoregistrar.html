@@ -68,7 +68,8 @@
         @if (edicion) {
           <button matButton="elevated">Actualizar</button>
         } @else {
-          <button matButton="elevated">Registrar</button>
+          <button mat-raised-button color="primary">Registrar</button>
+          <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
         }
       </div>
     </form>

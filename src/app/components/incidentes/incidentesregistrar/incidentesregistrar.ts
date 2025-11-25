@@ -22,6 +22,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-incidentesregistrar',
   imports: [
@@ -82,6 +83,7 @@ export class Incidentesregistrar {
     private tS:TipoIncidenteService,
     private dS:DistritoService,
     private http: HttpClient,
+    private snackBar: MatSnackBar,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { } 
 
@@ -157,6 +159,7 @@ export class Incidentesregistrar {
         this.iS.update(this.inc).subscribe(() => {
           this.iS.list().subscribe((data) => {
             this.iS.setList(data);
+            this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
       } else {
@@ -164,11 +167,16 @@ export class Incidentesregistrar {
 
           this.iS.list().subscribe((data) => {
             this.iS.setList(data);
+            this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
         });
       }
       this.router.navigate(['/Incidente']);
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/Incidente']);
   }
 
     init() {

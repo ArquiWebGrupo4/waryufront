@@ -13,6 +13,7 @@ import { NotificacionService } from '../../../services/notificacion-service';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import { TipoNotificacionService } from '../../../services/tipo-notificacion-service';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-notificacionregistrar',
@@ -42,7 +43,8 @@ export class Notificacionregistrar {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private tS: TipoNotificacionService
+    private tS: TipoNotificacionService,
+    private snackBar: MatSnackBar
   ) { }
   ngOnInit(): void {
     this.route.params.subscribe((data:Params) => {
@@ -71,18 +73,25 @@ export class Notificacionregistrar {
         this.nS.update(this.noti).subscribe(() => {
           this.nS.list().subscribe((data) => {
             this.nS.setList(data);
+            this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
       } else {
         this.nS.insert(this.noti).subscribe(() => {
           this.nS.list().subscribe((data) => {
             this.nS.setList(data);
+            this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
         });
       }
       this.router.navigate(['/Notificacion']);
     }
   }
+
+  cancelar(): void {
+    this.router.navigate(['/Notificacion']);
+  }
+  
   init() {
     if (this.edicion) {
       this.nS.listId(this.id).subscribe((data) => {

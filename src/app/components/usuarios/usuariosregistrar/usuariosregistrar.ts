@@ -16,6 +16,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Rol } from '../../../models/Rol';
 import { RolService } from '../../../services/rol-service';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuariosregistrar',
@@ -74,7 +75,8 @@ export class Usuariosregistrar implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private rS: RolService
+    private rS: RolService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -120,17 +122,22 @@ export class Usuariosregistrar implements OnInit {
         this.uS.update(this.user).subscribe((data) => {
           this.uS.list().subscribe((data) => {
             this.uS.setList(data);
+            this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
       } else {
         this.uS.insert(this.user).subscribe((data) => {
           this.uS.list().subscribe((data) => {
             this.uS.setList(data);
+            this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
         });
       }
       this.router.navigate(['usuarios']);
     }
+  }
+  cancelar(): void {
+    this.router.navigate(['usuarios']);
   }
   init() {
     if (this.edicion) {

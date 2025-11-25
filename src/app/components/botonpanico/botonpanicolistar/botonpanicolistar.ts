@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { Botonpanico } from '../../../models/Botonpanico';
 import { BotonpanicoService } from '../../../services/botonpanico-service';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-botonpanicolistar',
@@ -18,7 +19,7 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Botonpanico> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'fk1', 'c2', 'c5', 'c6'];
 
-  constructor(private iS: BotonpanicoService) {}
+  constructor(private iS: BotonpanicoService, private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,6 +40,7 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
     this.iS.delete(id).subscribe(() => {
       this.iS.list().subscribe((data) => {
         this.iS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }
