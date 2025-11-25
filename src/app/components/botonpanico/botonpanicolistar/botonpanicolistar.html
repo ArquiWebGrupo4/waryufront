@@ -2,6 +2,37 @@
   <div style="text-align: center; margin: 5%">
     <h2>Lista de Botones de Pánico</h2>
   </div>
+    <div [formGroup]="form" style="display:flex; gap:20px; margin-bottom:20px;">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio">
+      <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin">
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="reiniciarTabla()">
+      Reiniciar
+    </button>
+  </div>
+      <!-- filtro por Usuario -->
+  <div [formGroup]="form">
+    <mat-form-field appearance="outline" style="width: 250px; margin-bottom: 20px;">
+      <mat-label>Filtrar por Usuario</mat-label>
+        <mat-select formControlName="fk">
+          <mat-option value=''>Todos</mat-option>
+          @for (t of listausuarios; track t) {
+            <mat-option [value]="t.id_Usuario">{{ t.nombreUsuario}}</mat-option>
+          }
+        </mat-select>
+    </mat-form-field>
+  </div>
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
