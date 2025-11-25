@@ -41,7 +41,6 @@ export class DistritoFavoritoService implements OnInit {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' })
+    return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' });
   }
-
 }

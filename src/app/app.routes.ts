@@ -29,6 +29,7 @@ import { Distritofavoritoregistrar } from './components/distritofavorito/distrit
 import { Notificacionregistrar } from './components/notificacion/notificacionregistrar/notificacionregistrar';
 import { Notificacion } from './components/notificacion/notificacion';
 import { Verincidente } from './components/incidentes/verincidente/verincidente';
+import { Cantidadincidentextipo } from './components/cantidadincidentextipo/cantidadincidentextipo';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -108,5 +109,9 @@ export const routes: Routes = [
     {path:'', component:LandingPage
     },
     {path:'menu', component:Menu
+    },
+    {
+        path:'cantidadincidentextipo',component:Cantidadincidentextipo
     }
+
 ];
