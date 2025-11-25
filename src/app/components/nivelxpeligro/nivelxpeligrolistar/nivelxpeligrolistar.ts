@@ -7,6 +7,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 
 import { NivelxpeligroService } from '../../../services/nivelxpeligro-service';
 import { Nivelxpeligro } from '../../../models/nivelxpeligro';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-nivelxpeligrolistar',
@@ -18,7 +19,7 @@ export class Nivelxpeligrolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Nivelxpeligro> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
 
-  constructor(private nS: NivelxpeligroService) {}
+  constructor(private nS: NivelxpeligroService,private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,6 +40,7 @@ export class Nivelxpeligrolistar implements OnInit, AfterViewInit {
     this.nS.delete(id).subscribe(() => {
       this.nS.list().subscribe((data) => {
         this.nS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

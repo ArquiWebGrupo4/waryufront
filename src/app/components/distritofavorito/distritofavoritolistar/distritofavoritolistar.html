@@ -1,5 +1,18 @@
 <div class="container">
   <div style="text-align: center;margin:5%"><h2>Lista de Distritos Favoritos de Usuarios</h2></div>
+  <!-- filtro por usuario -->
+  <div [formGroup]="form">
+    <mat-form-field appearance="outline" style="width: 250px; margin-bottom: 20px;">
+      <mat-label>Filtrar por Usuario</mat-label>
+        <mat-select formControlName="fk">
+          <mat-option value=''>Todos</mat-option>
+          @for (t of listausuarios; track t) {
+            <mat-option [value]="t.id_Usuario">{{ t.nombreUsuario}}</mat-option>
+          }
+        </mat-select>
+    </mat-form-field>
+  </div>
+  
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

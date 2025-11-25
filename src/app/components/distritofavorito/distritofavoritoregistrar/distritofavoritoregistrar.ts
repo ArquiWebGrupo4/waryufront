@@ -20,6 +20,7 @@ import { UsuarioService } from '../../../services/usuario-service';
 import { MatSelectModule } from '@angular/material/select';
 import { DistritoService } from '../../../services/distrito-service';
 import { Distrito } from '../../../models/Distrito';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-distritofavoritoregistrar',
   imports: [
@@ -55,7 +56,8 @@ form: FormGroup = new FormGroup({});
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: UsuarioService,
-    private dS: DistritoService
+    private dS: DistritoService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -89,17 +91,23 @@ form: FormGroup = new FormGroup({});
         this.dfS.update(this.df).subscribe((data) => {
           this.dfS.list().subscribe((data) => {
             this.dfS.setList(data);
+            this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
       }else{
         this.dfS.insert(this.df).subscribe((data) => {
           this.dfS.list().subscribe((data) => {
             this.dfS.setList(data);
+            this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
         });
       }
       this.router.navigate(['distritofavorito']);
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['distritofavorito']);
   }
 
   init() {

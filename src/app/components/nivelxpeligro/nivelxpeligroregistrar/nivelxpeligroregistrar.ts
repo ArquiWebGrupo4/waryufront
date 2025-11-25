@@ -9,6 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class nivelxpeligroregistrar implements OnInit {
     private nS: NivelxpeligroService,
     private router: Router,
     private formBuilder: FormBuilder,
-     private route: ActivatedRoute
+     private route: ActivatedRoute,
+     private snackBar: MatSnackBar
     ) {}
   
     ngOnInit(): void {
@@ -58,17 +60,23 @@ export class nivelxpeligroregistrar implements OnInit {
           this.nS.update(this.ni).subscribe((data) => {
             this.nS.list().subscribe((data) => {
               this.nS.setList(data);
+              this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
             });
           });
         }else{
           this.nS.insert(this.ni).subscribe((data) => {
             this.nS.list().subscribe((data) => {
               this.nS.setList(data);
+              this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
             });
           });
         }
         this.router.navigate(['niveles']);
       }
+    }
+
+    cancelar(): void { 
+      this.router.navigate(['niveles']);
     }
   
     init() {

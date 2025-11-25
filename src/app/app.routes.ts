@@ -32,6 +32,7 @@ import { Verincidente } from './components/incidentes/verincidente/verincidente'
 import { Cantidadincidentextipo } from './components/cantidadincidentextipo/cantidadincidentextipo';
 import { ContarPorTipoIncidente } from './components/contar-por-tipo-incidente/contar-por-tipo-incidente';
 import { ReporteContarPorNivel } from './components/reportes/ReporteIncidente/reporte-contar-por-nivel/reporte-contar-por-nivel';
+import { Distritopeligroso } from './components/distritopeligroso/distritopeligroso';
 export const routes: Routes = [
     {path:'distritos',component:Distrito,
         children:[
@@ -120,6 +121,7 @@ export const routes: Routes = [
     },
     {
         path:'reporte-contar-por-nivel', component:ReporteContarPorNivel
+        path:'DistritoPeligroso', component:Distritopeligroso
     }
 
 ];
