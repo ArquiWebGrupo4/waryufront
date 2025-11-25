@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { BusquedaService } from '../../../services/busqueda-service';
 import { Busqueda } from '../../../models/Busqueda';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-busquedalistar',
@@ -18,7 +19,7 @@ export class Busquedalistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Busqueda> = new MatTableDataSource();
   displayedColumns: string[] = ['c1','c2','c3','c4','cf','c5','c6'];
 
-  constructor(private bS: BusquedaService) {}
+  constructor(private bS: BusquedaService,private snackBar: MatSnackBar) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,6 +40,7 @@ export class Busquedalistar implements OnInit, AfterViewInit {
     this.bS.delete(id).subscribe(() => {
       this.bS.list().subscribe((data) => {
         this.bS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

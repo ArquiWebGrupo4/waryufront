@@ -9,6 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { Tipo_Notificacion } from '../../../models/Tipo_notificacion';
 import { TipoNotificacionService } from '../../../services/tipo-notificacion-service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tiponotificacion-registrar',
@@ -24,7 +25,7 @@ export class TiponotificacionRegistrar implements OnInit {
     edicion: boolean = false;
     id:number = 0;
 
-    constructor(private tS:TipoNotificacionService, private router:Router, private formbuilder: FormBuilder, private route: ActivatedRoute) {}
+    constructor(private tS:TipoNotificacionService, private router:Router, private formbuilder: FormBuilder, private route: ActivatedRoute,private snackBar: MatSnackBar) {}
 
     ngOnInit(): void {
       this.route.params.subscribe((data:Params) => {
@@ -47,17 +48,22 @@ export class TiponotificacionRegistrar implements OnInit {
           this.tS.update(this.ti).subscribe((data) => {
             this.tS.list().subscribe((data) => {
               this.tS.setList(data);
+              this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
             });
           });
         } else {
           this.tS.insert(this.ti).subscribe((data) => {
             this.tS.list().subscribe((data) => {
               this.tS.setList(data);
+              this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
             });
           });
         }
         this.router.navigate(['tiponotificacion'])
       }
+    }
+    cancelar(): void {
+      this.router.navigate(['tiponotificacion']);
     }
 
     init() {

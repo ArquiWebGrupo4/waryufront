@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { DistritoFavoritoService } from '../../../services/distritofavorito-service';
 import { DistritoFavorito } from '../../../models/DistritoFavorito';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,6 +26,8 @@ export class Distritofavoritolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<DistritoFavorito> = new MatTableDataSource();
 
   displayedColumns: string[] = ['c1','c2','cf','cfk','c3','c4'];
+  
+  constructor(private dfS:DistritoFavoritoService,private snackBar: MatSnackBar) {}
   form: FormGroup;
   listausuarios: Usuarios[] = [];
   constructor(private dfS:DistritoFavoritoService, private fb: FormBuilder, private uS:UsuarioService) {
@@ -61,6 +64,7 @@ export class Distritofavoritolistar implements OnInit, AfterViewInit {
     this.dfS.delete(id).subscribe((data) => {
       this.dfS.list().subscribe(data => {
         this.dfS.setList(data)
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

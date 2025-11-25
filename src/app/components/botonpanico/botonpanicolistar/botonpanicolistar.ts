@@ -7,6 +7,8 @@ import { RouterLink } from '@angular/router';
 import { Botonpanico } from '../../../models/Botonpanico';
 import { BotonpanicoService } from '../../../services/botonpanico-service';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +30,8 @@ import { Usuarios } from '../../../models/Usuarios';
 export class Botonpanicolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Botonpanico> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'fk1', 'c2', 'c5', 'c6'];
+
+  constructor(private iS: BotonpanicoService, private snackBar: MatSnackBar) {}
   form: FormGroup;
   listausuarios: Usuarios[] = [];
   constructor(private iS: BotonpanicoService, private fb: FormBuilder, private uS: UsuarioService) {
@@ -67,6 +71,7 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
     this.iS.delete(id).subscribe(() => {
       this.iS.list().subscribe((data) => {
         this.iS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

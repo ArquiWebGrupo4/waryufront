@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { Notificacion } from '../../../models/Notificacion';
 import { NotificacionService } from '../../../services/notificacion-service';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class Notificacionlistar implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['c1','c2','c3','c4','c5','c6'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   
-  constructor(private uS:NotificacionService) {}
+  constructor(private uS:NotificacionService,private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.uS.list().subscribe((data) => {
@@ -38,6 +39,7 @@ export class Notificacionlistar implements OnInit, AfterViewInit {
     this.uS.delete(id).subscribe(() => {
       this.uS.list().subscribe(data => {
         this.uS.setList(data)
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

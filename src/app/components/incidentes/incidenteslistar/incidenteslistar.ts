@@ -7,6 +7,8 @@ import { RouterLink } from '@angular/router';
 import { Incidentes } from '../../../models/Incidentes';
 import { IncidentesService } from '../../../services/incidentes-service';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +30,8 @@ import { Distrito } from '../../../models/Distrito';
 export class Incidenteslistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Incidentes> = new MatTableDataSource();
   displayedColumns: string[] = ['c1','fk2','fk4','c2','c3','c5','c6', 'c7'];
+
+  constructor(private iS: IncidentesService, private snackBar: MatSnackBar) {}
   form: FormGroup;
   listadistritos: Distrito[] = [];
   constructor(private iS: IncidentesService, private fb: FormBuilder, private dS: DistritoService) {
@@ -68,6 +72,7 @@ export class Incidenteslistar implements OnInit, AfterViewInit {
     this.iS.delete(id).subscribe(() => {
       this.iS.list().subscribe((data) => {
         this.iS.setList(data);
+        this.snackBar.open('Eliminado', 'Cerrar', { duration: 3000 });
       });
     });
   }

@@ -15,6 +15,7 @@ import { UsuarioService } from '../../../services/usuario-service';
 import { IncidentesService } from '../../../services/incidentes-service';
 import { Incidentes } from '../../../models/Incidentes';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-reporteincidenteregistrar',
   imports: [ReactiveFormsModule,
@@ -52,7 +53,8 @@ export class Reporteincidenteregistrar implements OnInit {
     private formBuilder: FormBuilder,
      private route: ActivatedRoute,
      private uS: UsuarioService,
-     private iS : IncidentesService
+     private iS : IncidentesService,
+     private snackBar: MatSnackBar
     ) {}
 
     ngOnInit(): void {
@@ -82,19 +84,27 @@ export class Reporteincidenteregistrar implements OnInit {
           this.riS.update(this.ri).subscribe((data) => {
             this.riS.list().subscribe((data) => {
               this.riS.setList(data);
+              this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
             });
           });
         }else{
           this.riS.insert(this.ri).subscribe((data) => {
             this.riS.list().subscribe((data) => {
               this.riS.setList(data);
+              this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
             });
         });
 
       }
       this.router.navigate(['reporteincidente']);
     }
+    
 }
+
+  cancelar(): void {
+      this.router.navigate(['reporteincidente']);
+    }
+    
     init() {
       if (this.edicion) {
       this.riS.listId(this.id).subscribe((data) => {
