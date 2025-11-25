@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+
 import { ReporteIncidenteService } from '../../services/reporte-incidente-service';
 
 @Component({
@@ -9,6 +10,8 @@ import { ReporteIncidenteService } from '../../services/reporte-incidente-servic
   imports: [MatIconModule, BaseChartDirective],
   templateUrl: './contar-por-tipo-incidente.html',
   styleUrl: './contar-por-tipo-incidente.css',
+  providers: [provideCharts(withDefaultRegisterables())],
+
 })
 
 export class ContarPorTipoIncidente implements OnInit{

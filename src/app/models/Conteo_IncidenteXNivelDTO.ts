@@ -1,4 +1,4 @@
-export class CantidadIncidentexNivelDTO{
-    NivelDeIncidente: string=""
-    Cantidad: number=0
+export class Conteo_IncidenteXNivelDTO{
+    nivelDeIncidente: string=""
+    cantidad: number=0
 }

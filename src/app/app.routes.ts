@@ -119,7 +119,7 @@ export const routes: Routes = [
         path:'ContarPorTipoIncidente', component:ContarPorTipoIncidente
     },
     {
-        path:'ContarPorNivelPeligro', component:ReporteContarPorNivel
+        path:'reporte-contar-por-nivel', component:ReporteContarPorNivel
     }
 
 ];

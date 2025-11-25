@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "waryu": {
+    "demoFrontVI": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -26,8 +26,7 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css",
-              "node_modules/leaflet/dist/leaflet.css"
+              "src/styles.css"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",
@@ -63,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "waryu:build:production"
+              "buildTarget": "demoFrontVI:build:production"
             },
             "development": {
-              "buildTarget": "waryu:build:development"
+              "buildTarget": "demoFrontVI:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "b7c85b8e-3127-44d8-a1f0-7f284a29af7b"
+    "analytics": "0b35df24-5bf5-489e-8a8f-6a628aa989f9"
   }
 }

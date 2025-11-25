@@ -4,7 +4,7 @@ import { Incidentes } from '../models/Incidentes';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Conteo_IncidenteXTipoDTO } from '../models/Conteo_IncidenteXTipoDTO';
-import { CantidadIncidentexNivelDTO } from '../models/Conteo_IncidenteXNivelDTO';
+import { Conteo_IncidenteXNivelDTO } from '../models/Conteo_IncidenteXNivelDTO';
 const base_url = environment.base
 
 @Injectable({
@@ -52,8 +52,8 @@ export class IncidentesService implements OnInit{
     return this.http.get<[Conteo_IncidenteXTipoDTO]>(`${this.url}/contador_IncidentesXTipo`);
   }
 
-  getcontarxnivel(): Observable<CantidadIncidentexNivelDTO[]>{
-    return this.http.get<CantidadIncidentexNivelDTO[]>(`${this.url}/contador_IncidentesXNivel`);
+  getcontarxnivel(): Observable<Conteo_IncidenteXNivelDTO[]>{
+    return this.http.get<Conteo_IncidenteXNivelDTO[]>(`${this.url}/contador_IncidentesXNivel`);
   }
 
 }

@@ -1,8 +1,8 @@
-import { MatIconModule } from '@angular/material/icon';
-import { IncidentesService } from '../../../../services/incidentes-service';
 import { Component, OnInit } from '@angular/core';
-import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { IncidentesService } from '../../../../services/incidentes-service';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -41,10 +41,10 @@ export class ReporteContarPorNivel implements OnInit {
     this.iS.getcontarxnivel().subscribe((data)=>{
       if(data.length >0){
         this.hasData=true;
-        this.barChartLabels = data.map((item) => item.NivelDeIncidente);
+        this.barChartLabels = data.map((item) => item.nivelDeIncidente);
         this.barChartData = [
           {
-            data: data.map((item) => item.Cantidad),
+            data: data.map((item) => item.cantidad),
             label: 'Cantidad de Incidentes por Nivel de Peligro (1 a 10)',
             backgroundColor:[
               '#c94d4d',
