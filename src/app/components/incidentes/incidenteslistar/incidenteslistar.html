@@ -1,0 +1,110 @@
+<div class="container">
+  <div style="text-align: center; margin:5%">
+    <h2>Lista de Incidentes</h2>
+  </div>
+  <div [formGroup]="form" style="display:flex; gap:20px; margin-bottom:20px;">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio">
+      <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin">
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="reiniciarTabla()">
+      Reiniciar
+    </button>
+  </div>
+    <!-- filtro por Distrito -->
+  <div [formGroup]="form">
+    <mat-form-field appearance="outline" style="width: 250px; margin-bottom: 20px;">
+      <mat-label>Filtrar por Distrito</mat-label>
+        <mat-select formControlName="fk">
+          <mat-option value=''>Todos</mat-option>
+          @for (t of listadistritos; track t) {
+            <mat-option [value]="t.id_Distrito">{{ t.nombre}}</mat-option>
+          }
+        </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- ID -->
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element">{{ element.id_Incidente }}</td>
+      </ng-container>
+
+      <!-- Nivel de Peligro -->
+      <ng-container matColumnDef="fk2">
+        <th mat-header-cell *matHeaderCellDef> Nivel de Peligro </th>
+        <td mat-cell *matCellDef="let element">{{ element.nivelPeligro.nivel }}</td>
+      </ng-container>
+
+      <!-- Distrito -->
+      <ng-container matColumnDef="fk4">
+        <th mat-header-cell *matHeaderCellDef> Distrito </th>
+        <td mat-cell *matCellDef="let element">{{ element.distrito.nombre }}</td>
+      </ng-container>
+
+      <!-- Descripción -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+      </ng-container>
+
+      <!-- Columna Fecha -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef> Fecha de Registro </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha_Creacion | date:'dd/MM/yyyy HH:mm:ss' }}
+        </td> 
+      </ng-container>
+
+      <!-- Actualizar -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['edits', element.id_Incidente]">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Eliminar -->
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="eliminar(element.id_Incidente)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef> Ver Mas </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['ver', element.id_Incidente]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <!-- Filas -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- 🔹 Paginador -->
+    <mat-paginator [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.usuario-card {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  font-size: 1rem;
+  color: gray;
+}
+mat-card-content p {
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}

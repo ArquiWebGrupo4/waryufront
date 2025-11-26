@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "waryu": {
+    "demoFrontVI": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,6 +17,7 @@
             "polyfills": [
               "zone.js"
             ],
+            "scripts": ["node_modules/leaflet/dist/leaflet.js", "node_modules/leaflet.heat/dist/leaflet-heat.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -26,7 +27,8 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",
@@ -62,10 +64,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "waryu:build:production"
+              "buildTarget": "demoFrontVI:build:production"
             },
             "development": {
-              "buildTarget": "waryu:build:development"
+              "buildTarget": "demoFrontVI:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "0b35df24-5bf5-489e-8a8f-6a628aa989f9"
   }
 }

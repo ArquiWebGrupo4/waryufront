@@ -1,0 +1,91 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%">
+      <h2>Actualización de Busqueda</h2>
+    </div>
+  } @else {
+    <div style="text-align: center; margin: 5%">
+      <h2>Registro de Busqueda</h2>
+    </div>
+  }
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      @if (edicion) {
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" [readonly]="edicion" />
+        </mat-form-field>
+      }
+      <br />
+      <div>
+      <mat-form-field>
+        <mat-label>Direccion</mat-label>
+        <input matInput formControlName="direccion" />
+        <mat-error>
+          @if (form.get('direccion')?.hasError('required')) {
+            Ingrese direccion completa!!
+          }
+          @if (form.get('direccion')?.hasError('minlength')) {
+            Mínimo 15 caracteres requeridos!!
+          }
+          @if (form.get('direccion')?.hasError('maxlength')) {
+            Máximo 100 caracteres permitidos!!
+          }
+        </mat-error>
+      </mat-form-field>
+      </div>
+      <br />
+      <mat-form-field>
+        <mat-label>Palabra Clave</mat-label>
+        <input matInput formControlName="palabra_Clave" />
+        <mat-error>
+          @if (form.get('palabra_Clave')?.hasError('required')) {
+            Ingrese palabra clave!!
+          }
+          @if (form.get('palabra_Clave')?.hasError('minlength')) {
+            Mínimo 4 caracteres requeridos!!
+          }
+          @if (form.get('palabra_Clave')?.hasError('maxlength')) {
+            Máximo 30 caracteres permitidos!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
+        </mat-error>
+      </mat-form-field>
+    
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="fk">
+          @for (a of listaUsuarios; track a) {
+            <mat-option [value]="a.id_Usuario">{{ a.nombreUsuario }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('fk')?.hasError('required')) {
+            Seleccione un usuario!!
+          }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button mat-raised-button color="primary">Registrar</button>
+          <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

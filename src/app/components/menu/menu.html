@@ -1,0 +1,173 @@
+<div class="container">
+  @if(verificar()){
+  <mat-toolbar class="custom-toolbar">
+    <button mat-button [routerLink]="['/homes']" class="btn-rojo">
+      <mat-icon>home</mat-icon>Home
+    </button>
+
+    @if (isAdmin() || isEstudiante() || isPadre()) {
+    <!-- Botón Distrito -->
+    <button mat-button class="btn-rojo" aria-label="Botón menú distrito" [matMenuTriggerFor]="menuDistrito">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> Distrito
+    </button>
+
+    <!-- Botón Rol -->
+    <button mat-button class="btn-azul" aria-label="Botón menú rol" [matMenuTriggerFor]="menuRol">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="security"></mat-icon> Rol
+    </button>
+
+    <!-- Botón Pánico -->
+    <button mat-button class="btn-rojo" aria-label="Botón menú pánico" [matMenuTriggerFor]="menuBotonPanico">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="warning"></mat-icon> Botón Pánico
+    </button>
+
+    <!-- Botón Nivel -->
+    <button mat-button class="btn-verde" aria-label="Botón menú nivel" [matMenuTriggerFor]="menuNivel">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="priority_high"></mat-icon> Nivel
+    </button>
+
+    <!-- Botón Tipo de Notificación -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú tipo de notificación" [matMenuTriggerFor]="menuTipoNotificacion">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="notifications"></mat-icon> Tipo de Notificación
+    </button>
+    <!-- Botón Tipo de Incidente -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú tipo de incidente" [matMenuTriggerFor]="menuTipoIncidente">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="report"></mat-icon> Tipo de Incidente
+    </button>
+
+    <!-- Botón Usuario -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú usuario" [matMenuTriggerFor]="menuUsuario">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="people"></mat-icon> Usuario
+    </button>
+
+    <!-- Botón Reporte Incidente -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú reporte incidente" [matMenuTriggerFor]="menuReporteIncidente">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="assignment	"></mat-icon> Reporte Incidente
+    </button>
+
+    <!-- Botón Incidente -->
+    <button mat-button class="btn-naranja" aria-label="Botón menú incidente" [matMenuTriggerFor]="menuIncidente">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dangerous"></mat-icon> Incidente
+    </button>
+
+    <!-- Botón Busqueda -->
+    <button mat-button class="btn-rojo" aria-label="Botón menú busqueda" [matMenuTriggerFor]="menuBusqueda">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Busqueda
+    </button>
+
+    <!-- Botón Distrito Favorito -->
+    <button mat-button class="btn-rojo" aria-label="Botón menú distrito Favorito" [matMenuTriggerFor]="menuDistritoFavorito">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon> Distrito Favorito
+    </button>
+
+    <!-- Botón Notificacion -->
+    <button mat-button class="btn-morado" aria-label="Botón menú notificacion" [matMenuTriggerFor]="menuNotificacion">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="notifications"></mat-icon> Notificacion
+    </button>
+       <!-- Botón Query -->
+    <button mat-button class="btn-morado" aria-label="Botón menú notificacion" [matMenuTriggerFor]="menuQuery">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="analytics"></mat-icon> Querys
+    </button>
+    }
+    <span class="spacer"> </span>
+    <button mat-button [matMenuTriggerFor]="menuSalir">
+        <mat-icon>person</mat-icon>Usuario
+    </button>
+  </mat-toolbar>
+  }
+  <!-- Menú Distrito -->
+  <mat-menu #menuDistrito="matMenu">
+    <button mat-menu-item routerLink="/distritos">Listar</button>
+    <button mat-menu-item routerLink="/distritos/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Rol -->
+  <mat-menu #menuRol="matMenu">
+    <button mat-menu-item routerLink="/roles">Listar</button>
+    <button mat-menu-item routerLink="/roles/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Botón Pánico -->
+  <mat-menu #menuBotonPanico="matMenu">
+    <button mat-menu-item routerLink="/BotonPanico">Listar</button>
+    <button mat-menu-item routerLink="/BotonPanico/news">Registrar</button>
+    <button mat-menu-item routerLink="/BotonPanico/interactuar">Interactuar</button>
+  </mat-menu>
+
+  <!-- Menú Nivel -->
+  <mat-menu #menuNivel="matMenu">
+    <button mat-menu-item routerLink="/niveles">Listar</button>
+    <button mat-menu-item routerLink="/niveles/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Tipo de Notificación -->
+  <mat-menu #menuTipoNotificacion="matMenu">
+    <button mat-menu-item routerLink="/tiponotificacion">Listar</button>
+    <button mat-menu-item routerLink="/tiponotificacion/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Tipo de Incidente -->
+  <mat-menu #menuTipoIncidente="matMenu">
+    <button mat-menu-item routerLink="/tipoincidente">Listar</button>
+    <button mat-menu-item routerLink="/tipoincidente/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Usuario -->
+  <mat-menu #menuUsuario="matMenu">
+    <button mat-menu-item routerLink="/usuarios">Listar</button>
+    <button mat-menu-item routerLink="/usuarios/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Reporte Incidente -->
+  <mat-menu #menuReporteIncidente="matMenu">
+    <button mat-menu-item routerLink="/reporteincidente">Listar</button>
+    <button mat-menu-item routerLink="/reporteincidente/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Incidente -->
+  <mat-menu #menuIncidente="matMenu">
+    <button mat-menu-item routerLink="/Incidente">Listar</button>
+    <button mat-menu-item routerLink="/Incidente/news">Registrar</button>
+    <button mat-menu-item routerLink="/Incidente/heatmap">MapaCalor</button>
+  </mat-menu>
+
+  <!-- Menú Busqueda -->
+  <mat-menu #menuBusqueda="matMenu">
+    <button mat-menu-item routerLink="/Busqueda">Listar</button>
+    <button mat-menu-item routerLink="/Busqueda/news">Registrar</button>
+  </mat-menu>
+
+  <!-- Menú Distrito Favorito -->
+  <mat-menu #menuDistritoFavorito="matMenu">
+    <button mat-menu-item routerLink="/distritofavorito">Listar</button>
+    <button mat-menu-item routerLink="/distritofavorito/news">Registrar</button>
+  </mat-menu>
+  
+  <!-- Menú Notificación -->
+  <mat-menu #menuNotificacion="matMenu">
+    <button mat-menu-item routerLink="/Notificacion">Listar</button>
+    <button mat-menu-item routerLink="/Notificacion/news">Registrar</button>
+  </mat-menu>
+
+   <!-- Menú -->
+  <mat-menu #menuQuery="matMenu">
+    <button mat-menu-item routerLink="/cantidadincidentextipo">Rep.Cantidad</button>
+    <button mat-menu-item routerLink="/ContarPorTipoIncidente">Rep.Cont.Tipo.Inc</button>
+    <button mat-menu-item routerLink="/reporte-contar-por-nivel">Rep.Cont.Niv.Pel</button>
+
+    <button mat-menu-item routerLink="/DistritoPeligroso">Rep.Distrito Peligroso</button>
+  </mat-menu>
+
+  <mat-menu #menuSalir="matMenu">
+    <button mat-menu-item routerLink="/login" (click)="cerrar()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
+    <button mat-menu-item>
+      Rol:
+      <span>{{ role }}</span>
+    </button>
+  </mat-menu>
+</div>
+
+

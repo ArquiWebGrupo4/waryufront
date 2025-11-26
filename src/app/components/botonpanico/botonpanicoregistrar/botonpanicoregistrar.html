@@ -1,0 +1,81 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%">
+      <h2>Actualización de Boton Panico</h2>
+    </div>
+  } @else {
+    <div style="text-align: center; margin: 5%">
+      <h2>Registro de Boton Panico</h2>
+    </div>
+  }
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      @if (edicion) {
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" [readonly]="edicion" />
+          <mat-error>
+            @if (form.get('codigo')?.hasError('required')) { Ingrese id del distrito!! }
+          </mat-error>
+        </mat-form-field>
+      }
+
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="fk1">
+          @for (u of listausuarios; track u) {
+            <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('fk1')?.hasError('required')) { Seleccione un usuario!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+
+      <br />
+      <mat-form-field>
+        <mat-label>latitud</mat-label>
+        <input type="number" matInput formControlName="latitud" readonly/>
+        <mat-error>
+          @if (form.get('latitud')?.hasError('required')) { Ingrese la latitud!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>longitud</mat-label>
+        <input type="number" matInput formControlName="longitud" readonly/>
+        <mat-error>
+          @if (form.get('longitud')?.hasError('required')) { Ingrese la longitud!! }
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button mat-raised-button color="primary">Registrar</button>
+          <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

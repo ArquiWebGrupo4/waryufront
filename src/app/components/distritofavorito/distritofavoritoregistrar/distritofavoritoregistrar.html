@@ -1,0 +1,77 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%">
+      <h2>Actualización de Distrito Favorito</h2>
+    </div>
+  } @else {
+    <div style="text-align: center; margin: 5%">
+      <h2>Registro de Distrito Favorito</h2>
+    </div>
+  }
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      @if (edicion) {
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" [readonly]="edicion" />
+        </mat-form-field>
+      }
+      <br />
+      <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estado" required="">
+          @for (e of estados; track e.value) {
+          <mat-option [value]="e.value">
+            {{ e.viewValue }}
+          </mat-option>
+          }
+        </mat-select>
+        @if (form.get('estado')?.hasError('required')) {
+          <mat-error>El campo estado es obligatorio.</mat-error>
+          }
+      </mat-form-field>
+      </div>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="fk">
+          @for (a of listaUsuarios; track a) {
+            <mat-option [value]="a.id_Usuario">{{ a.nombreUsuario}}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('fk')?.hasError('required')) {
+            Seleccione un usuario!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+          <br />
+      <mat-form-field>
+        <mat-label>Distrito</mat-label>
+        <mat-select formControlName="fkd">
+          @for (a of listaDistritos; track a) {
+            <mat-option [value]="a.id_Distrito">{{ a.nombre}}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('fkd')?.hasError('required')) {
+            Seleccione un distrito!!
+          }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button mat-raised-button color="primary">Registrar</button>
+          <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

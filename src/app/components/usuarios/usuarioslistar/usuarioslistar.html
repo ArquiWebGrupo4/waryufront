@@ -1,0 +1,81 @@
+<div class="container">
+  <div style="text-align: center; margin:5%">
+    <h2>Lista de Usuarios</h2>
+  </div>
+
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Columna ID -->
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id_Usuario}} </td>
+      </ng-container>
+
+      <!-- Columna Usuario -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreUsuario}} </td>
+      </ng-container>
+
+      <!-- Columna Nombre -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+      </ng-container>
+
+      <!-- Columna Fecha -->
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef> Fecha de Registro </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha_Registro | date:'dd/MM/yyyy HH:mm:ss' }}
+        </td> 
+      </ng-container>
+
+      <!-- Columna Rol -->
+      <ng-container matColumnDef="cf">
+        <th mat-header-cell *matHeaderCellDef> Rol </th>
+        <td mat-cell *matCellDef="let element"> {{element.rol.nombre}} </td>
+      </ng-container>
+
+      <!-- Columna Actualizar -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['edits', element.id_Usuario]">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Columna Eliminar -->
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="eliminar(element.id_Usuario)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+            <!-- Columna Ver mas -->
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef> Ver Mas </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['ver', element.id_Usuario]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Filas -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- 🔹 Paginador -->
+    <mat-paginator [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

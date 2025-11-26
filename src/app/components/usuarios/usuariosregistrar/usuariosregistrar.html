@@ -1,0 +1,173 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%">
+      <h2>Actualización de Usuarios</h2>
+    </div>
+  } @else {
+    <div style="text-align: center; margin: 5%">
+      <h2>Registro de Usuarios</h2>
+    </div>
+  }
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      @if (edicion) {
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" [readonly]="edicion" />
+        </mat-form-field>
+      }
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) {
+            Ingrese nombre de usuario!!
+          }
+          @if (form.get('nombre')?.hasError('maxlength')) {
+            Máximo 20 caracteres permitidos!!
+          }
+          @if (form.get('nombre')?.hasError('minlength')) {
+            Mínimo 5 caracteres requeridos!!
+          }
+        </mat-error>
+      </mat-form-field>
+      
+      <br />
+      <div>
+      <mat-form-field>
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput formControlName="nombrecompleto" />
+        <mat-error>
+          @if (form.get('nombrecompleto')?.hasError('required')) {
+            Ingrese nombre completo!!
+          }
+          @if (form.get('nombrecompleto')?.hasError('maxlength')) {
+            Máximo 150 caracteres permitidos!!
+          }
+          @if (form.get('nombrecompleto')?.hasError('minlength')) {
+            Mínimo 8 caracteres requeridos!!
+          }
+        </mat-error>
+      </mat-form-field>
+      </div>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+        <mat-error>
+          @if (form.get('email')?.hasError('required')) {
+            Ingrese email!!
+          }
+          @if (form.get('email')?.hasError('esEmail')) {
+            Formato de email inválido!!
+          }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="contrasenahash" />
+        <mat-error>
+          @if (form.get('contrasenahash')?.hasError('required')) {
+            Ingrese contraseña!!
+          }
+          @if (form.get('contrasenahash')?.hasError('minlength')) {
+            Mínimo 8 caracteres requeridos!!
+          }
+          @if (form.get('contrasenahash')?.hasError('maxlength')) {
+            Máximo 64 caracteres permitidos!!
+          }
+          @if (form.get('contrasenahash')?.hasError('passwordCompleja')) {
+            La contraseña debe tener al menos una mayúscula, una minúscula, un número y un carácter especial!!
+          }
+        </mat-error>
+      </mat-form-field>
+      
+      <br />
+      <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput 
+               [value]="form.get('fecharegistro')?.value | date:'dd/MM/yyyy HH:mm:ss'" 
+               readonly/>
+        <mat-error>
+          @if (form.get('fecharegistro')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" />
+        <mat-error>
+          @if (form.get('telefono')?.hasError('required')) {
+            Ingrese teléfono!!
+          }
+          @if (form.get('telefono')?.hasError('telefono9Digitos')) {
+            El teléfono debe tener exactamente 9 dígitos!!
+          }
+
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Teléfono de Pánico</mat-label>
+        <input matInput formControlName="telefonopanico" />
+        <mat-error>
+          @if (form.get('telefonopanico')?.hasError('required')) {
+            Ingrese teléfono de pánico!!
+          }
+          @if (form.get('telefonopanico')?.hasError('telefono9Digitos')) {
+            El teléfono de pánico debe tener exactamente 9 dígitos!!
+          }
+        </mat-error>
+      </mat-form-field>
+      
+      <br />
+      <mat-form-field>
+        <mat-label>Mensaje</mat-label>
+        <textarea matInput formControlName="mensaje"></textarea>
+        <mat-error>
+          @if (form.get('mensaje')?.hasError('required')) {
+            Ingrese mensaje!!
+          }
+          @if (form.get('mensaje')?.hasError('minlength')) {
+            Mínimo 10 caracteres requeridos!!
+          }
+          @if (form.get('mensaje')?.hasError('maxlength')) {
+            Máximo 200 caracteres permitidos!!
+          }
+        </mat-error>
+      </mat-form-field>
+      
+      <br />
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="fk">
+          @for (a of listaRoles; track a) {
+            <mat-option [value]="a.id_Rol">{{ a.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('fk')?.hasError('required')) {
+            Seleccione un rol!!
+          }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button mat-raised-button color="primary">Registrar</button>
+          <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

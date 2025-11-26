@@ -1,0 +1,34 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%"><h2>Registro de Niveles</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" [readonly]="edicion" />
+        <mat-error>
+          @if (form.get('codigo')?.hasError('required')) { Ingrese codigo del Nivel!! }
+        </mat-error>
+      </mat-form-field>
+      }
+
+      <br />
+      <mat-form-field>
+        <mat-label>Nivel</mat-label>
+        <input matInput formControlName="nivel" />
+        <mat-error>
+          @if (form.get('nivel')?.hasError('required')) { Ingrese numero del Nivel!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <div>
+        @if (edicion) {
+          <button matButton="elevated">Actualizar</button>
+        } @else {
+          <button mat-raised-button color="primary">Registrar</button>
+            <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

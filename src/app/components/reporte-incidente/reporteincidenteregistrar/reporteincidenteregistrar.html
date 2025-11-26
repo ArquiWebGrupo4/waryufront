@@ -1,0 +1,73 @@
+<div class="container">
+    <div style="text-align: center; margin: 5%"><h2>Registrar Reporte de Incidente</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+       <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" type="number" [readonly]="edicion" />
+        <mat-error>
+          @if (form.get('codigo')?.hasError('required')) { Ingrese ID de reporte!! }
+        </mat-error>
+      </mat-form-field> 
+      }
+      <mat-form-field>
+        <mat-label>Incidente</mat-label>
+        <mat-select formControlName="id_Incidente">
+          @for (i of listaIncidentes; track i) {
+            <mat-option [value]="i.id_Incidente">{{ i.descripcion }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('id_Incidente')?.hasError('required')) { Ingrese incidente!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="id_Usuario">
+          @for (u of listaUsuarios; track u) {
+            <mat-option [value]="u.id_Usuario">{{ u.nombreCompleto }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('id_Usuario')?.hasError('required')) { Ingrese usuario!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
+        <mat-error>
+          @if (form.get('descripcion')?.hasError('required')) { Ingrese descripcion del Reporte!! }
+          @if (form.get('descripcion')?.hasError('maxlength')) { Máximo 1000 caracteres permitidos!! }
+          @if (form.get('descripcion')?.hasError('minlength')) { Mínimo 20 caracteres requeridos!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+            <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput 
+               [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" 
+               readonly/>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) {
+            Ingrese fecha de registro!!
+          }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        @if(edicion){
+        <button matButton="elevated">Actualizar</button>
+        }
+        @else{
+            <button mat-raised-button color="primary">Registrar</button>
+            <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+         }
+      </div>
+
+
+
+    </form>
+</div>
+</div>

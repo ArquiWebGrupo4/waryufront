@@ -1,0 +1,42 @@
+<div class="container">
+  @if (edicion) {
+    <div style="text-align: center; margin: 5%"><h2>Actualización de Roles</h2></div>
+  }
+  @else {
+    <div style="text-align: center; margin: 5%"><h2>Registro de Roles</h2></div>
+  }
+  
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" [readonly]="edicion" />
+        <mat-error>
+          @if (form.get('codigo')?.hasError('required')) { Ingrese id del rol!! }
+        </mat-error>
+      </mat-form-field>
+      }
+
+      <br />
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) { Ingrese nombre del Rol!! }
+          @if (form.get('nombre')?.hasError('maxlength')) { Máximo 20 caracteres permitidos!! }
+          @if (form.get('nombre')?.hasError('minlength')) { Mínimo 4 caracteres requeridos!! }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        @if(edicion){
+        <button matButton="elevated">Actualizar</button>
+        }
+        @else{
+            <button mat-raised-button color="primary">Registrar</button>
+            <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+         }
+      </div>
+    </form>
+  </div>
+</div>

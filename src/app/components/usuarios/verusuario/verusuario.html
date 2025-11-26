@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 style="text-align:center; margin:20px">Detalles del Usuario</h2>
+
+  <mat-card *ngIf="usuario" class="usuario-card">
+    <mat-card-header>
+      <mat-card-title>{{ usuario.nombreCompleto }}</mat-card-title>
+      <mat-card-subtitle>Rol: {{ usuario.rol.nombre }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <br>
+      <p><strong>ID:</strong> {{ usuario.id_Usuario }}</p>
+      <p><strong>Nombre de usuario:</strong> {{ usuario.nombreUsuario }}</p>
+      <p><strong>Email:</strong> {{ usuario.email }}</p>
+      <p><strong>Fecha de Registro:</strong> {{ usuario.fecha_Registro | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+      <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+      <p><strong>Teléfono de Pánico:</strong> {{ usuario.telefono_Panico }}</p>
+      <p><strong>Mensaje:</strong> {{ usuario.mensaje }}</p>
+      <p><strong>Contraseña:</strong> Bloqueado por seguridad</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [routerLink]="['/usuarios']">
+        Volver a la Lista
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="!usuario">
+    <p>Cargando datos...</p>
+  </div>
+</div>
