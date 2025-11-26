@@ -26,11 +26,9 @@ export class Distritofavoritolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<DistritoFavorito> = new MatTableDataSource();
 
   displayedColumns: string[] = ['c1','c2','cf','cfk','c3','c4'];
-  
-  constructor(private dfS:DistritoFavoritoService,private snackBar: MatSnackBar) {}
   form: FormGroup;
   listausuarios: Usuarios[] = [];
-  constructor(private dfS:DistritoFavoritoService, private fb: FormBuilder, private uS:UsuarioService) {
+  constructor(private dfS:DistritoFavoritoService, private snackBar: MatSnackBar, private fb: FormBuilder, private uS:UsuarioService) {
     this.form = this.fb.group({
       fk: ['']
     });

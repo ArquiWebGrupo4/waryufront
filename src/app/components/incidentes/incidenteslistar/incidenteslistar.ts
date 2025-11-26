@@ -31,10 +31,15 @@ export class Incidenteslistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Incidentes> = new MatTableDataSource();
   displayedColumns: string[] = ['c1','fk2','fk4','c2','c3','c5','c6', 'c7'];
 
-  constructor(private iS: IncidentesService, private snackBar: MatSnackBar) {}
   form: FormGroup;
   listadistritos: Distrito[] = [];
-  constructor(private iS: IncidentesService, private fb: FormBuilder, private dS: DistritoService) {
+
+  constructor(
+    private iS: IncidentesService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private dS: DistritoService
+  ) {
     this.form = this.fb.group({
       fechaInicio: [''],
       fechaFin: [''],

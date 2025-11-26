@@ -121,6 +121,8 @@ export const routes: Routes = [
     },
     {
         path:'reporte-contar-por-nivel', component:ReporteContarPorNivel
+    },
+    { 
         path:'DistritoPeligroso', component:Distritopeligroso
     }
 

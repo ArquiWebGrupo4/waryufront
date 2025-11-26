@@ -27,11 +27,14 @@ import { Incidentes } from '../../../models/Incidentes';
 export class Reporteincidentelistar implements OnInit, AfterViewInit {
   datasource: MatTableDataSource<Reporte_Incidente> = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'id_Usuario', 'id_Incidente', 'descripcion', 'fecha', 'ce', 'cd'];
-
-  constructor(private riS: ReporteIncidenteService,private snackBar: MatSnackBar) {}
   form: FormGroup;
   listaincidentes: Incidentes[] = [];
-  constructor(private riS: ReporteIncidenteService, private fb: FormBuilder, private iS:IncidentesService) {
+  constructor(
+    private riS: ReporteIncidenteService,
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private iS: IncidentesService
+  ) {
     this.form = this.fb.group({
       fk: ['']
     });

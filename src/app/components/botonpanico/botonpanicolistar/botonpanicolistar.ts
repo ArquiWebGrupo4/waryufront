@@ -30,11 +30,9 @@ import { Usuarios } from '../../../models/Usuarios';
 export class Botonpanicolistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Botonpanico> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'fk1', 'c2', 'c5', 'c6'];
-
-  constructor(private iS: BotonpanicoService, private snackBar: MatSnackBar) {}
   form: FormGroup;
   listausuarios: Usuarios[] = [];
-  constructor(private iS: BotonpanicoService, private fb: FormBuilder, private uS: UsuarioService) {
+  constructor(private iS: BotonpanicoService,  private snackBar: MatSnackBar, private fb: FormBuilder, private uS: UsuarioService) {
     this.form = this.fb.group({
       fechaInicio: [''],
       fechaFin: [''],
