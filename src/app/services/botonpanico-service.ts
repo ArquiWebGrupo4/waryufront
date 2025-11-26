@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Botonpanico } from '../models/Botonpanico';
-
+import { LoginService } from './login-service';
 const base_url = environment.base;
 
 @Injectable({
@@ -12,12 +12,13 @@ const base_url = environment.base;
 export class BotonpanicoService implements OnInit {
   private url = `${base_url}/botonpanico`;
   private listaCambio = new Subject<Botonpanico[]>();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private lS: LoginService) {}
 
   ngOnInit(): void {}
   
   interactuar() {
-    const params = new HttpParams().set('idUsuario', String(environment.userid));
+    const username = this.lS.showUsername();
+    const params = new HttpParams().set('nombreusuario', String(username));
     return this.http.post(`${this.url}/interact`, {}, { params });
   }
   list() {

@@ -56,4 +56,9 @@ export class IncidentesService implements OnInit{
     return this.http.get<Conteo_IncidenteXNivelDTO[]>(`${this.url}/contador_IncidentesXNivel`);
   }
 
+  getlatlon(): Observable<[number, number][]> {
+    return this.http.get<[number, number][]>(`${this.url}/listalatlon`);
+  }
+
+
 }

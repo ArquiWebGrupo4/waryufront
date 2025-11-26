@@ -1,0 +1,59 @@
+/* Toolbar futurista */
+.custom-toolbar {
+    background: #f5f7fa; /* fondo claro elegante */
+    color: #333;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 20px;
+    gap: 14px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Scroll minimalista */
+  .custom-toolbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-toolbar::-webkit-scrollbar-thumb {
+    background: rgba(100, 180, 255, 0.4); /* azul celeste translúcido */
+    border-radius: 4px;
+  }
+  .custom-toolbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 180, 255, 0.7);
+  }
+  
+  /* Botones futuristas */
+  .custom-toolbar button {
+    background: #fff;
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 500;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(100, 180, 255, 0.35); /* sombra azul celeste */
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover con efecto difuminado */
+  .custom-toolbar button:hover {
+    background: linear-gradient(145deg, #ffffff, #f0f4ff); /* ligero difuminado */
+    box-shadow: 0 6px 16px rgba(100, 180, 255, 0.55);
+    transform: translateY(-2px);
+  }
+  
+  /* Íconos futuristas */
+  .custom-toolbar mat-icon {
+    color: #4a90e2; /* azul elegante */
+    font-size: 20px;
+  }
+  
+  /* Espaciador */
+  .spacer {
+    flex: 1 1 auto;
+  }
+  

@@ -20,6 +20,8 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+declare const L: any;
+
 @Component({
   selector: 'app-botonpanicoregistrar',
   imports: [    ReactiveFormsModule,
@@ -58,8 +60,8 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
   listaTipoIncidente: Tipo_Incidente[] = []
   listadistrito: Distrito[] = [];
   
-  private map: any;
-  private marker: any;
+  private map!: any;
+  private markerLayer!: any;
   constructor(
     private iS:BotonpanicoService,
     private router: Router,
@@ -91,33 +93,36 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
   }
 
   async ngAfterViewInit(): Promise<void> {
-    if (isPlatformBrowser(this.platformId)) {
-      const L = await import('leaflet');
-      const mapElement = document.getElementById('map');
-      if (!mapElement) return;
-      this.map = L.map(mapElement).setView([-12.0464, -77.0428], 13);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(this.map);
-      setTimeout(() => {
-        this.map.invalidateSize();
-      }, 500);
-      this.map.on('click', (e: any) => {
-        const lat = e.latlng.lat;
-        const lng = e.latlng.lng;
-        if (this.marker) {
-          this.marker.setLatLng([lat, lng]);
-        } else {
-          this.marker = L.marker([lat, lng], { draggable: true }).addTo(this.map);
+      if (isPlatformBrowser(this.platformId)) {
+        const mapElement = document.getElementById('map');
+        if (!mapElement) return;
+  
+        if (!this.map) {
+          this.map = L.map(mapElement).setView([-12.0464, -77.0428], 13);
+  
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+          }).addTo(this.map);
         }
-        this.form.patchValue({ latitud: lat, longitud: lng });
-        this.marker.on('dragend', (event: any) => {
-          const pos = event.target.getLatLng();
-          this.form.patchValue({ latitud: pos.lat, longitud: pos.lng });
+  
+        this.markerLayer = L.layerGroup().addTo(this.map);
+  
+        this.map.on('click', (e: any) => {
+          const lat = e.latlng.lat;
+          const lng = e.latlng.lng;
+  
+          this.markerLayer.clearLayers();
+          const marker = L.marker([lat, lng], { draggable: true }).addTo(this.markerLayer);
+  
+          this.form.patchValue({ latitud: lat, longitud: lng });
+  
+          marker.on('dragend', (event: any) => {
+            const pos = event.target.getLatLng();
+            this.form.patchValue({ latitud: pos.lat, longitud: pos.lng });
+          });
         });
-      });
+      }
     }
-  }
 
   aceptar(): void {
     if(this.form.valid){

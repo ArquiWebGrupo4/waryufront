@@ -17,7 +17,6 @@ import { Usuariosregistrar } from './components/usuarios/usuariosregistrar/usuar
 import { Verusuario } from './components/usuarios/verusuario/verusuario';
 import { ReporteIncidente } from './components/reporte-incidente/reporte-incidente';
 import { Reporteincidenteregistrar } from './components/reporte-incidente/reporteincidenteregistrar/reporteincidenteregistrar';
-
 import { Incidentes } from './components/incidentes/incidentes';
 import { Incidentesregistrar } from './components/incidentes/incidentesregistrar/incidentesregistrar';
 import { Busqueda } from './components/busqueda/busqueda';
@@ -33,7 +32,20 @@ import { Cantidadincidentextipo } from './components/cantidadincidentextipo/cant
 import { ContarPorTipoIncidente } from './components/contar-por-tipo-incidente/contar-por-tipo-incidente';
 import { ReporteContarPorNivel } from './components/reportes/ReporteIncidente/reporte-contar-por-nivel/reporte-contar-por-nivel';
 import { Distritopeligroso } from './components/distritopeligroso/distritopeligroso';
+import { Autenticador } from './components/autenticador/autenticador';
+import { seguridadGuard } from './guard/seguridad-guard';
+import { HeatmapComponent } from './components/incidentes/heatmap/heatmap';
 export const routes: Routes = [
+    {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      }
+      ,
+      {
+        path: 'login',
+        component: Autenticador,
+      },
     {path:'distritos',component:Distrito,
         children:[
             {path:'news',component:Distritoregistrar},
@@ -71,59 +83,60 @@ export const routes: Routes = [
             {path:'edits/:id',component:Tipoincidenteregistrar}
         ]
     },
-    {path:'usuarios', component:Usuarios,
+    {path:'usuarios', component:Usuarios, canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:Usuariosregistrar},
-            {path:'edits/:id',component:Usuariosregistrar},
-            {path:'ver/:id',component: Verusuario}
+            {path:'news', component:Usuariosregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Usuariosregistrar, canActivate:[seguridadGuard]},
+            {path:'ver/:id',component: Verusuario, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'reporteincidente', component:ReporteIncidente,
+    {path:'reporteincidente', component:ReporteIncidente, canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:Reporteincidenteregistrar},
-            {path:'edits/:id',component:Reporteincidenteregistrar}
+            {path:'news', component:Reporteincidenteregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Reporteincidenteregistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'Incidente', component:Incidentes,
+    {path:'Incidente', component:Incidentes,canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:Incidentesregistrar},
-            {path:'edits/:id',component:Incidentesregistrar},
-            {path:'ver/:id',component: Verincidente}
+            {path:'news', component:Incidentesregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Incidentesregistrar, canActivate:[seguridadGuard]},
+            {path:'ver/:id',component: Verincidente, canActivate:[seguridadGuard]},
+            {path:'heatmap', component:HeatmapComponent, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'Busqueda', component:Busqueda,
+    {path:'Busqueda', component:Busqueda, canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:Busquedaregistrar},
-            {path:'edits/:id',component:Busquedaregistrar}
+            {path:'news', component:Busquedaregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Busquedaregistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'distritofavorito', component:Distritofavorito,
+    {path:'distritofavorito', component:Distritofavorito, canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:Distritofavoritoregistrar},
-            {path:'edits/:id',component:Distritofavoritoregistrar}
+            {path:'news', component: Distritofavoritoregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Distritofavoritoregistrar, canActivate:[seguridadGuard]}
         ]
     },
     {path:'Notificacion', component:Notificacion,
         children: [
-            {path:'news', component:Notificacionregistrar},
-            {path:'edits/:id',component:Notificacionregistrar}
+            {path:'news', component:Notificacionregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Notificacionregistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'', component:LandingPage
+    {path:'homes', component:LandingPage, canActivate:[seguridadGuard]
     },
     {path:'menu', component:Menu
     },
     {
-        path:'cantidadincidentextipo',component:Cantidadincidentextipo
+        path:'cantidadincidentextipo',component:Cantidadincidentextipo, canActivate:[seguridadGuard]
     },
     {
-        path:'ContarPorTipoIncidente', component:ContarPorTipoIncidente
+        path:'ContarPorTipoIncidente', component:ContarPorTipoIncidente, canActivate:[seguridadGuard]
     },
     {
-        path:'reporte-contar-por-nivel', component:ReporteContarPorNivel
+        path:'reporte-contar-por-nivel', component:ReporteContarPorNivel, canActivate:[seguridadGuard]
     },
     { 
-        path:'DistritoPeligroso', component:Distritopeligroso
+        path:'DistritoPeligroso', component:Distritopeligroso, canActivate:[seguridadGuard]
     }
 
 ];

@@ -10,11 +10,6 @@
       <a class="lp-nav-item" routerLink="/faq">FAQ</a>
     </nav>
 
-    <!-- Botón Login -->
-    <button class="lp-login-btn" (click)="mostrarLogin = !mostrarLogin">
-      Iniciar sesión
-    </button>
-
     <div class="lp-app-badges">
       <span class="badge placeholder">Play Store</span>
       <span class="badge placeholder">App Store</span>
@@ -38,13 +33,6 @@
     </section>
   </div>
 </main>
-
-<!-- Formulario Login -->
-<div *ngIf="mostrarLogin" class="lp-login-form">
-  <h3>Ingresar ID de usuario</h3>
-  <input type="text" [(ngModel)]="useridInput" placeholder="Tu ID">
-  <button (click)="login()">Aceptar</button>
-</div>
 
 
 <style>
