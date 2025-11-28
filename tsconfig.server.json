@@ -3,8 +3,9 @@
   "compilerOptions": {
     "outDir": "./out-tsc/server",
     "target": "ES2022",
-    "module": "nodenext",
-    "types": []
+    "module": "NodeNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "files": [
     "src/main.server.ts",
