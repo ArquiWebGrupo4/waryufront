@@ -6,11 +6,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && tsc-alias",
-    "build:ssr": "ng build && ng run demoFrontVI:server",
-    "serve:ssr": "node dist/demoFrontVI/server/main.js",
+    "build:ssr": "ng build && ng run demoFrontVI:server && mv dist/demoFrontVI/server/main.js dist/demoFrontVI/server/main.cjs",
+    "serve:ssr": "node dist/demoFrontVI/server/main.cjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:demoFrontVI": "node dist/demoFrontVI/server/main.js"
+    "serve:ssr:demoFrontVI": "node dist/demoFrontVI/server/main.cjs"
   },
   "prettier": {
     "printWidth": 100,
