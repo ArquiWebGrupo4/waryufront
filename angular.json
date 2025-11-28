@@ -76,7 +76,7 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/demoFrontVI/server",
-            "main": "server.ts",
+            "main": "main.server.ts",
             "tsConfig": "tsconfig.server.json"
           }
         },
