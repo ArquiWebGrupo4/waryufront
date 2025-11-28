@@ -3,10 +3,11 @@
   "compilerOptions": {
     "outDir": "./out-tsc/server",
     "target": "ES2022",
-    "module": "CommonJS",
+    "module": "nodenext",
     "types": []
   },
   "files": [
-    "src/main.server.ts"
+    "src/main.server.ts",
+    "src/server.ts"
   ]
 }
