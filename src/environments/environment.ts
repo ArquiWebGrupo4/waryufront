@@ -1,5 +1,4 @@
 export const environment={
   production:false,
-  base:'http://localhost:8080',
-  userid:0
+  base:'https://waryu.onrender.com',
 }
