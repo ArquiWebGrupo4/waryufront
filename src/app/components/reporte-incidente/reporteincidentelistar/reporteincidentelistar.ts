@@ -15,7 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { IncidentesService } from '../../../services/incidentes-service';
 import { Incidentes } from '../../../models/Incidentes';
-
+import { LoginService } from '../../../services/login-service';
 
 @Component({
   selector: 'app-reporteincidentelistar',
@@ -35,7 +35,8 @@ export class Reporteincidentelistar implements OnInit, AfterViewInit {
     private riS: ReporteIncidenteService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private iS: IncidentesService
+    private iS: IncidentesService,
+    private loginService: LoginService
   ) {
     this.form = this.fb.group({
       fk: ['']
@@ -60,6 +61,13 @@ export class Reporteincidentelistar implements OnInit, AfterViewInit {
     this.form.get('fk')?.valueChanges.subscribe((id_Incidente) => {
       this.filtrarporIncidente(id_Incidente);
     });
+
+    const rol = this.loginService.showRole();
+    if (rol === 'ADMIN') {
+      this.displayedColumns = ['id', 'id_Usuario', 'id_Incidente', 'descripcion', 'fecha', 'ce', 'cd'];
+    } else {
+      this.displayedColumns = ['id', 'id_Usuario', 'id_Incidente', 'descripcion', 'fecha'];
+    }
   }
 
   ngAfterViewInit(): void {

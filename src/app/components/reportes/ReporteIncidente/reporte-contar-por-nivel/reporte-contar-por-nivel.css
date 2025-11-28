@@ -34,15 +34,11 @@
 
  /* Contenedor del gráfico */
 
- .chart-container {
-
-  width: 1000px;     /* tamaño mediano */
-
-  max-width: 1000px;  /* evita que sea demasiado grande */
-
-  margin: 0 auto;   /* centra el componente */
-
- }
+.chart-container {
+  width: 80%;          /* ocupa la mayor parte de la pantalla */
+  max-width: 1000px;   /* límite máximo */
+  margin: 0 auto;      /* centrado */
+}
 
 
 

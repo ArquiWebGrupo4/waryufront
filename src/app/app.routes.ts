@@ -35,6 +35,7 @@ import { Distritopeligroso } from './components/distritopeligroso/distritopeligr
 import { Autenticador } from './components/autenticador/autenticador';
 import { seguridadGuard } from './guard/seguridad-guard';
 import { HeatmapComponent } from './components/incidentes/heatmap/heatmap';
+import { Dashboard } from './components/dashboard/dashboard';
 export const routes: Routes = [
     {
         path: '',
@@ -46,41 +47,41 @@ export const routes: Routes = [
         path: 'login',
         component: Autenticador,
       },
-    {path:'distritos',component:Distrito,
+    {path:'distritos',component:Distrito,canActivate:[seguridadGuard],
         children:[
-            {path:'news',component:Distritoregistrar},
-            {path:'edits/:id',component:Distritoregistrar}
+            {path:'news',component:Distritoregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Distritoregistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'roles',component:Rol,
+    {path:'roles',component:Rol,canActivate:[seguridadGuard],
         children:[
-            {path:'news',component:Rolregistrar},
-            {path:'edits/:id',component:Rolregistrar}
+            {path:'news',component:Rolregistrar,canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Rolregistrar,canActivate:[seguridadGuard]}
         ]
     },
-    {path:'niveles',component:Nivelxpeligro,
+    {path:'niveles',component:Nivelxpeligro, canActivate:[seguridadGuard],
         children:[
-            {path:'news',component:nivelxpeligroregistrar},
-            {path:'edits/:id',component:nivelxpeligroregistrar}
+            {path:'news',component:nivelxpeligroregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:nivelxpeligroregistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'BotonPanico',component:Botonpanico,
+    {path:'BotonPanico',component:Botonpanico, canActivate:[seguridadGuard],
         children:[
-            {path:'news',component:Botonpanicoregistrar},
-            {path:'edits/:id',component:Botonpanicoregistrar},
-            {path:'interactuar',component:Interactuar}
+            {path:'news',component:Botonpanicoregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Botonpanicoregistrar, canActivate:[seguridadGuard]},
+            {path:'interactuar',component:Interactuar, canActivate:[seguridadGuard]}
         ]},
     
-    {path:'tiponotificacion', component:TipoNotificacion,
+    {path:'tiponotificacion', component:TipoNotificacion,canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:TiponotificacionRegistrar},
-            {path:'edits/:id',component:TiponotificacionRegistrar}
+            {path:'news', component:TiponotificacionRegistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:TiponotificacionRegistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'tipoincidente', component:TipoIncidente,
+    {path:'tipoincidente', component:TipoIncidente,canActivate:[seguridadGuard],
         children: [
-            {path:'news', component:Tipoincidenteregistrar},
-            {path:'edits/:id',component:Tipoincidenteregistrar}
+            {path:'news', component:Tipoincidenteregistrar, canActivate:[seguridadGuard]},
+            {path:'edits/:id',component:Tipoincidenteregistrar, canActivate:[seguridadGuard]}
         ]
     },
     {path:'usuarios', component:Usuarios, canActivate:[seguridadGuard],
@@ -116,7 +117,7 @@ export const routes: Routes = [
             {path:'edits/:id',component:Distritofavoritoregistrar, canActivate:[seguridadGuard]}
         ]
     },
-    {path:'Notificacion', component:Notificacion,
+    {path:'Notificacion', component:Notificacion, canActivate:[seguridadGuard],
         children: [
             {path:'news', component:Notificacionregistrar, canActivate:[seguridadGuard]},
             {path:'edits/:id',component:Notificacionregistrar, canActivate:[seguridadGuard]}
@@ -137,6 +138,9 @@ export const routes: Routes = [
     },
     { 
         path:'DistritoPeligroso', component:Distritopeligroso, canActivate:[seguridadGuard]
+    },
+    {
+        path:'dashboard', component:Dashboard, canActivate:[seguridadGuard]
     }
 
 ];

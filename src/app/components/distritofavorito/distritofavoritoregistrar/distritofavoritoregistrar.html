@@ -36,7 +36,8 @@
       </div>
 
       <br />
-      <mat-form-field>
+      @if (rol === 'ADMIN') {
+        <mat-form-field>
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="fk">
           @for (a of listaUsuarios; track a) {
@@ -49,6 +50,8 @@
           }
         </mat-error>
       </mat-form-field>
+      }
+      
 
           <br />
       <mat-form-field>

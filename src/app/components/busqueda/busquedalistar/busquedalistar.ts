@@ -8,7 +8,7 @@ import { BusquedaService } from '../../../services/busqueda-service';
 import { Busqueda } from '../../../models/Busqueda';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { LoginService } from '../../../services/login-service';
 @Component({
   selector: 'app-busquedalistar',
   imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, MatPaginatorModule],
@@ -16,21 +16,43 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './busquedalistar.css',
 })
 export class Busquedalistar implements OnInit, AfterViewInit {
+  rol = "";
+  username = "";
   dataSource: MatTableDataSource<Busqueda> = new MatTableDataSource();
   displayedColumns: string[] = ['c1','c2','c3','c4','cf','c5','c6'];
 
-  constructor(private bS: BusquedaService,private snackBar: MatSnackBar) {}
+  constructor(private bS: BusquedaService,private snackBar: MatSnackBar, private loginService: LoginService) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.bS.list().subscribe((data) => {
-      this.dataSource.data = data;
+  this.rol = this.loginService.showRole();
+  this.username = this.loginService.showUsername();
+
+  this.bS.list().subscribe((data) => {
+    let filtrados = data;
+    console.log(data);
+    if (this.rol !== 'ADMIN') {
+        filtrados = filtrados.filter(item => item.usuario?.nombreUsuario === this.username);
+      }
+      this.dataSource.data = filtrados;
     });
+
     this.bS.getList().subscribe((data) => {
-      this.dataSource.data = data;
+      let filtrados = data;
+      if (this.rol !== 'ADMIN') {
+        filtrados = filtrados.filter(item => item.usuario?.nombreUsuario === this.username);
+      }
+      this.dataSource.data = filtrados;
     });
+
+    if (this.rol === 'ADMIN') {
+      this.displayedColumns = ['c1','c2','c3','c4','cf','c5','c6'];
+    } else {
+      this.displayedColumns = ['c1','c2','c3','c4','cf'];
+    }
   }
+
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

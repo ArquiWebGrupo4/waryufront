@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DistritoService } from '../../../services/distrito-service';
 import { Distrito } from '../../../models/Distrito';
+import { LoginService } from '../../../services/login-service';
 @Component({
   selector: 'app-incidenteslistar',
   imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink,
@@ -33,12 +34,14 @@ export class Incidenteslistar implements OnInit, AfterViewInit {
 
   form: FormGroup;
   listadistritos: Distrito[] = [];
-
+  rol = "";
+  username = "";
   constructor(
     private iS: IncidentesService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private dS: DistritoService
+    private dS: DistritoService,
+    private loginService: LoginService
   ) {
     this.form = this.fb.group({
       fechaInicio: [''],
@@ -54,6 +57,8 @@ export class Incidenteslistar implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.rol = this.loginService.showRole();
+    this.username = this.loginService.showUsername();
     this.iS.list().subscribe((data) => {
       this.dataSource.data = data;
     });
@@ -63,6 +68,12 @@ export class Incidenteslistar implements OnInit, AfterViewInit {
     this.dS.list().subscribe((distritos) => {
       this.listadistritos = distritos;
     });
+
+    if (this.rol === 'ADMIN') {
+      this.displayedColumns = ['c1','fk2','fk4','c2','c3','c5','c6', 'c7'];
+    } else {
+      this.displayedColumns = ['c1','fk2','fk4','c2','c3','c7'];
+    }
 
     this.form.get('fk')?.valueChanges.subscribe(() => this.filtrar());
     this.form.get('fechaInicio')?.valueChanges.subscribe(() => this.filtrar());

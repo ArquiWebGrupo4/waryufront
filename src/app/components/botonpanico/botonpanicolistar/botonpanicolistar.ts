@@ -11,17 +11,29 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Usuarios } from '../../../models/Usuarios';
+import { LoginService } from '../../../services/login-service';
+
 @Component({
   selector: 'app-botonpanicolistar',
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, MatPaginatorModule
-    , ReactiveFormsModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatNativeDateModule
+  standalone: true,
+  imports: [
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    CommonModule,
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './botonpanicolistar.html',
@@ -32,7 +44,16 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['c1', 'fk1', 'c2', 'c5', 'c6'];
   form: FormGroup;
   listausuarios: Usuarios[] = [];
-  constructor(private iS: BotonpanicoService,  private snackBar: MatSnackBar, private fb: FormBuilder, private uS: UsuarioService) {
+  rol = "";
+  username = "";
+
+  constructor(
+    private iS: BotonpanicoService,
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private uS: UsuarioService,
+    private loginService: LoginService
+  ) {
     this.form = this.fb.group({
       fechaInicio: [''],
       fechaFin: [''],
@@ -41,21 +62,44 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   private resetPaginator() {
-        this.dataSource.paginator = this.paginator;
-        this.paginator.firstPage();
+    this.dataSource.paginator = this.paginator;
+    this.paginator.firstPage();
   }
 
   ngOnInit(): void {
+    this.rol = this.loginService.showRole();
+    this.username = this.loginService.showUsername();
+    console.log(this.rol, this.username);
     this.iS.list().subscribe((data) => {
-      this.dataSource.data = data;
+      console.log(data);
+      let filtrados = data;
+      if (this.rol !== 'ADMIN') {
+        filtrados = filtrados.filter(item => item.usuario.nombreUsuario === this.username);
+      }
+      console.log(filtrados);
+      this.dataSource.data = filtrados;
     });
+
     this.iS.getList().subscribe((data) => {
-      this.dataSource.data = data;
+      let filtrados = data;
+      if (this.rol !== 'ADMIN') {
+        filtrados = filtrados.filter(item => item.usuario.nombreUsuario === this.username);
+      }
+      this.dataSource.data = filtrados;
     });
+
     this.uS.list().subscribe((usuarios) => {
       this.listausuarios = usuarios;
     });
+
+    if (this.rol === 'ADMIN') {
+      this.displayedColumns = ['c1', 'fk1', 'c2', 'c5', 'c6'];
+    } else {
+      this.displayedColumns = ['c1', 'fk1', 'c2'];
+    }
+
     this.form.get('fk')?.valueChanges.subscribe(() => this.filtrar());
     this.form.get('fechaInicio')?.valueChanges.subscribe(() => this.filtrar());
     this.form.get('fechaFin')?.valueChanges.subscribe(() => this.filtrar());
@@ -73,6 +117,7 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
       });
     });
   }
+
   filtrar() {
     const fechaInicio = this.form.get('fechaInicio')?.value;
     const fechaFin = this.form.get('fechaFin')?.value;
@@ -81,22 +126,20 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
     this.iS.list().subscribe(data => {
       let filtrados = data;
 
+      if (this.rol !== 'ADMIN') {
+        filtrados = filtrados.filter(item => item.usuario.nombreUsuario === this.username);
+      }
+
       if (idUsuario) {
         filtrados = filtrados.filter(item => item.usuario.id_Usuario === idUsuario);
       }
 
       if (fechaInicio && !fechaFin) {
-        filtrados = filtrados.filter(item => {
-          const fechaItem = new Date(item.fecha_Activacion);
-          return fechaItem >= fechaInicio;
-        });
+        filtrados = filtrados.filter(item => new Date(item.fecha_Activacion) >= fechaInicio);
       }
 
       if (!fechaInicio && fechaFin) {
-        filtrados = filtrados.filter(item => {
-          const fechaItem = new Date(item.fecha_Activacion);
-          return fechaItem <= fechaFin;
-        });
+        filtrados = filtrados.filter(item => new Date(item.fecha_Activacion) <= fechaFin);
       }
 
       if (fechaInicio && fechaFin) {
@@ -110,10 +153,15 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
       this.resetPaginator();
     });
   }
+
   reiniciarTabla() {
     this.form.reset();
     this.iS.list().subscribe(data => {
-      this.dataSource.data = data;
+      let filtrados = data;
+      if (this.rol !== 'ADMIN') {
+        filtrados = filtrados.filter(item => item.usuario.nombreUsuario === this.username);
+      }
+      this.dataSource.data = filtrados;
       this.resetPaginator();
     });
   }

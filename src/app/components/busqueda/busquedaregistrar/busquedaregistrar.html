@@ -54,7 +54,7 @@
       </mat-form-field>
 
       <br />
-      <mat-form-field>
+      <mat-form-field *ngIf="false">
         <mat-label>Fecha de Registro</mat-label>
         <input matInput [value]="form.get('fecha')?.value | date:'dd/MM/yyyy HH:mm:ss'" readonly/>
         <mat-error>
@@ -65,19 +65,21 @@
       </mat-form-field>
     
       <br />
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="fk">
-          @for (a of listaUsuarios; track a) {
-            <mat-option [value]="a.id_Usuario">{{ a.nombreUsuario }}</mat-option>
-          }
-        </mat-select>
-        <mat-error>
-          @if (form.get('fk')?.hasError('required')) {
-            Seleccione un usuario!!
-          }
-        </mat-error>
-      </mat-form-field>
+      @if (rol === "ADMIN") {
+        <mat-form-field>
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="fk">
+            @for (a of listaUsuarios; track a) {
+              <mat-option [value]="a.id_Usuario">{{ a.nombreUsuario }}</mat-option>
+            }
+          </mat-select>
+          <mat-error>
+            @if (form.get('fk')?.hasError('required')) {
+              Seleccione un usuario!!
+            }
+          </mat-error>
+        </mat-form-field>
+      }
       <div>
         @if (edicion) {
           <button matButton="elevated">Actualizar</button>

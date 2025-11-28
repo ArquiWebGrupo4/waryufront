@@ -69,9 +69,24 @@
       </mat-form-field>
       <br />
 
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="contrasenahash" />
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="contrasenahash"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Mostrar contraseña'"
+          [attr.aria-pressed]="!hide"
+          type="button"
+        >
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      
         <mat-error>
           @if (form.get('contrasenahash')?.hasError('required')) {
             Ingrese contraseña!!
@@ -89,7 +104,7 @@
       </mat-form-field>
       
       <br />
-      <mat-form-field>
+      <mat-form-field *ngIf="false">
         <mat-label>Fecha de Registro</mat-label>
         <input matInput 
                [value]="form.get('fecharegistro')?.value | date:'dd/MM/yyyy HH:mm:ss'" 
@@ -151,7 +166,9 @@
         <mat-label>Rol</mat-label>
         <mat-select formControlName="fk">
           @for (a of listaRoles; track a) {
-            <mat-option [value]="a.id_Rol">{{ a.nombre }}</mat-option>
+            @if (a.nombre !== 'ADMIN') {
+              <mat-option [value]="a.id_Rol">{{ a.nombre }}</mat-option>
+            }
           }
         </mat-select>
         <mat-error>

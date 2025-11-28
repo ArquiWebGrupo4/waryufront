@@ -1,3 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Poppins, "Helvetica Neue", sans-serif; }
+.mat-mdc-raised-button {
+  background-color: #0b3b4a !important;
+  color: #fff !important;
+}
+.custom-icon-btn {
+  background-color: #0b3b4a !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.custom-icon-btn:focus,
+.custom-icon-btn:active,
+.custom-icon-btn:hover {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+

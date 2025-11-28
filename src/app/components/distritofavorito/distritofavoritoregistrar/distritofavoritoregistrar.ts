@@ -21,6 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { DistritoService } from '../../../services/distrito-service';
 import { Distrito } from '../../../models/Distrito';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../../../services/login-service';
+
 @Component({
   selector: 'app-distritofavoritoregistrar',
   imports: [
@@ -36,19 +38,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providers: [provideNativeDateAdapter()],
   styleUrl: './distritofavoritoregistrar.css',
 })
-
-export class Distritofavoritoregistrar {
-form: FormGroup = new FormGroup({});
+export class Distritofavoritoregistrar implements OnInit {
+  form: FormGroup = new FormGroup({});
   df: DistritoFavorito = new DistritoFavorito();
   edicion: boolean = false;
   id: number = 0;
   listaUsuarios: Usuarios[] = [];
   listaDistritos: Distrito[] = [];
+  rol = '';
+  username = '';
+  idusuario = 0;
 
-    estados: { value: boolean; viewValue: string }[] = [
-  { value: true, viewValue: 'true' },
-  { value: false, viewValue: 'false' },
-];
+  estados: { value: boolean; viewValue: string }[] = [
+    { value: true, viewValue: 'true' },
+    { value: false, viewValue: 'false' },
+  ];
 
   constructor(
     private dfS: DistritoFavoritoService,
@@ -57,45 +61,58 @@ form: FormGroup = new FormGroup({});
     private route: ActivatedRoute,
     private uS: UsuarioService,
     private dS: DistritoService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
+    this.rol = this.loginService.showRole()?.toUpperCase();
+    this.username = this.loginService.showUsername();
+
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
+
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
+      if (this.rol !== 'ADMIN') {
+        const usuarioActual = this.listaUsuarios.find(u => u.nombreUsuario === this.username);
+        if (usuarioActual) {
+          this.idusuario = usuarioActual.id_Usuario;
+          this.form.patchValue({ fk: this.idusuario });
+        }
+      }
     });
-        this.dS.list().subscribe((data) => {
+
+    this.dS.list().subscribe((data) => {
       this.listaDistritos = data;
     });
 
     this.form = this.formBuilder.group({
       codigo:[''],
       estado: ['', Validators.required],
-      fk:['',Validators.required],
+      fk:[this.idusuario, Validators.required],
       fkd:['',Validators.required]
     });
   }
-  //aceptar
+
   aceptar(): void {
     if (this.form.valid) {
-      this.df.id_DistritoFavorito =this.form.value.codigo
+      this.df.id_DistritoFavorito = this.form.value.codigo;
       this.df.estado = this.form.value.estado;
       this.df.usuario.id_Usuario = this.form.value.fk;
       this.df.distrito.id_Distrito = this.form.value.fkd;
       if(this.edicion){
-        this.dfS.update(this.df).subscribe((data) => {
+        this.dfS.update(this.df).subscribe(() => {
           this.dfS.list().subscribe((data) => {
             this.dfS.setList(data);
             this.snackBar.open('Actualización exitosa', 'Cerrar', { duration: 3000 });
           });
         });
-      }else{
-        this.dfS.insert(this.df).subscribe((data) => {
+      } else {
+        this.dfS.insert(this.df).subscribe(() => {
           this.dfS.list().subscribe((data) => {
             this.dfS.setList(data);
             this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
@@ -119,7 +136,6 @@ form: FormGroup = new FormGroup({});
           fk: new FormControl(data.usuario.id_Usuario, Validators.required),
           fkd: new FormControl(data.distrito.id_Distrito, Validators.required)
         });
-        
       });
     }
   }

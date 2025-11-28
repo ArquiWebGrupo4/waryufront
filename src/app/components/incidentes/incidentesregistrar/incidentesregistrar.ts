@@ -23,6 +23,7 @@ import { DatePipe } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../../../services/login-service';
 declare const L: any;
 
 @Component({
@@ -61,10 +62,14 @@ export class Incidentesregistrar {
       this.http.post('https://api.imgbb.com/1/upload?key=296723c4cd1bd03a3e485ec0fbf9e349', formData)
         .subscribe((res: any) => {
           const imageUrl = res.data.display_url;
-          this.form.patchValue({ imagen: imageUrl });
+          this.form.get('imagen')?.setValue(imageUrl);
+          this.form.get('imagen')?.updateValueAndValidity();
         });
     }
   }
+  rol = "";
+  username = "";
+  idusuario: number = 0;
   form: FormGroup = new FormGroup({});
   inc: Incidentes = new Incidentes();
   edicion: boolean = false;
@@ -87,23 +92,35 @@ export class Incidentesregistrar {
     private dS:DistritoService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    private loginService: LoginService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { } 
 
   ngOnInit(): void {
+    this.rol = this.loginService.showRole();
+    this.username = this.loginService.showUsername();
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
   });
-    this.uS.list().subscribe((data) => { this.listausuarios = data });
+    this.uS.list().subscribe((data) => {
+      this.listausuarios = data;
+        if (this.rol !== 'ADMIN') {
+          const usuarioActual = this.listausuarios.find(user => user.nombreUsuario === this.username);
+          if (usuarioActual) {
+            this.idusuario = usuarioActual.id_Usuario;
+            this.form.patchValue({fk1: this.idusuario });
+          }
+        }
+    });
     this.nS.list().subscribe((data) => { this.listaNivelPeligro = data });
     this.tS.list().subscribe((data) => { this.listaTipoIncidente = data });
     this.dS.list().subscribe((data) => { this.listadistrito = data });
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      fk1: ['', Validators.required],
+      fk1: [this.idusuario, Validators.required],
       fk2: ['', Validators.required],
       fk3: ['', Validators.required],
       fk4: ['', Validators.required],

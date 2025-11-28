@@ -17,21 +17,22 @@ import { BotonpanicoService } from '../../../services/botonpanico-service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Botonpanico } from '../../../models/Botonpanico';
 import { PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgIf } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../../../services/login-service';
 declare const L: any;
 
 @Component({
   selector: 'app-botonpanicoregistrar',
-  imports: [    ReactiveFormsModule,
+  imports: [ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatRadioModule,
     MatDatepickerModule,
     MatButtonModule,
     MatSelectModule,
-    DatePipe],
+    DatePipe, NgIf],
   templateUrl: './botonpanicoregistrar.html',
   providers:[provideNativeDateAdapter()],
   styleUrl: './botonpanicoregistrar.css',
@@ -59,7 +60,9 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
   listaNivelPeligro: Nivelxpeligro[] = [];
   listaTipoIncidente: Tipo_Incidente[] = []
   listadistrito: Distrito[] = [];
-  
+  rol = "";
+  username = "";
+  idusuario = 0;
   private map!: any;
   private markerLayer!: any;
   constructor(
@@ -69,20 +72,32 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
     private route: ActivatedRoute,
     private uS:UsuarioService,
     private snackBar: MatSnackBar,
+    private LoginService: LoginService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { } 
 
   ngOnInit(): void {
+    this.rol = this.LoginService.showRole();
+    console.log(this.rol);
+    this.username = this.LoginService.showUsername();
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
   });
-    this.uS.list().subscribe((data) => { this.listausuarios = data });
+    this.uS.list().subscribe((data) => {
+      this.listausuarios = data;
+      if (this.rol !== 'ADMIN') {
+        const usuarioActual = this.listausuarios.find(user => user.nombreUsuario === this.username); 
+        if (usuarioActual) {
+          this.idusuario = usuarioActual.id_Usuario;
+        }
+      }
+    });
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      fk1: ['', Validators.required],
+      fk1: [this.idusuario, Validators.required],
       fecha: [
         this.getLocalDateTime(),
         Validators.required

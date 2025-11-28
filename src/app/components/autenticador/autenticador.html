@@ -1,22 +1,173 @@
-<div class="container" style="text-align: center">
-    <div>
-      <img src="https://images.seeklogo.com/logo-png/40/1/universidad-peruana-de-ciencias-aplicadas-upc-logo-png_seeklogo-402620.png" alt="Logo de la empresa" >
+<header class="lp-header">
+  <div class="lp-header-inner">
+    <a class="lp-brand" href="/" title="Ir a inicio">WARY - U</a>
+    <nav class="lp-nav">
+    </nav>
+    <div class="lp-app-badges">
     </div>
-    <h2>Inicie sesión</h2>
-    <mat-form-field class="example-full-width">
-      <mat-label>Usuario</mat-label>
-      <input matInput placeholder="Username" [(ngModel)]="username" />  
-    </mat-form-field>
-    <br />
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input
-        type="password"
-        matInput
-        placeholder="Password"
-        [(ngModel)]="password"
-      />
-    </mat-form-field>
-    <br />
-    <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
   </div>
+</header>
+<div class="container">
+  <div class="login-box">
+    <h2>¡Bienvenido!</h2>
+    <br>
+    <input
+      type="text"
+      class="custom-input"
+      placeholder="Usuario"
+      [(ngModel)]="username"
+    />
+    <br />
+
+    <input
+      type="password"
+      class="custom-input"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+    />
+    <br>
+    <br>
+    <button class="custom-button" (click)="login()">
+      Iniciar sesión
+    </button>
+  </div>
+</div>
+
+
+<style>
+  :host {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .lp-header {
+    background: rgb(150, 189, 228);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .lp-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+  }
+
+  .lp-brand {
+    font-weight: 700;
+    color: #0b3b4a;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .lp-nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .lp-nav-item {
+    color: #1b2b2f;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 18px;
+    cursor: pointer;
+  }
+
+  .lp-nav-cta {
+    background: #c94d4d;
+    color: #fff;
+    padding: 8px 16px;
+  }
+
+  .lp-app-badges {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .badge.placeholder {
+    display: inline-block;
+    background: #111827;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  .lp-hero {
+    background: #bfcfe0;
+    min-height: calc(100vh - 62px);
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .lp-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 60px 18px;
+    width: 100%;
+  }
+
+  .lp-hero-text {
+    flex: 1;
+    color: #24343d;
+  }
+
+  .lp-hero-text h1 {
+    font-size: 34px;
+    margin: 0 0 18px 0;
+    font-weight: 700;
+  }
+
+  .lp-hero-text strong {
+    font-size: 36px;
+  }
+
+  .lp-separator {
+    width: 60%;
+    border: 0;
+    height: 2px;
+    background: rgba(0,0,0,0.15);
+    margin: 12px 0;
+  }
+
+  .lp-lead {
+    color: #3b4b52;
+    max-width: 520px;
+    line-height: 1.4;
+  }
+
+  .lp-hero-illustration {
+    width: 360px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .lp-hero-inner {
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+    .lp-hero-illustration {
+      width: 100%;
+    }
+    .lp-hero-text h1 {
+      font-size: 24px;
+    }
+  }
+</style>
+

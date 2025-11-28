@@ -16,6 +16,7 @@ import { IncidentesService } from '../../../services/incidentes-service';
 import { Incidentes } from '../../../models/Incidentes';
 import { DatePipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../../../services/login-service';
 @Component({
   selector: 'app-reporteincidenteregistrar',
   imports: [ReactiveFormsModule,
@@ -42,8 +43,10 @@ export class Reporteincidenteregistrar implements OnInit {
   }
   form: FormGroup = new FormGroup({});
   ri: Reporte_Incidente = new Reporte_Incidente();
-
+  rol = "";
+  username = ""
   edicion: boolean = false
+  idusuario: number = 0;
   id: number = 0;
   listaUsuarios: Usuarios[] = [];
   listaIncidentes: Incidentes[] = [];
@@ -54,23 +57,36 @@ export class Reporteincidenteregistrar implements OnInit {
      private route: ActivatedRoute,
      private uS: UsuarioService,
      private iS : IncidentesService,
-     private snackBar: MatSnackBar
+     private snackBar: MatSnackBar,
+      private LoginService: LoginService
     ) {}
 
     ngOnInit(): void {
+      this.rol = this.LoginService.showRole();
+      this.username = this.LoginService.showUsername();
       this.route.params.subscribe((data: Params) => {
         this.id = data['id'];
         this.edicion = data['id'] != null;
         this.init();
       });
-      this.uS.list().subscribe(data => {this.listaUsuarios = data});
+      this.uS.list().subscribe(data => {
+        this.listaUsuarios = data;
+        if (this.rol !== 'ADMIN') {
+          const usuarioActual = this.listaUsuarios.find(user => user.nombreUsuario === this.username);
+          if (usuarioActual) {
+            this.idusuario = usuarioActual.id_Usuario;
+            this.form.patchValue({ id_Usuario: this.idusuario });
+          }
+        }
+      });
       this.iS.list().subscribe(data => {this.listaIncidentes = data});
+      console.log(this.idusuario);
       this.form = this.formBuilder.group({
         codigo:[''],
         descripcion: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1000)]],
         fecha: [this.getLocalDateTime(), Validators.required],
         id_Incidente: ['', Validators.required],
-        id_Usuario: ['', Validators.required],
+        id_Usuario: [this.idusuario, Validators.required],
       });
     }
     aceptar(): void {

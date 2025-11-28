@@ -17,11 +17,11 @@ import { Rol } from '../../../models/Rol';
 import { RolService } from '../../../services/rol-service';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-usuariosregistrar',
   imports: [ReactiveFormsModule, MatInputModule, MatFormFieldModule,
-    MatRadioModule, MatDatepickerModule, MatButtonModule, MatSelectModule, DatePipe
+    MatRadioModule, MatDatepickerModule, MatButtonModule, MatSelectModule, DatePipe, MatIconModule
   ],
   templateUrl: './usuariosregistrar.html',
   providers:[provideNativeDateAdapter()],
@@ -70,6 +70,7 @@ export class Usuariosregistrar implements OnInit {
   edicion: boolean = false;
   id: number = 0;
   listaRoles: Rol[] = [];
+  hide: boolean = true;
   constructor(
     private uS:UsuarioService,
     private router: Router,

@@ -1,51 +1,95 @@
-mat-form-field {
+.two-column-form {
+  display: grid;
+  grid-template-columns: 480px 1fr;
+  gap: 1rem 2rem;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+h2 {
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+}
+/* Columna izquierda */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
 
-  width: 60%;
-
-  }
-
-
-
-  button[matButton="elevated"] {
-
-
-
-  background-color:rgb(242, 49, 35);
-
-  color: white;
-
-  border: none;
-
-  padding: 0.5rem 1.25rem;
-
-  font-size: 1.1rem;
-
-  border-radius: 0.375rem; cursor: pointer;
-
-  transition: background-color 0.3s ease;
-
-  width: 60%;
-
- }
-
-
-
-
-
- button[matButton="elevated"]:hover {
-
-  background-color: #faf67c;
-
- }
-
-
+/* Mapa */
 .map-container {
+  width: 100%;
+  max-width: 480px;
+  height: 360px;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  margin: 0;
 }
 
 #map {
-  width: 600px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+
+/* Campos de coordenadas pegados al mapa */
+.coord-field {
+  width: calc(100% - 8px);
+  margin: 0;
+}
+
+/* Columna derecha */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Mantener ancho de mat-form-field en la columna derecha */
+.right-column mat-form-field,
+.right-column .file-field {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Botones centrados horizontalmente en la columna derecha */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+/* Botón personalizado */
+button[matButton="elevated"] {
+  background-color: rgb(242, 49, 35);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-size: 1.1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Responsive: apilar en pantallas pequeñas */
+@media (max-width: 920px) {
+  .two-column-form {
+    grid-template-columns: 1fr;
+  }
+  .left-column, .right-column {
+    align-items: stretch;
+  }
+  .map-container {
+    height: 300px;
+  }
+  .actions {
+    justify-content: center;
+  }
 }
