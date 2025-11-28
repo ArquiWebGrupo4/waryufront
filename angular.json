@@ -76,9 +76,11 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/demoFrontVI/server",
-            "main": "main.server.ts",
+            "main": "src/main.server.ts",
             "tsConfig": "tsconfig.server.json"
           }
+        }
+
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
