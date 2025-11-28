@@ -8,7 +8,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { join } from 'node:path';
 
 
-const browserDistFolder = join(import.meta.dirname, '../browser');
+const browserDistFolder = join(__dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
@@ -39,7 +39,7 @@ app.use(
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   angularApp
     .handle(req)
     .then((response) =>
