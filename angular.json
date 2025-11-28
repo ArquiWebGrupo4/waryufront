@@ -5,52 +5,35 @@
   "projects": {
     "demoFrontVI": {
       "projectType": "application",
-      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/demoFrontVI/server",
-            "externalDependencies": [],
+            "outputPath": "dist/demoFrontVI/browser",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "scripts": ["node_modules/leaflet/dist/leaflet.js", "node_modules/leaflet.heat/dist/leaflet-heat.js"],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              { "glob": "**/*", "input": "public" }
             ],
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css",
               "node_modules/leaflet/dist/leaflet.css"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js",
+              "node_modules/leaflet.heat/dist/leaflet-heat.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2MB",
-                  "maximumError": "5MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
+                { "type": "initial", "maximumWarning": "2MB", "maximumError": "5MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
               ],
               "outputHashing": "all"
             },
@@ -62,51 +45,59 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "demoFrontVI:build:production"
-            },
-            "development": {
-              "buildTarget": "demoFrontVI:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/demoFrontVI/server",
             "main": "src/main.server.ts",
             "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "sourceMap": true
             }
           }
         },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "browserTarget": "demoFrontVI:build:production",
+            "serverTarget": "demoFrontVI:server:production",
+            "routes": [
+              "/",
+              "/login",
+              "/homes",
+              "/menu",
+              "/dashboard"
+            ]
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": { "browserTarget": "demoFrontVI:build:production" },
+            "development": { "browserTarget": "demoFrontVI:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
         "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "assets": [{ "glob": "**/*", "input": "public" }],
+            "styles": ["src/styles.css"]
           }
         }
       }
-    },
+    }
+  },
   "cli": {
     "analytics": "0b35df24-5bf5-489e-8a8f-6a628aa989f9"
   }

@@ -10,7 +10,7 @@
   },
   "include": [
     "src/**/*.ts"
-, "src/vite.config.ts"  ],
+  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

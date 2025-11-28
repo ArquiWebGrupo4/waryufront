@@ -1,16 +1,29 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/server",
+    "outDir": "./dist/demoFrontVI/server",
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strict": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "app/*": ["app/*"],
+      "components/*": ["app/components/*"],
+      "services/*": ["app/services/*"],
+      "models/*": ["app/models/*"],
+      "environments/*": ["environments/*"],
+      "guard/*": ["app/guard/*"],
+      "interceptor/*": ["app/interceptor/*"]
+    }
   },
-  "files": [
+  "include": [
     "src/main.server.ts",
-    "src/server.ts"
+    "src/server.ts",
+    "src/**/*.server.ts",
+    "src/app/app.routes.server.ts"
   ]
 }
