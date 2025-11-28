@@ -7,6 +7,6 @@
     "types": []
   },
   "files": [
-    "main.server.ts"
+    "./main.server.ts"
   ]
 }
