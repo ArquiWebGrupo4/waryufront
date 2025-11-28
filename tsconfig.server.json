@@ -4,8 +4,10 @@
     "outDir": "./out-tsc/server",
     "target": "ES2022",
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "files": [
     "src/main.server.ts",

@@ -78,9 +78,8 @@
             "outputPath": "dist/demoFrontVI/server",
             "main": "src/main.server.ts",
             "tsConfig": "tsconfig.server.json"
+            }
           }
-        }
-
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
