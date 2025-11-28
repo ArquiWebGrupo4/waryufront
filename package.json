@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ssr": "ng build && ng run demo-front-vi:server",
+    "serve:ssr": "node dist/demo-front-vi/server/server.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:demoFrontVI": "node dist/demoFrontVI/server/server.mjs"
