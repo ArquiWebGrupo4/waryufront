@@ -97,7 +97,7 @@ export class Distritofavoritolistar implements OnInit, AfterViewInit {
     if (this.rol === 'ADMIN') {
       this.displayedColumns = ['c1','c2','cf','cfk','c3','c4'];
     } else {
-      this.displayedColumns = ['c1','c2','cf','cfk'];
+      this.displayedColumns = ['c1','c2','cf','cfk', 'c3'];
     }
   }
 
