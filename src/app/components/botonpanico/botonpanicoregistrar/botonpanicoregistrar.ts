@@ -78,7 +78,6 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.rol = this.LoginService.showRole();
-    console.log(this.rol);
     this.username = this.LoginService.showUsername();
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
@@ -127,7 +126,15 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
           const lng = e.latlng.lng;
   
           this.markerLayer.clearLayers();
-          const marker = L.marker([lat, lng], { draggable: true }).addTo(this.markerLayer);
+          const marker = L.marker([lat, lng], { 
+              draggable: true,
+              icon: L.icon({
+                iconUrl: 'assets/leaflet/marker-icon.png',
+                shadowUrl: 'assets/leaflet/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+              })
+          }).addTo(this.markerLayer);
   
           this.form.patchValue({ latitud: lat, longitud: lng });
   
@@ -155,10 +162,8 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
         });
       } 
       else {
-        console.log(this.btns);
         this.iS.insert(this.btns).subscribe(() => {
           this.iS.list().subscribe((data) => {
-            console.log(data);
             this.iS.setList(data);
             this.snackBar.open('Registro exitoso', 'Cerrar', { duration: 3000 });
           });
@@ -175,7 +180,6 @@ export class Botonpanicoregistrar implements OnInit, AfterViewInit{
     init() {
       if (this.edicion) {
         this.iS.listId(this.id).subscribe((data) => {
-          console.log(data);
           this.form = new FormGroup({
             codigo: new FormControl(data.id_Boton_Panico, Validators.required),
             fk1: new FormControl(data.usuario.id_Usuario, Validators.required),

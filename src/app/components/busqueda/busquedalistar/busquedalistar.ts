@@ -31,7 +31,6 @@ export class Busquedalistar implements OnInit, AfterViewInit {
 
   this.bS.list().subscribe((data) => {
     let filtrados = data;
-    console.log(data);
     if (this.rol !== 'ADMIN') {
         filtrados = filtrados.filter(item => item.usuario?.nombreUsuario === this.username);
       }

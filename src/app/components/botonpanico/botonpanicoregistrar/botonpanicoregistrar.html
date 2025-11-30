@@ -12,7 +12,6 @@
   <div class="form-wrap">
     <form [formGroup]="form" (submit)="aceptar()" class="two-column-form">
 
-      <!-- COLUMNA IZQUIERDA: mapa + coords -->
       <div class="left-column">
         <div class="map-container">
           <div id="map"></div>
@@ -35,7 +34,6 @@
         </mat-form-field>
       </div>
 
-      <!-- COLUMNA DERECHA: resto del formulario -->
       <div class="right-column">
         @if (edicion) {
           <mat-form-field>

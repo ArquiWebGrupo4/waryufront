@@ -71,14 +71,11 @@ export class Botonpanicolistar implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.rol = this.loginService.showRole();
     this.username = this.loginService.showUsername();
-    console.log(this.rol, this.username);
     this.iS.list().subscribe((data) => {
-      console.log(data);
       let filtrados = data;
       if (this.rol !== 'ADMIN') {
         filtrados = filtrados.filter(item => item.usuario.nombreUsuario === this.username);
       }
-      console.log(filtrados);
       this.dataSource.data = filtrados;
     });
 

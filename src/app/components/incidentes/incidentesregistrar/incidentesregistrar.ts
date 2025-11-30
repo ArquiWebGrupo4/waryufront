@@ -153,7 +153,15 @@ export class Incidentesregistrar {
         const lng = e.latlng.lng;
 
         this.markerLayer.clearLayers();
-        const marker = L.marker([lat, lng], { draggable: true }).addTo(this.markerLayer);
+        const marker = L.marker([lat, lng], { 
+              draggable: true,
+              icon: L.icon({
+                iconUrl: 'assets/leaflet/marker-icon.png',
+                shadowUrl: 'assets/leaflet/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+              })
+          }).addTo(this.markerLayer);
 
         this.form.patchValue({ latitud: lat, longitud: lng });
 

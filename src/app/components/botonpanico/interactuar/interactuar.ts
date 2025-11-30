@@ -50,7 +50,6 @@ form: FormGroup = new FormGroup({});
   }
   aceptar(): void {
     this.bS.interactuar().subscribe({});
-      console.log ("Se acaba de interactuar")
       this.router.navigate(['BotonPanico/interactuar']);
   }
 
